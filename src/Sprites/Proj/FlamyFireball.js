@@ -1,0 +1,11 @@
+import Sprite from "../Sprite.js";
+export default class FlamyFireball extends Sprite {
+    constructor(id) {
+        super(id);
+        this.sprite_name = 'impy_fireball';
+        this.max_frame = 5;
+        this.max_frame_tick = 4;
+        this.sprite_h = 30;
+        this.sprite_w = 30;
+    }
+}
