@@ -1,4 +1,4 @@
-import UnitSprite from "../UnitSprite.js"
+import UnitSprite from "../UnitSprite"
 
 export default class FlyingBones extends UnitSprite{
    

@@ -1,4 +1,4 @@
-import Sprite from "../Sprite.js";
+import Sprite from "../Sprite";
 
 export default class Intervention extends Sprite{
     constructor(id: string){

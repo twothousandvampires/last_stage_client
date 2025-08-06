@@ -1,4 +1,4 @@
-import Sprite from "../Sprite.js";
+import Sprite from "../Sprite";
 
 export default class Flame extends Sprite{
     constructor(id: string){
