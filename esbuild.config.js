@@ -5,6 +5,7 @@ const fs = require('fs')
 build({
   entryPoints: [
     'src/index.ts',
+    'src/config.ts',
     'src/Sprites/**/*.ts',
     'src/Sprites/*.ts',
     'src/scripts/*.ts',

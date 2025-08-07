@@ -1,6 +1,6 @@
 import { io } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js"
 import Client from "./scripts/Client"
-import url from "../config"
+import url from "./config"
 
 const socket = io.connect(url)
 
