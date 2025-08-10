@@ -30,6 +30,7 @@ export default class UI{
 
         return p
     }
+
     createAvailableSkillsBlock(skills: [], title: string){
         let div = document.createElement('div')
         let p = this.createParagraph(title)
@@ -44,7 +45,10 @@ export default class UI{
                 Sound.setSound('taunt')
                 this.socket.emit('select_skill', elem.name)
             })
-            image.title = elem.desc
+            this.applyTitle(image, {
+                main_title: elem.name,
+                text: elem.desc
+            })
             div.appendChild(image)
             div_wrap.appendChild(div)
         })
@@ -77,6 +81,65 @@ export default class UI{
 
         return select
     }
+
+    createTitle(title_text: any, e: any){
+       this.closeTitle()
+       
+        let title_div = this.createDiv('')
+        let text = this.createParagraph('')
+        
+        let main_title = undefined
+
+        if(typeof title_text === 'object'){
+            text.innerText = title_text.text
+            if(title_text.main_title){
+                main_title = this.createParagraph(title_text.main_title)
+                main_title.classList = 'main_title'
+            }
+        }
+        else{
+             text.innerText = title_text
+        }
+
+       
+        title_div.id = 'title'
+        title_div.style.top = (e.pageY + 15) + 'px'
+        title_div.style.left = (e.pageX  + 15) + 'px'
+
+        if(main_title){
+            title_div.appendChild(main_title)
+        }
+        title_div.appendChild(text)
+
+        document.getElementsByTagName('body')[0].appendChild(title_div)
+
+        const rect = title_div.getBoundingClientRect();
+
+        if(rect.bottom > window.innerHeight){
+            title_div.style.top = (e.pageY - rect.height- 15) + 'px'
+        }
+        if(rect.right > window.innerWidth){
+            title_div.style.left = (e.pageX - rect.width - 15) + 'px'
+        }
+    }
+
+    closeTitle(){
+        let exist = document.getElementById('title')
+        if(exist){
+            exist.parentNode?.removeChild(exist)
+        }
+    }
+
+    applyTitle(elem, info){
+        elem.addEventListener('mouseover', (e) => {
+            this.createTitle(info, e)
+            e.stopPropagation()
+        })
+        elem.addEventListener('mouseleave' , () => {
+            this.closeTitle()
+        })
+    }
+
     createStats(item: any){
         let wrap = document.createElement('div')
         wrap.className = 'stat_wrap'
@@ -94,7 +157,11 @@ export default class UI{
             })
             
             let stat_name = this.createParagraph(stat + ' : ' + item.template.stats[stat])
-            stat_name.title = item.template.stats_description[stat]
+            this.applyTitle(stat_name, {
+                main_title: stat,
+                text: item.template.stats_description[stat]
+            })
+            // stat_name.title = item.template.stats_description[stat]
 
             let inc = this.createParagraph('+')
             inc.className = 'pointer'
@@ -182,7 +249,11 @@ export default class UI{
 
         let p = this.createParagraph('main: ' + main.name)
         let image = this.createImage('./icons/' + main.name + '.png')
-        image.title = main.desc
+        this.applyTitle(image, {
+                main_title: main.name,
+                text: main.desc
+            })
+        
 
         main_div.appendChild(p)
         main_div.appendChild(image)
@@ -193,7 +264,10 @@ export default class UI{
 
         p = this.createParagraph('secondary: ' + second.name)
         image = this.createImage('./icons/' + second.name + '.png')
-        image.title = second.desc
+        this.applyTitle(image, {
+                main_title: second.name,
+                text: second.desc
+            })
 
         second_div.appendChild(p)
         second_div.appendChild(image)
@@ -204,7 +278,11 @@ export default class UI{
 
         p = this.createParagraph('finisher: ' + third.name)
         image = this.createImage('./icons/' + third.name + '.png')
-        image.title = third.desc
+        this.applyTitle(image, {
+                main_title: third.name,
+                text: third.desc
+            })
+        
 
         third_div.appendChild(p)
         third_div.appendChild(image)
@@ -215,7 +293,11 @@ export default class UI{
 
         p = this.createParagraph('utility: ' + utility.name)
         image = this.createImage('./icons/' + utility.name + '.png')
-        image.title = utility.desc
+        this.applyTitle(image, {
+                main_title: utility.name,
+                text: utility.desc
+            })
+        
 
         utility_div.appendChild(p)
         utility_div.appendChild(image)
@@ -284,7 +366,11 @@ export default class UI{
             if(!players_items.includes(item.name)){
             
                 let image = this.createImage('./icons/' + item.name + '.png')
-                image.title = item.description
+                this.applyTitle(image, {
+                    main_title: item.name,
+                    text: item.description
+                })
+                
                 image.style.margin = '2px'
 
                 image.addEventListener('click', () => {
@@ -329,7 +415,11 @@ export default class UI{
         div.id = 'status_' + status.name
 
         let img = this.createImage('./icons/' + status.name + '.png')
-        img.title = status.desc
+        this.applyTitle(img, {
+            main_title: status.name,
+            text: status.description
+        })
+        
         div.appendChild(img)
 
         wrap?.appendChild(div)
@@ -337,6 +427,7 @@ export default class UI{
         setTimeout(() => {
             if(div){
                 div.parentNode?.removeChild(div)
+                this.closeTitle()
             }
         }, status.duration)
     }
@@ -361,7 +452,11 @@ export default class UI{
             img.addEventListener('click', () => {
                 this.socket.emit('select_upgrade', elem.name)
             })
-            img.title = elem.desc
+            this.applyTitle(img, {
+                main_title: elem.name,
+                text: elem.desc
+            })
+            
             under_div.appendChild(img)
 
             let cost_and_name = document.createElement('div')
@@ -385,13 +480,20 @@ export default class UI{
 
         wrap2.appendChild(grace_count)
         
-        if(data.grace > 0){
+        if(data.can_hold){
             let hold = this.createParagraph('hold')
             hold.addEventListener('click', () => {
                 this.socket.emit('hold_grace')
             })
             wrap2.appendChild(hold)
         }
+
+        let exit = this.createParagraph('exit')
+        exit.addEventListener('click', () => {
+            this.socket.emit('exit_grace')
+        })
+
+        wrap2.appendChild(exit)
 
         parrent.appendChild(wrap2)
 
@@ -404,5 +506,7 @@ export default class UI{
         if(exist){
             exist.parentNode?.removeChild(exist)
         }
+
+        this.closeTitle()
     }
 }

@@ -33,6 +33,10 @@
                     <div id="player_resourses"></div>
                     <div id="player_life"></div>
                 </div>
+                <div id="meta_info" >
+                    <div id="time"></div>
+                    <div id="killed"></div>
+                </div>
             </div>
             <div style="filter:saturate(83%)">
                 <canvas  id="canvas" width="400" height="400"></canvas>
@@ -46,6 +50,16 @@
 </body>
 </html>
 <style>
+    #title .main_title{
+        font-size: 20px;
+        color: blue;
+    }
+    #title{
+        position: fixed;
+        background-color: green;
+        width: 400px;
+        z-index: 667;
+    }
     .pointer{
         cursor: pointer;
         width: 40px;
@@ -161,7 +175,7 @@
     .left_block{
         width: 40%;
     }
-    #player_stats{
+    #player_stats, #meta_info{
         display: flex;
         flex-direction: row;
         justify-content: space-between;

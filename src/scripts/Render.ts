@@ -73,6 +73,8 @@ export default class Render{
     bg_bottom: any
     socket: any
     downscale: number
+    killed: number
+    time: number
 
     constructor(socket: any){
         this.client_id = socket.id
@@ -81,6 +83,8 @@ export default class Render{
         this.actors = new Map()
         this.light = []
         this.downscale = 5
+        this.time = 0
+        this.killed = 0
         this.data = new ImageData()
         this.init()
     }
@@ -137,9 +141,13 @@ export default class Render{
         
         let resourses = document.getElementById('player_resourses')
         let life = document.getElementById('player_life')
+        let time = document.getElementById('time')
+        let killed = document.getElementById('killed')
 
-        resourses.innerText = sprite.resource + ' / ' + sprite.max_resource + ' / ' + sprite.second
+        resourses.innerText = sprite.resource + ' / ' + sprite.max_resource
         life.innerText = this.getLifeString(sprite.life_status)
+        time.innerText = this.time
+        killed.innerText = this.killed
 
         let first = document.getElementById('first')
 
@@ -365,7 +373,10 @@ export default class Render{
     }
 
     public updateData(data: any){
-        
+
+        this.time = Math.floor(data.meta.ms / 1000)
+        this.killed = data.meta.killed
+
         data.deleted.forEach(id => {
             this.actors.delete(id)
         })

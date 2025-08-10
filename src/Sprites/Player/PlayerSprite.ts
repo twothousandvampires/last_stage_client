@@ -96,8 +96,7 @@ export default class PlayerSprite extends UnitSprite{
             this.y_frame_offset = 240
             this.max_frame = 8
             this.max_frame_tick = 3
-            this.action_frame = 4
-            this.repeatable = false
+            this.action_frame = 4 
         }
         else if(this.state === 'jump'){
             this.sprite_name = 'swordman2'
