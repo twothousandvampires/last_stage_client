@@ -3,6 +3,7 @@ import Track from "./Track"
 class Sound{
     pool: any[]
     back: any
+    lobby_back: any
 
     constructor(){
         this.pool = [new Track(), new Track(), new Track(),  new Track()]
@@ -10,6 +11,10 @@ class Sound{
         this.back = new Audio()
         this.back.src = 'sounds/99_Cavern_of_Lost_Souls.mp3'
         this.back.volume = 0.2
+
+        this.lobby_back = new Audio()
+        this.lobby_back.src = 'sounds/Cult Play-The Woods-kissvk.com.mp3'
+        this.lobby_back.volume = '0.3'
     }
 
     static distance(x, y, x1, y1){

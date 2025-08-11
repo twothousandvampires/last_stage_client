@@ -18,6 +18,7 @@ export default class Client{
     }
     
     private initSocket(){
+        Sound.lobby_back.play()
         this.socket.on('update_lobby_data', (data, items) => {
             this.UI.updateStats(data, items)
         })
@@ -25,6 +26,7 @@ export default class Client{
         this.socket.on('start', (players_data: any) => {
             this.UI.showGameCanvas(players_data)
             this.startGame()
+            Sound.lobby_back.stop()
             Sound.back.play()
         })
 
@@ -40,12 +42,15 @@ export default class Client{
         this.socket.on('new_status' ,(status) => {
            this.UI.newStatus(status)
         })
+
         this.socket.on('change_level', (level_id: number) => {
            this.render?.actors.get(this.socket.id).setLevelId(level_id)
         })
+
         this.socket.on('show_upgrades', (upgrades: number) => {
            this.UI.showUpgrades(upgrades)
         })
+
         this.socket.on('close_upgrades', () => {
             this.UI.clsoeUpgrades()
         })

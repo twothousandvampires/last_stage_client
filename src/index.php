@@ -17,11 +17,14 @@
     <title>Document</title>
 </head>
 <body>
-    <select style="visibility: hidden" name="select_template" id="select_template">
+    <select style="visibility: hidden; position: fixed" name="select_template" id="select_template">
         <option value="swordman">swordman</option>
         <option value="flyer">flyer</option>
         <option value="cultist">cultist</option>
     </select>
+     <div id="main">
+        <p style='color: wheat'>LAST STAGE</p>
+    </div>
     <div id="wrap">
         <div id="lobby"></div>
         <div id="canvas-wrap">
@@ -50,6 +53,22 @@
 </body>
 </html>
 <style>
+    body{
+        margin: 0;
+        padding: 0;
+    }
+    #main p {
+        font-size: 50px;
+    }
+    #main{
+        background-color: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100vh;
+        cursor: pointer;
+    }
     #title .main_title{
         font-size: 20px;
         color: blue;
@@ -92,7 +111,7 @@
         align-items: center;
         justify-content: center;
         visibility: hidden;
-        display: flex;
+        display: none;
         flex-direction: column;
     }
     #player{
@@ -102,8 +121,9 @@
     }
     #wrap{
         background-color: black;
-        width: 100vw;
+        width: 100%;
         height: 100vh;
+        display: none;
     }
     #lobby{
         display: grid;

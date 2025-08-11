@@ -6,6 +6,7 @@ export default class UI{
     constructor(socket: any){
         this.socket = socket
     }
+
     createImage(path: string, width = 50, height = 50): HTMLElement{
         let image = new Image()
         image.width = width
@@ -14,6 +15,7 @@ export default class UI{
 
         return image
     }
+
     updateSkill(data){
         let skill_icons = document.getElementById('skill_icons')
         skill_icons.innerHTML = ''
@@ -24,6 +26,7 @@ export default class UI{
             skill_icons.appendChild(img)
         })
     }
+
     createParagraph(text: string): HTMLElement{
         let p = document.createElement('p')
         p.innerText = text
@@ -32,6 +35,7 @@ export default class UI{
     }
 
     createAvailableSkillsBlock(skills: [], title: string){
+
         let div = document.createElement('div')
         let p = this.createParagraph(title)
         div.appendChild(p)
@@ -54,6 +58,7 @@ export default class UI{
         })
 
         return div_wrap
+        
     }
     createDiv(classes: string): HTMLElement{
         let div = document.createElement('div')
@@ -68,8 +73,12 @@ export default class UI{
         let p = this.createParagraph(text)
         parent.appendChild(p)
     }
-    createSelect(item: any): Node{
-        let select = document.getElementById('select_template').cloneNode(true)
+    createSelect(item: any): any{
+        let template = document.getElementById('select_template')
+        if(!template) return
+
+        let select = template.cloneNode(true)
+        // template?.parentNode?.removeChild(template)
 
         select.style.visibility = 'visible'
 
@@ -101,7 +110,6 @@ export default class UI{
              text.innerText = title_text
         }
 
-       
         title_div.id = 'title'
         title_div.style.top = (e.pageY + 15) + 'px'
         title_div.style.left = (e.pageX  + 15) + 'px'
@@ -311,6 +319,7 @@ export default class UI{
        
         return wrap
     }
+
     showGameCanvas(players_data: any){
         let section = document.getElementById('lobby')
         section?.parentNode?.removeChild(section)
@@ -337,8 +346,14 @@ export default class UI{
         })
 
         section = document.getElementById('canvas-wrap')
+        let template = document.getElementById('select_template')
+
+        template.parentNode.removeChild(template)
+
+        section.style.display = 'flex'
         section.style.visibility = 'visible'
     }
+
     updateStats(data: any, items: any){
         let parent = document.getElementById('lobby')
         parent.innerHTML = ''
