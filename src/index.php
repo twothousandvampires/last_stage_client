@@ -79,14 +79,24 @@
         width: 400px;
         z-index: 667;
     }
+    .select_ready_equip{
+        height: 160px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+    }
     .pointer{
         cursor: pointer;
-        width: 40px;
         text-align: center;
     }
-    .stat_wrap{
-        border: 10px solid transparent;
-        border-image: url('img/client/frame1.png') 30 round;
+    .equip_and_image{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .stat_wrap {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -99,8 +109,15 @@
         color: aquamarine;
     }
     .stat{
-        display: flex;
-        flex-direction: row;
+        display: grid;
+        grid-template-columns:10% 80% 10%;
+        gap: 10px;
+        grid-template-rows: 1;
+        width: 80%;
+        
+    }
+    .stat p {
+        text-align: center;
     }
     #stats{
         display: flex;
@@ -127,38 +144,55 @@
     }
     #lobby{
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
         gap: 10px;
-        grid-template-rows: repeat(2, 1fr);
+        grid-template-rows: 15% repeat(3, 1fr);
+        height: 100vh; 
     }
+    /* .lobby_cap{
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      grid-column: 1 / 3;  
+    } */
+    .item_pull, .abilities_pull{
+        background-color: yellow;
+    }
+    .item_pull{
+        grid-column: 1;
+     }
+    .abilities_pull{
+        grid-column: 2;
+     }
     .player1 {
         grid-column: 1;
-        grid-row: 1;
+        grid-row: 2;
     }
     .player2 {
         grid-column: 2;
-        grid-row: 1;
+        grid-row: 2;
     }
     .player3 {
         grid-column: 1;
-        grid-row: 2;
+        grid-row: 3;
     }
     .player4 {
         grid-column: 2;
-        grid-row: 2;
+        grid-row: 3;
     }
-    .player{
+    .player {
         background-color: aqua;
         display: flex;
         flex-direction: row;
         justify-content: center;
+        align-items: center;
+        border: 4px solid red;
     }
-    .item_pull{
+    .item_pull, .abilities_pull{
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         justify-content: space-around;
-        grid-column: 3;
-        grid-row: 1 / 3;
     }
     .select_and_preview{
         display: flex;
@@ -168,14 +202,16 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        justify-content: center;
+        justify-content: space-between;
+        width: 80%;
     }
     .right_bottom{
+        border-top: 4px red solid;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        width: 80%;
+        width: 100%;
     }
     .right_block{
         display: flex;
@@ -193,7 +229,13 @@
         width: 60%;
     }
     .left_block{
+        border-left: 4px red solid;
         width: 40%;
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
     }
     #player_stats, #meta_info{
         display: flex;

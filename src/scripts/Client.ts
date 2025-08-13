@@ -18,7 +18,7 @@ export default class Client{
     }
     
     private initSocket(){
-        Sound.lobby_back.play()
+        // Sound.lobby_back.play()
         this.socket.on('update_lobby_data', (data, items) => {
             this.UI.updateStats(data, items)
         })

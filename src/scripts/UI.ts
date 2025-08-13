@@ -58,7 +58,7 @@ export default class UI{
         })
 
         return div_wrap
-        
+
     }
     createDiv(classes: string): HTMLElement{
         let div = document.createElement('div')
@@ -86,7 +86,10 @@ export default class UI{
             this.socket.emit('change_class', e.target.value)
         })
 
+       
+        select.style.position = 'static'
         select.value = item.name
+        select.style.width = '100%'
 
         return select
     }
@@ -151,14 +154,14 @@ export default class UI{
     createStats(item: any){
         let wrap = document.createElement('div')
         wrap.className = 'stat_wrap'
-        this.createParagraphAppend(item.template.stat_count, wrap)
+        this.createParagraphAppend('remain stat points: ' + item.template.stat_count, wrap)
 
         for(let stat in item.template.stats){
-            let dec = this.createParagraph('-')
+            let dec = this.createParagraph(item.id === this.socket.id ? '-' : ' ')
             dec.className = 'pointer'
 
             dec.addEventListener('click', () => {
-                if(item.template.stats[stat] <= 0) return
+                if(item.template.stats[stat] <= 0 || item.id !== this.socket.id) return
 
                 Sound.setSound('menu button')
                 this.socket.emit('decrease_stat', stat)
@@ -169,12 +172,11 @@ export default class UI{
                 main_title: stat,
                 text: item.template.stats_description[stat]
             })
-            // stat_name.title = item.template.stats_description[stat]
 
-            let inc = this.createParagraph('+')
+            let inc = this.createParagraph(item.id === this.socket.id ? '+' : ' ')
             inc.className = 'pointer'
             inc.addEventListener('click', () => {
-                if(item.template.stat_count <= 0) return
+                if(item.template.stat_count <= 0 || item.id !== this.socket.id) return
 
                 Sound.setSound('menu button 2')
                 this.socket.emit('increase_stat', stat)
@@ -182,14 +184,9 @@ export default class UI{
             
             let div = document.createElement('div')
             div.className = 'stat'
-
-            if(item.id === this.socket.id){
-                div.append(dec)
-            }
-            div.append(stat_name)
-            if(item.id === this.socket.id){
-                div.append(inc)
-            }
+            div.appendChild(dec)
+            div.appendChild(stat_name)
+            div.appendChild(inc)
         
             wrap?.appendChild(div)
         }
@@ -225,21 +222,38 @@ export default class UI{
         ready.addEventListener('click', () => {
             this.socket.emit('player_ready')
         })
+        ready.style.width = '100%'
 
-        select_preview.appendChild(select)
         select_preview.appendChild(preview)
-        select_preview.appendChild(ready)
-
+       
         right_top.appendChild(select_preview)
 
+        let select_ready_equip = this.createDiv('select_ready_equip')
+
+        select_ready_equip.appendChild(select)
+
+        let div = this.createDiv('equip_and_image')
+        let e_p = this.createParagraph("equip: ")
+        div.appendChild(e_p)
+        console.log(item)
         if(item.template.item){
             let image = this.createImage('./icons/' + item.template.item + '.png')
+            this.applyTitle(image, {
+                main_title: item.template.item,
+                text: item.template.item_decription
+            })
             image.addEventListener('click', () => {
                 Sound.setSound('menu item drop')
                 this.socket.emit('unpick_item', item.template.item)
             })
-            right_top.appendChild(image)
+            
+            div.appendChild(image)        
         }
+
+        select_ready_equip.appendChild(div)
+        select_ready_equip.appendChild(ready)
+
+        right_top.appendChild(select_ready_equip)
 
         right.appendChild(right_top)
 
@@ -314,8 +328,9 @@ export default class UI{
         
         right.appendChild(skills)
 
-        wrap.append(left)
+      
         wrap.append(right)
+          wrap.append(left)
        
         return wrap
     }
@@ -355,27 +370,21 @@ export default class UI{
     }
 
     updateStats(data: any, items: any){
-        let parent = document.getElementById('lobby')
-        parent.innerHTML = ''
-
-        data.sort((a, b) => {
-            return a.id === this.socket.id ? -1 : 1
-        })
-
-        data.forEach((item, index) => {
-            let block = this.createBlock(item)
-            block.classList += 'player player' + (index + 1)
-            parent?.appendChild(block)
-        });
+        // fill a lobby
+        let lobby = document.getElementById('lobby')
         
+        if(!lobby) return
         
+        lobby.innerHTML = ''
+
+        //create cap(items and abilities)
+
         let players_items = data.map(elem => elem.template.item)
 
-        let item_div = document.createElement('div')
-        item_div.className += 'item_pull'
+        // let lobby_cap = this.createDiv('lobby_cap')
 
-        let available_items = this.createDiv('items')
-        let p = this.createParagraph('available items: ')
+        // items
+        let items_div = this.createDiv('item_pull')
 
         items.forEach(item => {
             if(!players_items.includes(item.name)){
@@ -393,27 +402,36 @@ export default class UI{
                     this.socket.emit('pick_item', item.name)
                 })
 
-                available_items.appendChild(image)
+                items_div.appendChild(image)
             }
         })
 
-        item_div.appendChild(p)
-        item_div.appendChild(available_items)
+        lobby.appendChild(items_div)
 
         let avalable_main_skills = data.find(elem => elem.id === this.socket.id).template.abilities.filter(elem => !elem.selected && elem.type === 1)
         let avalable_secondary_skills = data.find(elem => elem.id === this.socket.id).template.abilities.filter(elem => !elem.selected && elem.type === 2)
         let avalable_finishers_skills = data.find(elem => elem.id === this.socket.id).template.abilities.filter(elem => !elem.selected && elem.type === 3)
         let avalable_utility_skills = data.find(elem => elem.id === this.socket.id).template.abilities.filter(elem => !elem.selected && elem.type === 4)
 
-        let wrap = this.createDiv('')
+        // abilities
+        let abilities_div = this.createDiv('abilities_pull')
 
-        wrap.appendChild(this.createAvailableSkillsBlock(avalable_main_skills, 'available main skills: '))
-        wrap.appendChild(this.createAvailableSkillsBlock(avalable_secondary_skills, 'available secondary skills: '))
-        wrap.appendChild(this.createAvailableSkillsBlock(avalable_finishers_skills, 'available finishers skills: '))
-        wrap.appendChild(this.createAvailableSkillsBlock(avalable_utility_skills, 'available utility skills: '))
+        abilities_div.appendChild(this.createAvailableSkillsBlock(avalable_main_skills, 'available main skills: '))
+        abilities_div.appendChild(this.createAvailableSkillsBlock(avalable_secondary_skills, 'available secondary skills: '))
+        abilities_div.appendChild(this.createAvailableSkillsBlock(avalable_finishers_skills, 'available finishers skills: '))
+        abilities_div.appendChild(this.createAvailableSkillsBlock(avalable_utility_skills, 'available utility skills: '))
 
-        item_div.appendChild(wrap)
-        parent?.appendChild(item_div)
+        lobby.appendChild(abilities_div)
+
+        data.sort((a, b) => {
+            return a.id === this.socket.id ? -1 : 1
+        })
+
+        data.forEach((item, index) => {
+            let block = this.createBlock(item)
+            block.classList += 'player player' + (index + 1)
+            lobby.appendChild(block)
+        });
     }
 
     newStatus(status: any){
