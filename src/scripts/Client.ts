@@ -58,6 +58,10 @@ export default class Client{
         this.socket.on('update_skill' ,(data) => {
            this.UI.updateSkill(data)
         })
+
+        this.socket.on('status_end' ,(name) => {
+           this.UI.deleteStatus(name)
+        })
     }
     private startGame(){
         this.input = new Input(this.socket)

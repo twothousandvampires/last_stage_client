@@ -434,6 +434,16 @@ export default class UI{
         });
     }
 
+    deleteStatus(name: string){
+        alert(name)
+        let exist = document.getElementById('status_' + name)
+
+        if(exist){
+            exist.parentNode?.removeChild(exist)
+            this.closeTitle()
+        }
+    }
+
     newStatus(status: any){
 
         let exist = document.getElementById('status_' + status.name)
@@ -448,9 +458,10 @@ export default class UI{
         div.id = 'status_' + status.name
 
         let img = this.createImage('./icons/' + status.name + '.png')
+
         this.applyTitle(img, {
             main_title: status.name,
-            text: status.description
+            text: status.desc
         })
         
         div.appendChild(img)
@@ -486,7 +497,7 @@ export default class UI{
                 this.socket.emit('select_upgrade', elem.name)
             })
             this.applyTitle(img, {
-                main_title: elem.name,
+                main_title: elem.name + (elem.type ? '(' + elem.type + ')' : ''),
                 text: elem.desc
             })
             
