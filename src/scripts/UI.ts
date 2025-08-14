@@ -435,7 +435,6 @@ export default class UI{
     }
 
     deleteStatus(name: string){
-        alert(name)
         let exist = document.getElementById('status_' + name)
 
         if(exist){

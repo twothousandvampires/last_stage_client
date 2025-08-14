@@ -18,15 +18,15 @@ export default class Client{
     }
     
     private initSocket(){
-        // Sound.lobby_back.play()
+        Sound.lobby_back.play()
         this.socket.on('update_lobby_data', (data, items) => {
             this.UI.updateStats(data, items)
         })
 
         this.socket.on('start', (players_data: any) => {
             this.UI.showGameCanvas(players_data)
+            Sound.lobby_back.pause()
             this.startGame()
-            Sound.lobby_back.stop()
             Sound.back.play()
         })
 
