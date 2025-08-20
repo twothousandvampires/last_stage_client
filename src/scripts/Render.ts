@@ -60,6 +60,9 @@ import SpecterSoulSeeker from "../Sprites/Proj/SpecterSoulSeeker"
 import ThrowedWeapon from "../Sprites/Proj/ThrowedWeapon"
 import Tooth from "../Sprites/Proj/Tooth"
 import WeaponFragment from "../Sprites/Proj/WeaponFragment"
+import Boss from "../Sprites/Boss/Boss"
+import Statue from "../Sprites/Enemy/Statue"
+import MagicStar from "../Sprites/Effect/MagicStar"
 
 export default class Render{
     ctx: any
@@ -325,6 +328,9 @@ export default class Render{
         else if(elem.name === 'tooth explode'){
             return new ToothExplode(elem.id)
         }
+        else if(elem.name === 'magic star'){
+            return new MagicStar(elem.id)
+        }
         else if(elem.name === 'weapon fragment'){
             return new WeaponFragment(elem.id)
         }
@@ -369,6 +375,12 @@ export default class Render{
         }
         else if(elem.name === 'gifter'){
             return new Gifter(elem.id)
+        }
+        else if(elem.name === 'boss'){
+            return new Boss(elem.id)
+        }
+        else if(elem.name === 'statue'){
+            return new Statue(elem.id)
         }
     }
 

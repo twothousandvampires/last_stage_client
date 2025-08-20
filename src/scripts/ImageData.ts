@@ -234,6 +234,14 @@ export default class ImageData{
             name: 'gifter1',
             path: 'Gifter/gifter1.png',
         },
+        {
+            name: 'boss1',
+            path: 'boss/boss1.png',
+        },
+        {
+            name: 'statue1',
+            path: 'spirit_statue/spirit_statue1.png',
+        },
     ]
 
     constructor(){
