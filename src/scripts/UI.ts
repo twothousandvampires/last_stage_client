@@ -488,7 +488,7 @@ export default class UI{
         let wrap = document.createElement('div')
         wrap.id = 'upgrades_list'
         parrent.id = 'upgrades'
-       
+        console.log(data)
         data.upgrades.forEach(elem => {
             let div =  document.createElement('div')
             let under_div = document.createElement('div')

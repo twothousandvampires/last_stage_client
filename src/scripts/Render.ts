@@ -63,6 +63,7 @@ import WeaponFragment from "../Sprites/Proj/WeaponFragment"
 import Boss from "../Sprites/Boss/Boss"
 import Statue from "../Sprites/Enemy/Statue"
 import MagicStar from "../Sprites/Effect/MagicStar"
+import BurningCircle from "../Sprites/Effect/BurningCircle"
 
 export default class Render{
     ctx: any
@@ -360,6 +361,9 @@ export default class Render{
         }
         else if(elem.name === 'banner of armour'){
             return new BannerOfArmour(elem.id)
+        }
+        else if(elem.name === 'burning circle'){
+            return new BurningCircle(elem.id)
         }
         else if(elem.name === 'small shocknova'){
             return new SmallShockNova(elem.id)
