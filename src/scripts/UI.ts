@@ -444,7 +444,7 @@ export default class UI{
     }
 
     newStatus(status: any){
-
+    
         let exist = document.getElementById('status_' + status.name)
 
         if(exist){
@@ -467,12 +467,15 @@ export default class UI{
 
         wrap?.appendChild(div)
 
-        setTimeout(() => {
-            if(div){
-                div.parentNode?.removeChild(div)
-                this.closeTitle()
-            }
-        }, status.duration)
+        if(status.duration){
+            setTimeout(() => {
+                if(div){
+                    div.parentNode?.removeChild(div)
+                    this.closeTitle()
+                }
+            }, status.duration)
+        }
+        
     }
 
     showUpgrades(data: any){
