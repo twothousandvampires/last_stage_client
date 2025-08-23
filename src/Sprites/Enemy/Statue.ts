@@ -34,5 +34,12 @@ export default class Statue extends UnitSprite{
             this.max_frame_tick = 4
             this.action_frame = 9
         }
+        else{
+            this.sprite_name = 'statue1'
+            this.y_frame_offset = 0
+            this.max_frame = 0
+            this.max_frame_tick = 1
+            this.removable = true
+        }
     }
 }

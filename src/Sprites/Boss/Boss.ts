@@ -35,5 +35,12 @@ export default class Boss extends UnitSprite{
             this.max_frame = 12
             this.max_frame_tick = 10
         }
+        else{
+            this.sprite_name = 'boss1'
+            this.y_frame_offset = 0
+            this.max_frame = 6
+            this.max_frame_tick = 10
+            this.removable = true
+        }
     }
 }
