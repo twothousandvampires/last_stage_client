@@ -10,7 +10,8 @@ export default class Cultist extends UnitSprite{
     finisher: boolean | undefined
     utility: boolean | undefined
     level_id: number
-     second: any
+    second: any
+    ward: number = 0
    
     constructor(id: number){
       super(id)
@@ -34,6 +35,7 @@ export default class Cultist extends UnitSprite{
         this.finisher = data.finisher
         this.utility = data.utility
         this.second = data.second
+        this.ward = data.ward
     }
 
     setLevelId(id: number){

@@ -64,6 +64,7 @@ import Boss from "../Sprites/Boss/Boss"
 import Statue from "../Sprites/Enemy/Statue"
 import MagicStar from "../Sprites/Effect/MagicStar"
 import BurningCircle from "../Sprites/Effect/BurningCircle"
+import SkullCloud from "../Sprites/Effect/SkullCloud"
 
 export default class Render{
     ctx: any
@@ -123,17 +124,20 @@ export default class Render{
     }
 
 
-    getLifeString(life: number): string{
-        if(life > 3){
+    getLifeString(sprite: any){
+        if(sprite.ward > 0){
+            return 'warded'
+        }
+        else if(sprite.life_status > 3){
             return 'blessed'
         }
-        else if(life == 3){
+        else if(sprite.life_status == 3){
             return 'good'
         }
-        else if(life == 2){
+        else if(sprite.life_status == 2){
             return 'injured'
         }
-        else if(life == 1){
+        else if(sprite.life_status == 1){
             return 'near death'
         }
         else{
@@ -149,7 +153,10 @@ export default class Render{
         let killed = document.getElementById('killed')
 
         resourses.innerText = sprite.resource + ' / ' + sprite.max_resource
-        life.innerText = this.getLifeString(sprite.life_status)
+
+        console.log(sprite)
+
+        life.innerText = this.getLifeString(sprite)
         time.innerText = this.time
         killed.innerText = this.killed
 
@@ -385,6 +392,9 @@ export default class Render{
         }
         else if(elem.name === 'statue'){
             return new Statue(elem.id)
+        }
+        else if(elem.name === 'skull cloud'){
+            return new SkullCloud(elem.id)
         }
     }
 

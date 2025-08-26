@@ -69,6 +69,7 @@ class Sound{
         else if(name === 'impy'){
             result.src = 'impy.wav'
         }
+        
         else if(name === 'shatter'){
             result.src = 'shatter1.wav'
         }
@@ -83,6 +84,12 @@ class Sound{
         }
         else if(name === 'metal hit'){
             let v = ['block arrow1.wav' ,'block arrow2.wav', 'block arrow3.wav', 'block blade1.wav', 'block blade4.wav', 'block blade5.wav']
+         
+            result.src = v[Math.floor(Math.random() * v.length)]
+            result.max_volume = 0.2
+        }
+        else if(name === 'ward hit'){
+            let v = ['emerge06.wav', 'emerge04.wav']
          
             result.src = v[Math.floor(Math.random() * v.length)]
             result.max_volume = 0.2
