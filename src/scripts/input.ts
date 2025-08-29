@@ -59,6 +59,16 @@ export default class Input {
                 }, 50)
             }
         })
+        this.canvas.addEventListener('mouseup',(e)=>{
+            if(e.which === 1){
+                this.pressed.l_click = false
+                this.pressed.canvas_x = undefined
+                this.pressed.canvas_y = undefined
+            }
+            else{           
+                this.pressed.r_click = false
+            }
+        })
         window.addEventListener('keydown',(e)=>{
             // e.preventDefault()
             if(e.key == ' '){

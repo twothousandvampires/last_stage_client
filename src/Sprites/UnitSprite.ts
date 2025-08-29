@@ -9,6 +9,8 @@ export default abstract class UnitSprite extends Sprite{
     min_frame: number
     real_x: number | undefined
     real_y: number | undefined
+    need_send_end: boolean = false
+    is_end: boolean = false
 
     constructor(id: number){
         super(id)
@@ -43,8 +45,14 @@ export default abstract class UnitSprite extends Sprite{
                 }
                 else if(this.repeatable){
                     this.frame = this.min_frame
+                    if(this.need_send_end){
+                        this.is_end = true
+                    }
                 }
                 else{
+                    if(this.need_send_end){
+                        this.is_end = true
+                    }
                     this.frame -= 1
                     this.stopped = true
                 }
@@ -74,5 +82,7 @@ export default abstract class UnitSprite extends Sprite{
         this.action = false
         this.removable = false
         this.is_bottom = false
+        this.is_end = false
+        this.need_send_end = false
     }   
 }

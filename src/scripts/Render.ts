@@ -65,6 +65,13 @@ import Statue from "../Sprites/Enemy/Statue"
 import MagicStar from "../Sprites/Effect/MagicStar"
 import BurningCircle from "../Sprites/Effect/BurningCircle"
 import SkullCloud from "../Sprites/Effect/SkullCloud"
+import SmallTextL1 from "../Sprites/Effect/SmallTextL1"
+import SmallTextL2 from "../Sprites/Effect/SmallTextL2"
+import SmallTextL3 from "../Sprites/Effect/SmallTextL3"
+import TextLanguage1 from "../Sprites/Effect/TextLanguage1"
+import TextLanguage2 from "../Sprites/Effect/TextLanguage2"
+import TextLanguage3 from "../Sprites/Effect/TextLanguage3"
+import ClosedGate from "../Sprites/Effect/ClosedGate"
 
 export default class Render{
     ctx: any
@@ -153,8 +160,6 @@ export default class Render{
         let killed = document.getElementById('killed')
 
         resourses.innerText = sprite.resource + ' / ' + sprite.max_resource
-
-        console.log(sprite)
 
         life.innerText = this.getLifeString(sprite)
         time.innerText = this.time
@@ -396,6 +401,27 @@ export default class Render{
         else if(elem.name === 'skull cloud'){
             return new SkullCloud(elem.id)
         }
+        else if(elem.name === 'small text l1'){
+            return new SmallTextL1(elem.id)
+        }
+        else if(elem.name === 'small text l2'){
+           return new SmallTextL2(elem.id)
+        } 
+        else if(elem.name === 'small text l3'){
+            return new SmallTextL3(elem.id)
+        }
+        else if(elem.name === 'text l1'){
+            return new TextLanguage1(elem.id)
+        }
+        else if(elem.name === 'text l2'){
+            return new TextLanguage2(elem.id)
+        }
+        else if(elem.name === 'text l3'){
+            return new TextLanguage3(elem.id)
+        }
+        else if(elem.name === 'closed gate'){
+            return new ClosedGate(elem.id)
+        }
     }
 
     public updateData(data: any){
@@ -455,7 +481,6 @@ export default class Render{
         rel_x = (40 + client.level_id * 120 ) - rel_x
         rel_y = 40 - rel_y
         
-    
         this.ctx.clearRect(0, 0, 120, 120)
 
         this.ctx.drawImage(this.bg, 120 * client.level_id, 0, 120, 120, rel_x, rel_y, 120, 120)
@@ -474,6 +499,7 @@ export default class Render{
 
             let elem = to_draw[i]
 
+           
             if(elem.need_to_remove){
                 this.actors.delete(elem.id)
                 continue
@@ -489,48 +515,45 @@ export default class Render{
                 this.ctx.save()
                 this.flipHorizontally(rel_x)
             }
-            
-            if(elem.by_centr){
-                this.ctx.drawImage(this.data.map.get(elem.sprite_name),
-                elem.frame * elem.sprite_w,
-                elem.y_frame_offset + 1,
-                elem.sprite_w,
-                elem.sprite_h - 1,
-                rel_x - elem.sprite_w / (2 * this.downscale), 
-                rel_y - (elem.sprite_h / (2 * this.downscale)) - elem.z,
-                elem.sprite_w / this.downscale, 
-                elem.sprite_h / this.downscale)
+            if(!elem.invisible){
+                 if(elem.by_centr){
+                    this.ctx.drawImage(this.data.map.get(elem.sprite_name),
+                    elem.frame * elem.sprite_w,
+                    elem.y_frame_offset + 1,
+                    elem.sprite_w,
+                    elem.sprite_h - 1,
+                    rel_x - elem.sprite_w / (2 * this.downscale), 
+                    rel_y - (elem.sprite_h / (2 * this.downscale)) - elem.z,
+                    elem.sprite_w / this.downscale, 
+                    elem.sprite_h / this.downscale)
+                }
+                else{
+                    this.ctx.drawImage(this.data.map.get(elem.sprite_name),
+                    elem.frame * elem.sprite_w,
+                    elem.y_frame_offset + 1,
+                    elem.sprite_w,
+                    elem.sprite_h - 1,
+                    rel_x - elem.sprite_w / (2 * this.downscale), 
+                    rel_y - ( (elem.sprite_h / this.downscale) - 1) - elem.z,
+                    elem.sprite_w / this.downscale, 
+                    elem.sprite_h / this.downscale)
+                }
             }
-            else{
-                this.ctx.drawImage(this.data.map.get(elem.sprite_name),
-                elem.frame * elem.sprite_w,
-                elem.y_frame_offset + 1,
-                elem.sprite_w,
-                elem.sprite_h - 1,
-                rel_x - elem.sprite_w / (2 * this.downscale), 
-                rel_y - ( (elem.sprite_h / this.downscale) - 1) - elem.z,
-                elem.sprite_w / this.downscale, 
-                elem.sprite_h / this.downscale)
-            }
-
+           
             if(elem.flipped){
                 this.ctx.restore()
             }
 
-            // this.ctx.fillStyle = 'white'
-            // this.ctx.fillRect(rel_x, rel_y, 1, 1)
-            // this.ctx.fillStyle = 'green'
-            // this.ctx.beginPath();
-            // this.ctx.ellipse(rel_x, rel_y, 2.5, 1.25, 6.28, 0, 360)
-            // this.ctx.fill()
-            
-            // this.ctx.fillRect(rel_x - value.box_x / 2, rel_y - Math.ceil(value.box_y/ 2), value.box_x, value.box_y)
-        
             elem.act()
 
             if(!elem.action && elem.is_action_frame){
                 elem.action = true
                 this.socket.emit('action', elem.id) 
+            }
+
+            if(elem.is_end){
+                this.socket.emit('action_end', elem.id) 
+                elem.is_end = false
             }
             
             if(elem.real_x && elem.real_y && inputs.l_click){
@@ -540,10 +563,6 @@ export default class Render{
                     t = elem.id
                 }
             }
-
-            // this.ctx.font = "2px serif";
-            // this.ctx.fillStyle  = 'white'
-            // this.ctx.fillText(elem.state, rel_x, rel_y)
 
             if((elem.id === this.client_id) || (elem.light_r && elem.can_share_light)){
                 let r = elem.light_r

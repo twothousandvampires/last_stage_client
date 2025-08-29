@@ -11,6 +11,10 @@ export default class ImageData{
             path:  'cultist/cultist2.png',
         },
         {
+            name: 'cultist3',
+            path:  'cultist/cultist3.png',
+        },
+        {
             name: 'swordman1',
             path:  'swordman/swordman1.png',
         },
@@ -127,6 +131,14 @@ export default class ImageData{
             path:  'effect/pack3.png',
         }, 
          {
+            name: 'pack5',
+            path:  'effect/pack5.png',
+        }, 
+        {
+            name: 'pack6',
+            path:  'effect/pack6.png',
+        }, 
+        {
             name: 'ghost_cultist',
             path:  'effect/ghost_cultist.png',
         }, 

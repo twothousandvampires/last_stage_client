@@ -12,6 +12,7 @@ export default class FlyerSprite extends UnitSprite{
     level_id: number
     second: any
     ward: number = 0
+    invisible: boolean = false
  
     constructor(id: number){
       super(id)
@@ -36,6 +37,7 @@ export default class FlyerSprite extends UnitSprite{
         this.utility = data.utility
         this.second = data.second
         this.ward = data.ward
+        this.invisible = data.invisible
     }
 
     setLevelId(id: number){
@@ -60,6 +62,7 @@ export default class FlyerSprite extends UnitSprite{
         }
         else if(this.state === 'cast'){
             let r = Math.random()
+            this.need_send_end = true
             if(r < 0.33){
                 this.sprite_name = 'flyer2'
                 this.y_frame_offset = 0

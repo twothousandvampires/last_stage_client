@@ -31,7 +31,5 @@ export default class Tooth extends Sprite{
         else if(this.state === 2){
             this.y_frame_offset = 60
         }
-
-        console.log(this)
     }
 }

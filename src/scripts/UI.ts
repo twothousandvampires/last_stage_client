@@ -235,7 +235,7 @@ export default class UI{
         let div = this.createDiv('equip_and_image')
         let e_p = this.createParagraph("equip: ")
         div.appendChild(e_p)
-        console.log(item)
+     
         if(item.template.item){
             let image = this.createImage('./icons/' + item.template.item + '.png')
             this.applyTitle(image, {
@@ -488,7 +488,7 @@ export default class UI{
         let wrap = document.createElement('div')
         wrap.id = 'upgrades_list'
         parrent.id = 'upgrades'
-        console.log(data)
+       
         data.upgrades.forEach(elem => {
             let div =  document.createElement('div')
             let under_div = document.createElement('div')

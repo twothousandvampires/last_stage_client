@@ -12,6 +12,7 @@ export default class Cultist extends UnitSprite{
     level_id: number
     second: any
     ward: number = 0
+    invisible: boolean = false
    
     constructor(id: number){
       super(id)
@@ -36,6 +37,7 @@ export default class Cultist extends UnitSprite{
         this.utility = data.utility
         this.second = data.second
         this.ward = data.ward
+        this.invisible = data.invisible
     }
 
     setLevelId(id: number){
@@ -68,13 +70,14 @@ export default class Cultist extends UnitSprite{
         }
         else if(this.state === 'attack'){
             let r = Math.random()
+            this.repeatable = false
+            this.need_send_end = true
             if(r < 0.33){
                 this.sprite_name = 'cultist2'
                 this.y_frame_offset = 0
                 this.max_frame = 10
                 this.max_frame_tick = Math.round( (this.action_time / this.max_frame) / 30)
                 this.action_frame = 8
-                this.repeatable = false
             }
             else if(r < 0.66){
                 this.sprite_name = 'cultist2'
@@ -82,7 +85,6 @@ export default class Cultist extends UnitSprite{
                 this.max_frame = 9
                 this.max_frame_tick = Math.round( (this.action_time / this.max_frame) / 30)
                 this.action_frame = 7
-                this.repeatable = false
             }
             else{
                 this.sprite_name = 'cultist2'
@@ -90,7 +92,6 @@ export default class Cultist extends UnitSprite{
                 this.max_frame = 8
                 this.max_frame_tick = Math.round( (this.action_time / this.max_frame) / 30)
                 this.action_frame = 7
-                this.repeatable = false
             }
         }
         else if(this.state === 'damaged'){
@@ -100,9 +101,9 @@ export default class Cultist extends UnitSprite{
             this.max_frame_tick = 1
         }
         else if(this.state === 'defend'){
-            this.sprite_name = 'swordman2'
-            this.y_frame_offset = 400
-            this.max_frame = 3
+            this.sprite_name = 'cultist3'
+            this.y_frame_offset = 0
+            this.max_frame = 5
             this.max_frame_tick = 2
             this.repeatable = false
         }
@@ -121,6 +122,7 @@ export default class Cultist extends UnitSprite{
             this.repeatable = false
         }
         else if(this.state === 'cast'){
+            this.need_send_end = true
             this.sprite_name = 'cultist1'
             this.y_frame_offset = 400
             this.max_frame = 10
@@ -129,6 +131,7 @@ export default class Cultist extends UnitSprite{
             this.action_frame = 9
         }
         else if(this.state === 'shield hit'){
+            this.need_send_end = true
             this.sprite_name = 'cultist2'
             this.y_frame_offset = 240
             this.max_frame = 8
@@ -137,7 +140,7 @@ export default class Cultist extends UnitSprite{
             this.action_frame = 7
         }
         else if(this.state === 'freezed'){
-            this.sprite_name = 'swordman3'
+            this.sprite_name = 'cultist3'
             this.y_frame_offset = 80
             this.max_frame = 1
             this.max_frame_tick = 100000
@@ -157,9 +160,9 @@ export default class Cultist extends UnitSprite{
             this.max_frame_tick = 3
         }
         else if(this.state === 'zaped'){
-            this.sprite_name = 'swordman3'
-            this.y_frame_offset = 240
-            this.max_frame = 6
+            this.sprite_name = 'cultist3'
+            this.y_frame_offset = 160
+            this.max_frame = 7
             this.max_frame_tick = 3
         }
         else if(this.state === 'start ghost'){

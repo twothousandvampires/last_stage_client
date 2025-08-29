@@ -49,7 +49,7 @@ export default class Bones extends UnitSprite{
             let r = Math.random()
             this.sprite_name = 'bones2'
             this.repeatable = false
-            console.log(r)
+        
             if(r < 0.5){
                 this.y_frame_offset = 0
                 this.max_frame = 7

@@ -61,7 +61,7 @@ class Sound{
             result.max_volume = 0.6
         }
         else if(name === 'demon roar'){
-            let v = ['attack1.wav', 'attack3.wav', 'attack2.wav']
+            let v = ['attack1.wav', 'attack3.wav', 'attack2.wav', 'biclopd2.wav']
 
             result.src = v[Math.floor(Math.random() * v.length)]
             result.max_volume = 0.2
@@ -125,13 +125,13 @@ class Sound{
             result.max_volume = 0.1
         }
         else if(name === 'lightning cast'){
-            let v = ['eleccast.wav']
+            let v = ['eleccast.wav', 'LMag.wav']
          
             result.src = v[Math.floor(Math.random() * v.length)]
             result.max_volume = 0.1
         }
         else if(name === 'cast'){
-            let v = ['summon.wav', 'firecasta.wav', 'cloak.wav']
+            let v = ['summon.wav', 'firecasta.wav', 'cloak.wav', 'cast8.wav']
          
             result.src = v[Math.floor(Math.random() * v.length)]
             result.max_volume = 0.1
@@ -143,16 +143,22 @@ class Sound{
             result.max_volume = 0.1
         }
         else if(name === 'dark cast'){
-            let v = ['cursecast.wav', 'revivecast.wav']
+            let v = ['cursecast.wav', 'revivecast.wav', 'cast3.wav', 'Cast10.wav']
          
             result.src = v[Math.floor(Math.random() * v.length)]
             result.max_volume = 0.1
         }
         else if(name === 'sword swing'){
-            let v = ['bigswish1.wav', 'bigswish2.wav', 'bigswish3.wav', 'bigswish5.wav', 'bigswish4.wav']
+            let v = ['bigswish1.wav', 'bigswish2.wav', 'bigswish3.wav', 'bigswish5.wav', 'bigswish4.wav', 'swing.wav', 'swing2.wav']
          
             result.src = v[Math.floor(Math.random() * v.length)]
             result.max_volume = 0.1
+        }
+        else if(name === 'enlight'){
+            let v = ['magic.wav', 'Magic1.wav']
+         
+            result.src = v[Math.floor(Math.random() * v.length)]
+            result.max_volume = 0.6
         }
         else if(name === 'corpse explode'){
             let v = ['corpse explode 1.wav', 'corpse explode 2.wav', 'corpse explode 3.wav', 'corpse explode 4.wav', 'corpse explode 5.wav', 'corpse explode 6.wav']
@@ -209,13 +215,19 @@ class Sound{
         }
 
         else if(name === 'hit bones'){
-            let v = ['gethit1.wav', 'gethit2.wav', 'gethit3.wav', 'gethit4.wav', 'gethit5.wav', 'gethit6.wav', 'gethit7.wav']
+            let v = ['gethit1.wav', 'gethit2.wav', 'gethit3.wav', 'gethit4.wav', 'gethit5.wav', 'gethit6.wav', 'gethit7.wav', 'bsimpct.wav']
          
             result.src = v[Math.floor(Math.random() * v.length)]
 
             result.max_volume = 0.3
         }
+        else if(name === 'door open'){
+        
+            result.src = 'dooropen.wav'
 
+            result.max_volume = 0.7
+        }
+    
         else if(name === 'bones explode'){
             let v = ['death1.wav', 'death2.wav', 'death3.wav', 'death4.wav', 'death5.wav']
          
@@ -225,7 +237,7 @@ class Sound{
         }
 
         else if(name === 'short sword swing'){
-            let v = ['defiles1.wav', 'defiles2.wav']
+            let v = ['defiles1.wav', 'defiles2.wav', 'swing.wav', 'swing2.wav']
          
             result.src = v[Math.floor(Math.random() * v.length)]
 
@@ -254,8 +266,8 @@ class Sound{
             result.max_volume = 0.2
         }
 
-        else if(name === 'injured human'){
-            let v = ['soft1.wav', 'soft3.wav', 'soft5.wav']
+        else if(name === 'get hit'){
+            let v = ['soft1.wav', 'soft3.wav', 'soft5.wav' , 'lghit.wav', 'lghit1.wav', 'bhit.wav', 'bhit1.wav', 'sword1.wav' ,'sword2.wav', 'sword3.wav', 'sword4.wav', 'sword5.wav', 'sword6.wav']
          
             result.src = v[Math.floor(Math.random() * v.length)]
 
