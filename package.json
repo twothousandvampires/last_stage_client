@@ -4,7 +4,7 @@
   "description": "slash them",
   "main": "index.js",
   "scripts": {
-    "clean": "if exist dist rmdir /s /q dist",
+    "clean": "rm -rf dist",
     "build": "npm run clean && node esbuild.config.js"
   },
   "author": "twothousandvampires",

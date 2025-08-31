@@ -248,6 +248,19 @@
         justify-content: start;
         min-height: 54px;
     }
+    #forge{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-between;
+        z-index: 666;
+        position: fixed;
+        width: 600px;
+        left: calc(50% - 300px);
+        height: 300px;
+        top: calc(50% - 150px);
+        background-color: goldenrod;
+    }
     #upgrades{
         display: flex;
         flex-direction: column;

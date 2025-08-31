@@ -51,6 +51,14 @@ export default class Client{
            this.UI.showUpgrades(upgrades)
         })
 
+        this.socket.on('show_forgings', (upgrades: number) => {
+           this.UI.showForgings(upgrades)
+        })
+
+        this.socket.on('close_forgings', () => {
+           this.UI.closeForgings()
+        })
+
         this.socket.on('close_upgrades', () => {
             this.UI.clsoeUpgrades()
         })

@@ -73,6 +73,7 @@ export default class UI{
         let p = this.createParagraph(text)
         parent.appendChild(p)
     }
+
     createSelect(item: any): any{
         let template = document.getElementById('select_template')
         if(!template) return
@@ -236,19 +237,20 @@ export default class UI{
         let e_p = this.createParagraph("equip: ")
         div.appendChild(e_p)
      
-        if(item.template.item){
-            let image = this.createImage('./icons/' + item.template.item + '.png')
+        item.template.item.forEach(item => {
+            let image = this.createImage('./icons/' + item.name+ '.png')
+
             this.applyTitle(image, {
-                main_title: item.template.item,
-                text: item.template.item_decription
+                main_title: item.name,
+                text: ''
             })
             image.addEventListener('click', () => {
                 Sound.setSound('menu item drop')
-                this.socket.emit('unpick_item', item.template.item)
+                this.socket.emit('unpick_item', item.name)
             })
             
-            div.appendChild(image)        
-        }
+            div.appendChild(image)     
+        })
 
         select_ready_equip.appendChild(div)
         select_ready_equip.appendChild(ready)
@@ -379,31 +381,26 @@ export default class UI{
 
         //create cap(items and abilities)
 
-        let players_items = data.map(elem => elem.template.item)
-
         // let lobby_cap = this.createDiv('lobby_cap')
 
         // items
         let items_div = this.createDiv('item_pull')
 
         items.forEach(item => {
-            if(!players_items.includes(item.name)){
+            let image = this.createImage('./icons/' + item.name + '.png')
+            this.applyTitle(image, {
+                main_title: item.name,
+                text: item.description
+            })
             
-                let image = this.createImage('./icons/' + item.name + '.png')
-                this.applyTitle(image, {
-                    main_title: item.name,
-                    text: item.description
-                })
-                
-                image.style.margin = '2px'
+            image.style.margin = '2px'
 
-                image.addEventListener('click', () => {
-                    Sound.setSound('menu item take')
-                    this.socket.emit('pick_item', item.name)
-                })
+            image.addEventListener('click', () => {
+                Sound.setSound('menu item take')
+                this.socket.emit('pick_item', item.name)
+            })
 
-                items_div.appendChild(image)
-            }
+            items_div.appendChild(image)
         })
 
         lobby.appendChild(items_div)
@@ -478,12 +475,80 @@ export default class UI{
         
     }
 
+    showForgings(data: any){
+        let exist = document.getElementById('forge')
+        
+        if(exist){
+            return
+        }
+
+        let parrent = document.createElement('div')
+        parrent.id = 'forge'
+
+        data.items.forEach(item => {
+            let wrap = this.createDiv('')
+            let img = this.createImage('./icons/' + item.name + '.png', 80, 80)
+
+            // img.addEventListener('click', () => {
+            //     this.socket.emit('select_upgrade', elem.name)
+            // })
+
+            this.applyTitle(img, {
+                main_title: item.name,
+                text: ''
+            })
+
+
+            let unlock = this.createParagraph('unlock forging')
+
+            unlock.addEventListener('click', () => {
+                this.socket.emit('unlock_forging', item.name,
+                )
+            })
+
+            parrent.appendChild(unlock)
+
+            wrap.appendChild(img)
+            let wrap2= this.createDiv('')
+
+            item.forge.forEach((forge, index) =>{
+                let p = this.createParagraph(forge.name + ' - ' + forge.value)
+
+                p.addEventListener('click', () => {
+                    this.socket.emit('forge_item', {
+                        item_name: item.name,
+                        forge: index
+                    })
+                })
+
+                wrap2.appendChild(p)
+            })
+
+            parrent.appendChild(wrap)
+            parrent.appendChild(wrap2)
+
+        })
+
+        document.getElementsByTagName('body')[0].appendChild(parrent)
+    }
+
+    closeForgings(){
+        let exist = document.getElementById('forge')
+
+        if(exist){
+            exist.parentNode?.removeChild(exist)
+        }
+
+        this.closeTitle()
+    }
+
     showUpgrades(data: any){
         let exist = document.getElementById('upgrades')
 
         if(exist){
             return
         }
+        
         let parrent = document.createElement('div')
         let wrap = document.createElement('div')
         wrap.id = 'upgrades_list'
