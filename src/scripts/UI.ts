@@ -156,6 +156,19 @@ export default class UI{
         })
     }
 
+    createRealiseBar(data){
+        let info = data.realise
+
+        if(data.realise_info){
+           info += (" " + data.realise_info)
+        }
+
+        let bar = this.createParagraph(info)
+        bar.id = 'realise'
+    
+        document.getElementsByTagName('body')[0].appendChild(bar)
+    }
+
     createStats(item: any){
         let wrap = document.createElement('div')
         wrap.className = 'stat_wrap'
@@ -320,7 +333,6 @@ export default class UI{
                 text: utility.desc
             })
         
-
         utility_div.appendChild(p)
         utility_div.appendChild(image)
 
@@ -328,7 +340,6 @@ export default class UI{
         
         right.appendChild(skills)
 
-      
         wrap.append(right)
           wrap.append(left)
        

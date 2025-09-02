@@ -121,6 +121,13 @@
         font-size: 18px;
         background-color: #b8860b;
     }
+    #realise{
+        position: fixed;
+        top: 95%;
+        left: 95%;
+        font-size: 14px;
+        color: #e0e07a;
+    }
     #lobby_full{
         font-size: 30px;
         position: fixed;

@@ -30,8 +30,8 @@ export default class Client{
             Sound.back.play()
         })
 
-        this.socket.on('server_status', (game_is_started: boolean) => {
-            if(game_is_started){
+        this.socket.on('server_status', (data: any) => {
+            if(data.game_is_started){
                 let text = document.createElement('p')
                 text.id = 'lobby_full'
                 text.innerText = 'lobby is started or full'
@@ -40,6 +40,8 @@ export default class Client{
             else{
                 
             }
+
+            this.UI.createRealiseBar(data)
         })
        
         this.socket.on('new_status' ,(status) => {
