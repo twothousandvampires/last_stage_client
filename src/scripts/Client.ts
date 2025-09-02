@@ -31,7 +31,7 @@ export default class Client{
         })
 
         this.socket.on('server_status', (data: any) => {
-            if(data.game_is_started){
+            if(data.status){
                 let text = document.createElement('p')
                 text.id = 'lobby_full'
                 text.innerText = 'lobby is started or full'

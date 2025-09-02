@@ -132,7 +132,7 @@
         font-size: 30px;
         position: fixed;
         top: 45%;
-        left: 50%;
+        left: 40%;
         color: #e0e07a;
     }
     #hud{
