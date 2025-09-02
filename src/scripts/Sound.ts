@@ -75,6 +75,22 @@ class Sound{
 
             result.src = v[Math.floor(Math.random() * v.length)]
         }
+
+        else if(name === 'gold spending'){
+            let v = ['gold.wav', 'gold1.wav']
+
+            result.src = v[Math.floor(Math.random() * v.length)]
+        }
+
+        else if(name === 'ambient'){
+            let v = ['drip1.wav', 'drip2.wav', 'drip3.wav', 'drip4.wav', 'drip5.wav', 'drip6.wav', 'drip7.wav','drip8.wav', 'vtheft.wav', 'breath1.wav',
+                'breath2.wav','breath3.wav', 'breath4.wav' , 'breath5.wav', 'breath6.wav', 'breath7.wav', 'breath8.wav', 'breath9.wav'
+            ]
+            
+            result.max_volume = 0.7
+            result.src = v[Math.floor(Math.random() * v.length)]
+        }
+        
         else if(name === 'frost nova'){
              let v = ['cold1.wav', 'cold2.wav', 'cold3.wav', 'cold4.wav']
 

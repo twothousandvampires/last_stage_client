@@ -114,6 +114,13 @@
     .cannot_use{
         opacity: 0.3;
     }
+    .cost_and_buy p{
+        padding: 2px;
+        text-align: center;
+        cursor:  pointer;
+        font-size: 18px;
+        background-color: #b8860b;
+    }
     #lobby_full{
         font-size: 30px;
         position: fixed;

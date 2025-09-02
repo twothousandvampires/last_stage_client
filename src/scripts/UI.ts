@@ -142,8 +142,11 @@ export default class UI{
         }
     }
 
-    applyTitle(elem, info){
-        elem.style.cursor = 'help'
+    applyTitle(elem, info, with_cursor = true){
+        if(with_cursor){
+              elem.style.cursor = 'help'
+        }
+      
         elem.addEventListener('mouseover', (e) => {
             this.createTitle(info, e)
             e.stopPropagation()
@@ -483,9 +486,36 @@ export default class UI{
         let parrent = document.createElement('div')
         parrent.id = 'forge'
 
+        let cost_and_buy = this.createDiv('cost_and_buy')
+
         let gold = this.createParagraph('gold: ' + data.gold)
-        gold.style.fontSize = '20px'
-        parrent.appendChild(gold)
+        cost_and_buy.appendChild(gold)
+
+        let donate = this.createParagraph('donate')
+        this.applyTitle(donate, {
+            main_titl: undefined,
+            text: 'donate 20g to get 1 grace'
+        },false)
+
+        cost_and_buy.appendChild(donate)
+
+        if(data.items.length < 4){
+            let buy = this.createParagraph('buy item')
+
+            this.applyTitle(buy, {
+                main_titl: undefined,
+                text: 'buy new random item for 30g'
+            },false)
+
+            buy.addEventListener('click', () => {
+                this.socket.emit('buy')
+            })
+
+            gold.style.fontSize = '20px'
+            cost_and_buy.appendChild(buy)
+        }
+
+        parrent.appendChild(cost_and_buy)
 
         data.items.forEach(item => {
             let wrap = this.createDiv('forge_item')
@@ -493,22 +523,18 @@ export default class UI{
 
             this.applyTitle(img, {
                 main_title: item.name,
-                text: ''
+                text: item.description
             })
 
             if(item.forge.length < item.max_forgings){
-                let unlock = this.createParagraph('unlock forging')
-                    this.applyTitle(unlock, {
-                        main_title: 'unlock forging',
-                        text: 'cost: 10'
-                    })
-                    unlock.addEventListener('click', () => {
-                        this.socket.emit('unlock_forging', item.name,
-                    )
-                })
-                wrap.appendChild(unlock)
-            }
 
+                img.addEventListener('click', () => {
+                    this.socket.emit('unlock_forging', item.name)
+                })
+
+                img.title = 'unlock forging cost: ' + (item.forge.length * 5 + 5)
+            }
+    
             wrap.appendChild(img)
         
             item.forge.forEach((forge, index) =>{
@@ -538,28 +564,6 @@ export default class UI{
 
             parrent.appendChild(wrap)
         })
-
-        let count = 4 - data.items.length
-
-        if(count > 0){
-           
-            let buy_wrap = this.createDiv('forge_item')
-            let buy_img = this.createImage('./icons/' + 'forge' + '.png', 80, 80)
-
-            buy_img.addEventListener('click', () => {
-                this.socket.emit('buy')
-            })
-
-            this.applyTitle(buy_img, {
-                main_title: 'buy item',
-                text: 'buy it!(cost: 30)'
-            })
-
-
-            buy_wrap.appendChild(buy_img)
-
-            parrent.appendChild(buy_wrap) 
-        }
 
         document.getElementsByTagName('body')[0].appendChild(parrent)
     }

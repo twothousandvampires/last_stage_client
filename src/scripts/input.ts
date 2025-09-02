@@ -70,14 +70,13 @@ export default class Input {
             }
         })
         window.addEventListener('keydown',(e)=>{
-            // e.preventDefault()
             if(e.key == ' '){
                 e.preventDefault()
             }
-            this.pressed[e.key] = true
+            this.pressed[e.keyCode] = true
         })
         window.addEventListener('keyup',(e)=>{
-            this.pressed[e.key] = false
+            this.pressed[e.keyCode] = false
         })
         
     }
