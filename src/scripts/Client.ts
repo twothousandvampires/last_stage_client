@@ -32,7 +32,10 @@ export default class Client{
 
         this.socket.on('server_status', (game_is_started: boolean) => {
             if(game_is_started){
-                // todo
+                let text = document.createElement('p')
+                text.id = 'lobby_full'
+                text.innerText = 'lobby is started or full'
+                document.getElementById('wrap')?.appendChild(text)
             }
             else{
                 

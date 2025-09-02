@@ -23,7 +23,7 @@
         <option value="cultist">cultist</option>
     </select>
      <div id="main">
-        <p style='color: wheat'>LAST STAGE</p>
+       <img src="preview/logo.png"   alt="">
     </div>
     <div id="wrap">
         <div id="lobby"></div>
@@ -71,13 +71,14 @@
     }
     #title .main_title{
         font-size: 20px;
-        color: blue;
+        color: #001e3a;
     }
     #title{
         position: fixed;
-        background-color: green;
+        background-color: #2a9eb2;
         width: 400px;
         z-index: 667;
+        border: 4px solid #3a7da3;
     }
     .select_ready_equip{
         height: 160px;
@@ -96,6 +97,14 @@
         justify-content: space-between;
         align-items: center;
     }
+    #ready_botton{
+        text-align: center;
+        width: 100%;
+        background-color: #4a4a4a;
+        cursor: pointer;
+        padding: 8px;
+        width: 200px;
+    }
     .stat_wrap {
         display: flex;
         flex-direction: column;
@@ -104,6 +113,13 @@
     }
     .cannot_use{
         opacity: 0.3;
+    }
+    #lobby_full{
+        font-size: 30px;
+        position: fixed;
+        top: 45%;
+        left: 50%;
+        color: #e0e07a;
     }
     #hud{
         color: aquamarine;
@@ -157,7 +173,8 @@
       grid-column: 1 / 3;  
     } */
     .item_pull, .abilities_pull{
-        background-color: yellow;
+        background-color: #e0e07a;
+        border: 8px solid #7a7a3a;
     }
     .item_pull{
         grid-column: 1;
@@ -182,12 +199,13 @@
         grid-row: 3;
     }
     .player {
-        background-color: aqua;
+        background-color: #b8b85c;
         display: flex;
         flex-direction: row;
         justify-content: center;
         align-items: center;
-        border: 4px solid red;
+        border: 8px solid #7a7a3a;
+        font-size: 18px;
     }
     .item_pull, .abilities_pull{
         display: flex;
@@ -206,7 +224,7 @@
         width: 80%;
     }
     .right_bottom{
-        border-top: 4px red solid;
+        border-top: 8px solid #7a7a3a;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -229,7 +247,7 @@
         width: 60%;
     }
     .left_block{
-        border-left: 4px red solid;
+        border-left: 8px solid #7a7a3a;
         width: 40%;
         height: 100%;
         display: flex;
@@ -248,18 +266,25 @@
         justify-content: start;
         min-height: 54px;
     }
-    #forge{
+    .forge_item{
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
-        align-items: flex-between;
+        align-items: center;
+        justify-content: center;
+    }
+    #forge{
         z-index: 666;
         position: fixed;
-        width: 600px;
-        left: calc(50% - 300px);
-        height: 300px;
-        top: calc(50% - 150px);
-        background-color: goldenrod;
+        width: 800px;
+        left: calc(50% - 400px);
+        height: 500;
+        top: calc(50% - 250px);
+        background-color: #b8b85c;
+        border: 6px solid #7a7a3a;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
     }
     #upgrades{
         display: flex;
@@ -268,11 +293,17 @@
         align-items: flex-between;
         z-index: 666;
         position: fixed;
-        width: 300px;
-        left: calc(50% - 150px);
-        height: 150px;
-        top: calc(50% - 75px);
-        background-color: goldenrod;
+        width: 400px;
+        left: calc(50% - 200px);
+        height: 220px;
+        top: calc(50% - 110px);
+        background-color: #b8b85c;
+        border: 6px solid #7a7a3a;
+    }
+    #hold_grace{
+        width: 100%;
+        background-color: #ff8c00;
+        cursor: pointer;
     }
     #upgrades_list{
         display: flex;
@@ -286,10 +317,14 @@
         text-align: center;
     }
     #upgrades div{
-        max-width: 80px;
+        
     }
     #upgrades div .underdiv{
         padding: 4px;
         background-color: wheat;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 </style>

@@ -71,10 +71,14 @@ class Sound{
         }
         
         else if(name === 'shatter'){
-            result.src = 'shatter1.wav'
+            let v = ['shatter1.wav', 'coldimpact1.wav', 'coldimpact2.wav', 'coldimpact3.wav']
+
+            result.src = v[Math.floor(Math.random() * v.length)]
         }
         else if(name === 'frost nova'){
-            result.src = 'cold3.wav'
+             let v = ['cold1.wav', 'cold2.wav', 'cold3.wav', 'cold4.wav']
+
+            result.src = v[Math.floor(Math.random() * v.length)]
         }
         else if(name === 'sword hit'){
             let v = ['sword1.wav' ,'sword2.wav', 'sword3.wav', 'sword4.wav', 'sword5.wav', 'sword6.wav']

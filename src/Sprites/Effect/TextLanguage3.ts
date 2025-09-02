@@ -26,4 +26,4 @@ export default class TextLanguage3 extends Sprite{
             this.max_frame_tick = 40
         }
     }
-}2
+}

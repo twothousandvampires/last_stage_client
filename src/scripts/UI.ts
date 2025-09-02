@@ -143,6 +143,7 @@ export default class UI{
     }
 
     applyTitle(elem, info){
+        elem.style.cursor = 'help'
         elem.addEventListener('mouseover', (e) => {
             this.createTitle(info, e)
             e.stopPropagation()
@@ -211,20 +212,14 @@ export default class UI{
     
         let select_preview = this.createDiv('select_and_preview')
 
-        let ready = this.createParagraph('ready')
+        let ready = this.createParagraph(item.ready ? 'cancel' : 'ready')
 
-        if(item.ready){
-            ready.style.backgroundColor = 'green'
-        }
-        else{
-            ready.style.backgroundColor = 'red'
-        }
+        ready.id = 'ready_botton'
 
         ready.addEventListener('click', () => {
             this.socket.emit('player_ready')
         })
-        ready.style.width = '100%'
-
+       
         select_preview.appendChild(preview)
        
         right_top.appendChild(select_preview)
@@ -427,6 +422,9 @@ export default class UI{
         data.forEach((item, index) => {
             let block = this.createBlock(item)
             block.classList += 'player player' + (index + 1)
+            if(item.ready){
+                block.style.backgroundColor = '#e0e07a'
+            }
             lobby.appendChild(block)
         });
     }
@@ -485,49 +483,83 @@ export default class UI{
         let parrent = document.createElement('div')
         parrent.id = 'forge'
 
-        data.items.forEach(item => {
-            let wrap = this.createDiv('')
-            let img = this.createImage('./icons/' + item.name + '.png', 80, 80)
+        let gold = this.createParagraph('gold: ' + data.gold)
+        gold.style.fontSize = '20px'
+        parrent.appendChild(gold)
 
-            // img.addEventListener('click', () => {
-            //     this.socket.emit('select_upgrade', elem.name)
-            // })
+        data.items.forEach(item => {
+            let wrap = this.createDiv('forge_item')
+            let img = this.createImage('./icons/' + item.name + '.png', 80, 80)
 
             this.applyTitle(img, {
                 main_title: item.name,
                 text: ''
             })
 
-
-            let unlock = this.createParagraph('unlock forging')
-
-            unlock.addEventListener('click', () => {
-                this.socket.emit('unlock_forging', item.name,
-                )
-            })
-
-            parrent.appendChild(unlock)
+            if(item.forge.length < item.max_forgings){
+                let unlock = this.createParagraph('unlock forging')
+                    this.applyTitle(unlock, {
+                        main_title: 'unlock forging',
+                        text: 'cost: 10'
+                    })
+                    unlock.addEventListener('click', () => {
+                        this.socket.emit('unlock_forging', item.name,
+                    )
+                })
+                wrap.appendChild(unlock)
+            }
 
             wrap.appendChild(img)
-            let wrap2= this.createDiv('')
-
+        
             item.forge.forEach((forge, index) =>{
-                let p = this.createParagraph(forge.name + ' - ' + forge.value)
+                let p = this.createParagraph(forge.name)
 
-                p.addEventListener('click', () => {
-                    this.socket.emit('forge_item', {
-                        item_name: item.name,
-                        forge: index
-                    })
+                this.applyTitle(p, {
+                    main_title: forge.stat,
+                    text: 'cost: ' + forge.cost 
                 })
 
-                wrap2.appendChild(p)
+                if(forge.can){
+                     p.addEventListener('click', () => {
+                        this.socket.emit('forge_item', {
+                            item_name: item.name,
+                            forge: index
+                        })
+                    })
+
+                    p.style.cursor = 'pointer'
+                }
+                else{
+                    p.style.color = 'red'
+                }
+               
+                wrap.appendChild(p)
             })
 
             parrent.appendChild(wrap)
-            parrent.appendChild(wrap2)
-
         })
+
+        let count = 4 - data.items.length
+
+        if(count > 0){
+           
+            let buy_wrap = this.createDiv('forge_item')
+            let buy_img = this.createImage('./icons/' + 'forge' + '.png', 80, 80)
+
+            buy_img.addEventListener('click', () => {
+                this.socket.emit('buy')
+            })
+
+            this.applyTitle(buy_img, {
+                main_title: 'buy item',
+                text: 'buy it!(cost: 30)'
+            })
+
+
+            buy_wrap.appendChild(buy_img)
+
+            parrent.appendChild(buy_wrap) 
+        }
 
         document.getElementsByTagName('body')[0].appendChild(parrent)
     }
@@ -539,7 +571,7 @@ export default class UI{
             exist.parentNode?.removeChild(exist)
         }
 
-        this.closeTitle()
+        // this.closeTitle()
     }
 
     showUpgrades(data: any){
@@ -587,24 +619,23 @@ export default class UI{
 
         let wrap2 = document.createElement('div')
 
-        let grace_count = this.createParagraph(data.grace)
+        let grace_count = this.createParagraph('grace: ' + data.grace)
+        grace_count.style.fontSize = '18px'
 
         wrap2.appendChild(grace_count)
         
         if(data.can_hold){
             let hold = this.createParagraph('hold')
+            hold.id = 'hold_grace'
             hold.addEventListener('click', () => {
                 this.socket.emit('hold_grace')
             })
             wrap2.appendChild(hold)
+            this.applyTitle(hold, {
+                main_title: 'hold grace',
+                text: 'if you dont spend grace you can reject this and get 3 grace'
+            })
         }
-
-        let exit = this.createParagraph('exit')
-        exit.addEventListener('click', () => {
-            this.socket.emit('exit_grace')
-        })
-
-        wrap2.appendChild(exit)
 
         parrent.appendChild(wrap2)
 
@@ -618,6 +649,6 @@ export default class UI{
             exist.parentNode?.removeChild(exist)
         }
 
-        this.closeTitle()
+        // this.closeTitle()
     }
 }

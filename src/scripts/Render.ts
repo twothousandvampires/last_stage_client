@@ -72,6 +72,9 @@ import TextLanguage1 from "../Sprites/Effect/TextLanguage1"
 import TextLanguage2 from "../Sprites/Effect/TextLanguage2"
 import TextLanguage3 from "../Sprites/Effect/TextLanguage3"
 import ClosedGate from "../Sprites/Effect/ClosedGate"
+import Forger from "../Sprites/Effect/Forger"
+import Gate from "../Sprites/Effect/Gate"
+import StrangeLanguage from "../Sprites/Effect/StrangeLanguage"
 
 export default class Render{
     ctx: any
@@ -422,6 +425,15 @@ export default class Render{
         else if(elem.name === 'closed gate'){
             return new ClosedGate(elem.id)
         }
+        else if(elem.name === 'forger'){
+            return new Forger(elem.id)
+        }
+        else if(elem.name === 'gate'){
+            return new Gate(elem.id)
+        }
+        else if(elem.name === 'strange language'){
+            return new StrangeLanguage(elem.id)
+        }   
     }
 
     public updateData(data: any){
