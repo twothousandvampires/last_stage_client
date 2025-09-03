@@ -46,7 +46,7 @@ export default class UI{
             let image = this.createImage('./icons/' + elem.name + '.png')
             image.style.margin = '2px'
             image.addEventListener('click', () => {
-                Sound.setSound('taunt')
+                Sound.setSound('select_skill')
                 this.socket.emit('select_skill', elem.name)
             })
             this.applyTitle(image, {
@@ -503,10 +503,18 @@ export default class UI{
         cost_and_buy.appendChild(gold)
 
         let donate = this.createParagraph('donate')
+
+        donate.addEventListener('click', () => {
+            if(data.gold >= 20){
+                this.socket.emit('donate')
+                Sound.setSound('donate')
+            }
+        })
+
         this.applyTitle(donate, {
             main_titl: undefined,
             text: 'donate 20g to get 1 grace'
-        },false)
+        }, false)
 
         cost_and_buy.appendChild(donate)
 
@@ -534,16 +542,24 @@ export default class UI{
 
             this.applyTitle(img, {
                 main_title: item.name,
-                text: item.description
+                text: item.description + '\n\n unlock forging for ' + (item.forge.length * 5 + 5) + 'g'
             })
 
             if(item.forge.length < item.max_forgings){
-
                 img.addEventListener('click', () => {
                     this.socket.emit('unlock_forging', item.name)
                 })
 
-                img.title = 'unlock forging cost: ' + (item.forge.length * 5 + 5)
+                this.applyTitle(img, {
+                    main_title: item.name,
+                    text: item.description + '\n\n unlock forging for ' + (item.forge.length * 5 + 5) + 'g'
+                })
+            }
+            else{
+                this.applyTitle(img, {
+                    main_title: item.name,
+                    text: item.description + '\n\n maximum forgings'
+                })
             }
     
             wrap.appendChild(img)
@@ -586,7 +602,7 @@ export default class UI{
             exist.parentNode?.removeChild(exist)
         }
 
-        // this.closeTitle()
+        this.closeTitle()
     }
 
     showUpgrades(data: any){
@@ -648,7 +664,7 @@ export default class UI{
             wrap2.appendChild(hold)
             this.applyTitle(hold, {
                 main_title: 'hold grace',
-                text: 'if you dont spend grace you can reject this and get 3 grace'
+                text: 'if you haven nott spent any grace, you can cancel this one and get 3 grace'
             })
         }
 
@@ -664,6 +680,6 @@ export default class UI{
             exist.parentNode?.removeChild(exist)
         }
 
-        // this.closeTitle()
+        this.closeTitle()
     }
 }

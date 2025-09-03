@@ -18,6 +18,6 @@ main.addEventListener('click' , () => {
     socket.on('game_is_over', () => {
         setTimeout(() => {
             location.reload()
-        }, 1000)
+        }, 500)
     })
 })

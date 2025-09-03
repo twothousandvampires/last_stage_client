@@ -82,6 +82,13 @@ class Sound{
             result.src = v[Math.floor(Math.random() * v.length)]
         }
 
+        else if(name === 'upgrade'){
+            let v = ['readbook.wav']
+
+            result.src = v[Math.floor(Math.random() * v.length)]
+            result.max_volume = 0.4
+        }
+
         else if(name === 'ambient'){
             let v = ['drip1.wav', 'drip2.wav', 'drip3.wav', 'drip4.wav', 'drip5.wav', 'drip6.wav', 'drip7.wav','drip8.wav', 'vtheft.wav', 'breath1.wav',
                 'breath2.wav','breath3.wav', 'breath4.wav' , 'breath5.wav', 'breath6.wav', 'breath7.wav', 'breath8.wav', 'breath9.wav'
@@ -103,7 +110,7 @@ class Sound{
             result.max_volume = 0.2
         }
         else if(name === 'metal hit'){
-            let v = ['block arrow1.wav' ,'block arrow2.wav', 'block arrow3.wav', 'block blade1.wav', 'block blade4.wav', 'block blade5.wav']
+            let v = ['block arrow1.wav' ,'block arrow2.wav', 'block arrow3.wav', 'block blade1.wav', 'block blade4.wav', 'block blade5.wav', 'metalshield.wav']
          
             result.src = v[Math.floor(Math.random() * v.length)]
             result.max_volume = 0.2
@@ -210,14 +217,22 @@ class Sound{
             result.max_volume = 0.3
         }
 
-        else if(name === 'taunt'){
-            let v = ['taunt1.wav', 'taunt2.wav', 'taunt3.wav']
+        else if(name === 'select_skill'){
+            let v = ['metalshield.wav']
          
             result.src = v[Math.floor(Math.random() * v.length)]
 
             result.max_volume = 0.2
         }
 
+        else if(name === 'donate'){
+            let v = ['handofgod.wav']
+         
+            result.src = v[Math.floor(Math.random() * v.length)]
+
+            result.max_volume = 0.7
+        }
+        
         else if(name === 'zap'){
             let v = ['zap1.wav', 'zap2.wav', 'zap3.wav', 'zap4.wav']
          
