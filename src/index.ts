@@ -1,23 +1,27 @@
-import { io } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js"
 import Client from "./scripts/Client"
 import url from "./config"
 
-main.addEventListener('click' , () => {
+declare global {
+  interface Window {
+    io: any;
+  }
+}
 
-    main.parentNode?.removeChild(main)
-    wrap.style.display = 'block'
+main.addEventListener('click', () => {
+  main.parentNode?.removeChild(main)
+  wrap.style.display = 'block'
 
-    const socket = io.connect(url)
+  const socket = window.io.connect(url)
 
-    socket.on('connect', () => {
-        new Client(socket)
-    })
-    socket.on('disconnect', () => {
-        location.reload()
-    })
-    socket.on('game_is_over', () => {
-        setTimeout(() => {
-            location.reload()
-        }, 500)
-    })
+  socket.on('connect', () => {
+    new Client(socket)
+  })
+  socket.on('disconnect', () => {
+    location.reload()
+  })
+  socket.on('game_is_over', () => {
+    setTimeout(() => {
+      location.reload()
+    }, 500)
+  })
 })

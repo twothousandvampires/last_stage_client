@@ -211,7 +211,7 @@ export default class UI{
 
         return wrap
     }
-    createBlock(item: any){
+    createBlock(item: any, index: number){
         
         let wrap = document.createElement('div')
 
@@ -298,6 +298,12 @@ export default class UI{
         let second_div = this.createDiv('selected_skill_div')
 
         p = this.createParagraph('secondary: ' + second.name)
+
+        if(index === 0){
+            p.addEventListener('click', () => {
+                this.socket.emit('set_start_scenario', 'learning')
+            })
+        }
         image = this.createImage('./icons/' + second.name + '.png')
         this.applyTitle(image, {
                 main_title: second.name,
@@ -434,7 +440,7 @@ export default class UI{
         })
 
         data.forEach((item, index) => {
-            let block = this.createBlock(item)
+            let block = this.createBlock(item, index)
             block.classList += 'player player' + (index + 1)
             if(item.ready){
                 block.style.backgroundColor = '#e0e07a'

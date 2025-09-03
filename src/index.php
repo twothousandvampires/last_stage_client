@@ -16,7 +16,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta http-equiv="Cache-Control" content="max-age=3600">
     <title>Document</title>
-</head>
+    <script src="https://cdn.socket.io/4.4.1/socket.io.min.js"></script>
 <body>
     <select style="visibility: hidden; position: fixed" name="select_template" id="select_template">
         <option value="swordman">swordman</option>
@@ -50,7 +50,7 @@
             </div>
         </div>
     </div>
-    <script type="module" src="index.js"></script>
+    <script type="module" src="bundle.js"></script>
 </body>
 </html>
 <style>
