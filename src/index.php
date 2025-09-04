@@ -50,18 +50,7 @@
             </div>
         </div>
     </div>
-    <div id="mobile-controls" style="position: fixed; bottom: 20px; left: 0; right: 0;">
-    <div id="joystick-container">
-    <div class="joystick">
-        <button class="dir-btn up" attr-dir="1">↑</button>
-        <button class="dir-btn up-right" attr-dir="2">↗</button>
-        <button class="dir-btn right" attr-dir="3">→</button>
-        <button class="dir-btn down-right" attr-dir="4">↘</button>
-        <button class="dir-btn down" attr-dir="5">↓</button>
-        <button class="dir-btn down-left" attr-dir="6">↙</button>
-        <button class="dir-btn left" attr-dir="7">←</button>
-        <button class="dir-btn up-left" attr-dir="8">↖</button>
-    </div>
+    <div id="joystick">
 </div>
 </div>
     <script type="module" src="bundle.js"></script>
@@ -356,20 +345,25 @@
         justify-content: center;
         align-items: center;
     }
-    #joystick-container {
+    #joystick {
         position: fixed;
         bottom: 30px;
         left: 30px;
         z-index: 1000;
-    }
-
-    .joystick {
-        position: relative;
-        width: 200px;
-        height: 200px;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: none;
     }
 
     .dir-btn {
+        outline: none;
+        -webkit-touch-callout: none;
+        -webkit-user-drag: none;
         position: absolute;
         width: 50px;
         height: 50px;
