@@ -50,6 +50,20 @@
             </div>
         </div>
     </div>
+    <div id="mobile-controls" style="position: fixed; bottom: 20px; left: 0; right: 0;">
+    <div id="joystick-container">
+    <div class="joystick">
+        <button class="dir-btn up" attr-dir="1">↑</button>
+        <button class="dir-btn up-right" attr-dir="2">↗</button>
+        <button class="dir-btn right" attr-dir="3">→</button>
+        <button class="dir-btn down-right" attr-dir="4">↘</button>
+        <button class="dir-btn down" attr-dir="5">↓</button>
+        <button class="dir-btn down-left" attr-dir="6">↙</button>
+        <button class="dir-btn left" attr-dir="7">←</button>
+        <button class="dir-btn up-left" attr-dir="8">↖</button>
+    </div>
+</div>
+</div>
     <script type="module" src="bundle.js"></script>
 </body>
 </html>
@@ -341,5 +355,90 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+    }
+    #joystick-container {
+        position: fixed;
+        bottom: 30px;
+        left: 30px;
+        z-index: 1000;
+    }
+
+    .joystick {
+        position: relative;
+        width: 200px;
+        height: 200px;
+    }
+
+    .dir-btn {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        border: none;
+        border-radius: 50%;
+        background: rgba(0, 0, 0, 0.6);
+        color: white;
+        font-size: 20px;
+        cursor: pointer;
+        touch-action: none;
+        user-select: none;
+    }
+
+    .dir-btn:active {
+        background: rgba(255, 165, 0, 0.8);
+        transform: scale(1.1);
+    }
+
+    /* Центральная кнопка */
+    .center-btn {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(255, 0, 0, 0.7);
+        z-index: 2;
+    }
+
+    /* Расположение кнопок по кругу */
+    .up {
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .up-right {
+        top: 25%;
+        right: 25%;
+    }
+
+    .right {
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+    }
+
+    .down-right {
+        bottom: 25%;
+        right: 25%;
+    }
+
+    .down {
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .down-left {
+        bottom: 25%;
+        left: 25%;
+    }
+
+    .left {
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+    }
+
+    .up-left {
+        top: 25%;
+        left: 25%;
     }
 </style>
