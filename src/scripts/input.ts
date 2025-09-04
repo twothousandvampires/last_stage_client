@@ -26,8 +26,12 @@ export default class Input {
             r_click: false,
             target: undefined
         }
+        this.setInputs()
+    }
 
-        this.canvas.addEventListener('mousemove',(e)=>{
+    setInputs(){
+        if(!this.isTouchDevice()){
+            this.canvas.addEventListener('mousemove',(e)=>{
             let x: any =  Math.floor(e.offsetX / 5)
             this.pressed.over_x = x
 
@@ -47,39 +51,46 @@ export default class Input {
             
             if(e.which === 1){
                 this.pressed.l_click = true
-                setTimeout(()=>{
+                    setTimeout(()=>{
+                        this.pressed.l_click = false
+                        this.pressed.canvas_x = undefined
+                        this.pressed.canvas_y = undefined
+                    }, 50)
+                }
+                else{
+                    this.pressed.r_click = true
+                    setTimeout(()=>{
+                        this.pressed.r_click = false
+                    }, 50)
+                }
+            })
+            this.canvas.addEventListener('mouseup',(e)=>{
+                if(e.which === 1){
                     this.pressed.l_click = false
                     this.pressed.canvas_x = undefined
                     this.pressed.canvas_y = undefined
-                }, 50)
-            }
-            else{
-                this.pressed.r_click = true
-                setTimeout(()=>{
+                }
+                else{           
                     this.pressed.r_click = false
-                }, 50)
-            }
-        })
-        this.canvas.addEventListener('mouseup',(e)=>{
-            if(e.which === 1){
-                this.pressed.l_click = false
-                this.pressed.canvas_x = undefined
-                this.pressed.canvas_y = undefined
-            }
-            else{           
-                this.pressed.r_click = false
-            }
-        })
-        window.addEventListener('keydown',(e)=>{
-            if(e.key == ' '){
-                e.preventDefault()
-            }
-            this.pressed[e.keyCode] = true
-        })
-        window.addEventListener('keyup',(e)=>{
-            this.pressed[e.keyCode] = false
-        })  
-        this.createTouchZone()
+                }
+            })
+            window.addEventListener('keydown',(e)=>{
+                if(e.key == ' '){
+                    e.preventDefault()
+                }
+                this.pressed[e.keyCode] = true
+            })
+            window.addEventListener('keyup',(e)=>{
+                this.pressed[e.keyCode] = false
+            })  
+        }
+        else{
+            this.createTouchZone()
+        }
+    }
+
+    isTouchDevice() {
+        return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
     }
 
     createTouchZone() {
@@ -93,21 +104,57 @@ export default class Input {
         `;
     
         this.touchZone.addEventListener('touchstart', (e) =>{
+            e.stopPropagation()
             e.preventDefault();
             this.updateDirection(e);
         }, { passive: false });
         
         this.touchZone.addEventListener('touchmove', (e) => {
+               e.stopPropagation()
             e.preventDefault();
             this.updateDirection(e);
         }, { passive: false });
     
         this.touchZone.addEventListener('touchend', (e) => {
+               e.stopPropagation()
             e.preventDefault();
             this.last.forEach(key => {
                 this.pressed[key] = false
             })
         }, { passive: false });
+
+       this.canvas.addEventListener('touchstart', (e) => {
+           e.preventDefault();
+            const touch = e.touches[0];
+            
+            // Получаем координаты относительно канваса
+            const rect = this.canvas.getBoundingClientRect();
+            const scaleX = this.canvas.width / rect.width;    // Масштаб по X
+            const scaleY = this.canvas.height / rect.height;  // Масштаб по Y
+            
+            const canvasX = (touch.clientX - rect.left) * scaleX;
+            const canvasY = (touch.clientY - rect.top) * scaleY;
+            
+            // Делим на 5 как в вашем примере
+            let x = Math.floor(canvasX / 5);
+            let y = Math.floor(canvasY / 5);
+            
+            this.pressed.canvas_x = x;
+            this.pressed.canvas_y = y;
+        
+            this.pressed.l_click = true
+             console.log(this.pressed)
+            setTimeout(()=>{
+                this.pressed.l_click = false
+                this.pressed.canvas_x = undefined
+                this.pressed.canvas_y = undefined
+            }, 50)
+        });
+
+        this.canvas.addEventListener('touchend', function(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+        });
     
         document.getElementById('joystick').appendChild(this.touchZone);
     }

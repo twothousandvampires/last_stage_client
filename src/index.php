@@ -347,8 +347,8 @@
     }
     #joystick {
         position: fixed;
-        bottom: 30px;
-        left: 30px;
+        bottom: 42%;
+        left: 10px;
         z-index: 1000;
         -webkit-touch-callout: none;
         -webkit-user-select: none;
@@ -358,81 +358,5 @@
         user-select: none;
         -webkit-tap-highlight-color: transparent;
         touch-action: none;
-    }
-
-    .dir-btn {
-        outline: none;
-        -webkit-touch-callout: none;
-        -webkit-user-drag: none;
-        position: absolute;
-        width: 50px;
-        height: 50px;
-        border: none;
-        border-radius: 50%;
-        background: rgba(0, 0, 0, 0.6);
-        color: white;
-        font-size: 20px;
-        cursor: pointer;
-        touch-action: none;
-        user-select: none;
-    }
-
-    .dir-btn:active {
-        background: rgba(255, 165, 0, 0.8);
-        transform: scale(1.1);
-    }
-
-    /* Центральная кнопка */
-    .center-btn {
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: rgba(255, 0, 0, 0.7);
-        z-index: 2;
-    }
-
-    /* Расположение кнопок по кругу */
-    .up {
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-    }
-
-    .up-right {
-        top: 25%;
-        right: 25%;
-    }
-
-    .right {
-        top: 50%;
-        right: 0;
-        transform: translateY(-50%);
-    }
-
-    .down-right {
-        bottom: 25%;
-        right: 25%;
-    }
-
-    .down {
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-    }
-
-    .down-left {
-        bottom: 25%;
-        left: 25%;
-    }
-
-    .left {
-        top: 50%;
-        left: 0;
-        transform: translateY(-50%);
-    }
-
-    .up-left {
-        top: 25%;
-        left: 25%;
     }
 </style>
