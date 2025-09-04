@@ -11,8 +11,13 @@ export default class Input {
         r_click: boolean,
         [key: string]: any}
     socket: any
-    touchZone: any
+    touch_zone: any
     last: any[] = []
+    last_touch_time: number = Date.now()
+    canvas_touch_event: TouchEvent | undefined
+    long_touch: any
+    was_long_touch: boolean = false
+    special_pressed: boolean = false
    
     constructor(socket: any) {
         this.canvas = document.getElementById('canvas')
@@ -94,78 +99,103 @@ export default class Input {
     }
 
     createTouchZone() {
-        this.touchZone = document.createElement('div');
-        this.touchZone.style.cssText = `
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            background: red;
-            touch-action: none;
-        `;
-    
-        this.touchZone.addEventListener('touchstart', (e) =>{
+        this.touch_zone = document.getElementById('touch-zone');
+        this.special = document.getElementById('special');
+        this.defend = document.getElementById('defend');
+
+        this.special.addEventListener('touchstart', (e) => {
+            e.preventDefault()
+            this.pressed[69] = true
+        })
+        this.special.addEventListener('touchend', (e) => {
+            e.preventDefault()
+            this.pressed[69] = false
+        })
+
+        this.defend.addEventListener('touchstart', (e) => {
+            e.preventDefault()
+            this.pressed[32] = true
+        })
+        this.defend.addEventListener('touchend', (e) => {
+            e.preventDefault()
+            this.pressed[32] = false
+        })
+
+        this.touch_zone.addEventListener('touchstart', (e: TouchEvent) =>{
             e.stopPropagation()
             e.preventDefault();
             this.updateDirection(e);
         }, { passive: false });
         
-        this.touchZone.addEventListener('touchmove', (e) => {
-               e.stopPropagation()
+        this.touch_zone.addEventListener('touchmove', (e: TouchEvent) => {
+            e.stopPropagation()
             e.preventDefault();
             this.updateDirection(e);
-        }, { passive: false });
+        }, { touch_zone: false });
     
-        this.touchZone.addEventListener('touchend', (e) => {
-               e.stopPropagation()
+        this.touch_zone.addEventListener('touchend', (e: TouchEvent) => {
+            e.stopPropagation()
             e.preventDefault();
             this.last.forEach(key => {
                 this.pressed[key] = false
             })
-        }, { passive: false });
+        }, { touch_zone: false });
 
-       this.canvas.addEventListener('touchstart', (e) => {
+       this.canvas.addEventListener('touchstart', (e: TouchEvent) => {
            e.preventDefault();
             const touch = e.touches[0];
-            
-            // Получаем координаты относительно канваса
+        
             const rect = this.canvas.getBoundingClientRect();
-            const scaleX = this.canvas.width / rect.width;    // Масштаб по X
-            const scaleY = this.canvas.height / rect.height;  // Масштаб по Y
-            
+            const scaleX = this.canvas.width / rect.width;
+            const scaleY = this.canvas.height / rect.height;
+        
             const canvasX = (touch.clientX - rect.left) * scaleX;
             const canvasY = (touch.clientY - rect.top) * scaleY;
             
-            // Делим на 5 как в вашем примере
             let x = Math.floor(canvasX / 5);
             let y = Math.floor(canvasY / 5);
-            
+
             this.pressed.canvas_x = x;
             this.pressed.canvas_y = y;
-        
-            this.pressed.l_click = true
-             console.log(this.pressed)
-            setTimeout(()=>{
-                this.pressed.l_click = false
+            this.pressed.over_x = x
+            this.pressed.over_y = y
+         
+            this.long_touch = setTimeout(() => {
+                this.pressed.r_click = true
+                this.was_long_touch = true            
+            }, 250);
+        })
+
+        this.canvas.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            if(this.was_long_touch){
+                this.was_long_touch = false
+                this.pressed.r_click = false
                 this.pressed.canvas_x = undefined
                 this.pressed.canvas_y = undefined
-            }, 50)
+            }
+            else{
+                clearTimeout(this.long_touch)
+                
+                this.pressed.l_click = true
+                
+                
+                setTimeout(()=>{
+                    this.pressed.l_click = false
+                    this.pressed.canvas_x = undefined
+                    this.pressed.canvas_y = undefined
+                }, 50)
+            }     
         });
-
-        this.canvas.addEventListener('touchend', function(e) {
-            e.preventDefault();
-            const touch = e.touches[0];
-        });
-    
-        document.getElementById('joystick').appendChild(this.touchZone);
     }
 
     public getInputs(){
         return this.pressed
     }
 
-     updateDirection(e) {
+     updateDirection(e: TouchEvent) {
         const touch = e.touches[0];
-        let rect = this.touchZone.getBoundingClientRect();
+        let rect = this.touch_zone.getBoundingClientRect();
         const centerX = rect.left + rect.width / 2;
         const centerY = rect.top + rect.height / 2;
         
@@ -183,6 +213,11 @@ export default class Input {
             this.last = newDirection
             newDirection.forEach(key => {
                 this.pressed[key] = true
+            })
+        }
+        else{
+            this.last.forEach(key => {
+                this.pressed[key] = false
             })
         }
     }

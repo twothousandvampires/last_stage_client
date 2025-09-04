@@ -1,21 +1,11 @@
 <!doctype html>
 <html lang="en">
-<style>
-    @font-face {
-        font-family: o;
-        src: url("./fonts/manaspc.ttf");
-    }
-    html{
-        font-family: o;
-    }
-</style>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta http-equiv="Cache-Control" content="max-age=3600">
-    <title>Document</title>
+    <title>Last stage</title>
     <script src="https://cdn.socket.io/4.4.1/socket.io.min.js"></script>
 <body>
     <select style="visibility: hidden; position: fixed" name="select_template" id="select_template">
@@ -51,12 +41,25 @@
         </div>
     </div>
     <div id="joystick">
+        <div id="touch-zone"></div>
+    </div>
+    <div id="defend_and_special">
+        <div id="defend"></div>
+        <div id="special"></div>
+    </div>
 </div>
 </div>
-    <script type="module" src="bundle.js"></script>
+    <script src="bundle.js"></script>
 </body>
 </html>
 <style>
+     @font-face {
+        font-family: o;
+        src: url("./fonts/manaspc.ttf");
+    }
+    html{
+        font-family: o;
+    }
     body{
         margin: 0;
         padding: 0;
@@ -345,9 +348,17 @@
         justify-content: center;
         align-items: center;
     }
+    #touch-zone{
+        background-image: url('/preview/joystick.png');
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+
+        touch-action: none;
+    }
     #joystick {
         position: fixed;
-        bottom: 42%;
+        bottom: 22%;
         left: 10px;
         z-index: 1000;
         -webkit-touch-callout: none;
@@ -358,5 +369,35 @@
         user-select: none;
         -webkit-tap-highlight-color: transparent;
         touch-action: none;
+        display: flex;
+        flex-direction: column;
+    }
+    #defend_and_special{
+        position: fixed;
+        bottom: 22%;
+        width: 100px;
+        left: 65%;
+        z-index: 1000;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: none;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    #defend {
+        width: 40px;
+        height: 40px;
+        background-image: url('./preview/defend.png');
+    }
+    #special {
+        width: 40px;
+        height: 40px;
+        background-image: url('./preview/special.png');
     }
 </style>
