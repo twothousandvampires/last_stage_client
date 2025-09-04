@@ -154,8 +154,8 @@ export default class UI{
       
         elem.addEventListener('mouseover', (e) => {
             e.preventDefault()
-            this.createTitle(info, e)
             e.stopPropagation()
+            this.createTitle(info, e)
         })
 
         elem.addEventListener('mouseleave' , (e) => {

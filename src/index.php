@@ -124,8 +124,8 @@
             width: 150px;
             align-items: flex-start;
             height: 130px;
-            left: 30px;
-            top: -15px;
+            left: -10px;
+            top: -10px;
         }
     }
     .pointer{
@@ -301,19 +301,22 @@
         width: 100%;
     }
     .right_block{
+        width: 60%;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
+    }
+    @media (max-width: 425px) {
+        .right_block{
+            width: 40%;
+        }
     }
     .selected_skill_div{
         display: flex;
         flex-direction: row;
         width: 100%;
         justify-content: space-between;
-    }
-    .right_block{
-        width: 60%;
     }
     .left_block{
         border-left: 8px solid #7a7a3a;
@@ -327,6 +330,7 @@
     @media (max-width: 425px) {
         .left_block{
             align-items: flex-end;
+            justify-content: flex-end;
         }
     }
     #player_stats, #meta_info{

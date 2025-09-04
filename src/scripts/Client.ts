@@ -43,7 +43,8 @@ export default class Client{
                     if('ontouchstart' in window || navigator.maxTouchPoints > 0){
                         info.innerText = `Use the stick in the lower left corner to move.
 Tap the screen to use skills. Single tap - uses the first skill, long tap uses the second and third skills (if there are enough resources).
-Tap on the shield for protection. Tap the yellow circle to use the utility skill (if it requires coordinates on the field, the last tap on it will be used).`
+Tap on the shield for protection. Tap the yellow circle to use the utility skill (if it requires coordinates on the field, the last tap on it will be used).You can move and attack at the same time. 
+Take 2 items, distribute stats and press ready button.`
                     }
                     else{
                          info.innerText = `Use WASD to move, space to block, E to use utility abilities.`
