@@ -123,28 +123,35 @@ export default class Input {
 
         this.touch_zone.addEventListener('touchstart', (e: TouchEvent) =>{
             e.stopPropagation()
-            e.preventDefault();
             this.updateDirection(e);
+            this.stick_touch_id = e.touches[0].identifier
+            e.preventDefault()
         }, { passive: false });
         
         this.touch_zone.addEventListener('touchmove', (e: TouchEvent) => {
             e.stopPropagation()
-            e.preventDefault();
+           
             this.updateDirection(e);
+            e.preventDefault();
+            console.log(this.stick_touch_id)
         }, { touch_zone: false });
     
         this.touch_zone.addEventListener('touchend', (e: TouchEvent) => {
             e.stopPropagation()
-            e.preventDefault();
+           
             this.last.forEach(key => {
                 this.pressed[key] = false
             })
+            this.stick_touch_id = undefined
+             e.preventDefault();
         }, { touch_zone: false });
 
        this.canvas.addEventListener('touchstart', (e: TouchEvent) => {
-           e.preventDefault();
-            const touch = e.touches[0];
-        
+            e.preventDefault();
+            let touch = e.touches[0];
+            if(touch.identifier === this.stick_touch_id){
+                touch = e.touches[1]
+            }
             const rect = this.canvas.getBoundingClientRect();
             const scaleX = this.canvas.width / rect.width;
             const scaleY = this.canvas.height / rect.height;
