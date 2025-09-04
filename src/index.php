@@ -14,7 +14,7 @@
         <option value="cultist">cultist</option>
     </select>
      <div id="main">
-       <img src="preview/logo.png"   alt="">
+       <img id="logo" src="preview/logo.png" alt="logo">
     </div>
     <div id="wrap">
         <div id="lobby"></div>
@@ -40,19 +40,13 @@
             </div>
         </div>
     </div>
-    <div id="joystick">
-        <div id="touch-zone"></div>
-    </div>
-    <div id="defend_and_special">
-        <div id="defend"></div>
-        <div id="special"></div>
-    </div>
 </div>
 </div>
     <script src="bundle.js"></script>
 </body>
 </html>
 <style>
+    
      @font-face {
         font-family: o;
         src: url("./fonts/manaspc.ttf");
@@ -63,6 +57,16 @@
     body{
         margin: 0;
         padding: 0;
+    }
+    #logo{
+        width: 1380px;
+        height: 920px;
+    }
+    @media (max-width: 425px) {
+        #logo{
+            width: 276px;
+            height: 184px;
+        }
     }
     #main p {
         font-size: 50px;
@@ -80,6 +84,11 @@
         font-size: 20px;
         color: #001e3a;
     }
+    @media (max-width: 425px) {
+        #title .main_title{
+            font-size: 12;
+        }
+    }
     #title{
         position: fixed;
         background-color: #2a9eb2;
@@ -87,12 +96,32 @@
         z-index: 667;
         border: 4px solid #3a7da3;
     }
+    @media (max-width: 425px) {
+        #title{
+            font-size: 8px;
+            position: fixed;
+            background-color: #2a9eb2;
+            width: 200px;
+            z-index: 667;
+            border: 4px solid #3a7da3;
+        }
+    }
     .select_ready_equip{
         height: 160px;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: space-between;
+    }
+    @media (max-width: 425px) {
+        .select_ready_equip {
+            z-index: 666;
+            position: relative;
+            background-color: #b8b85c;
+            width: 150px;
+            align-items: flex-start;
+            left: 60px;
+        }
     }
     .pointer{
         cursor: pointer;
@@ -111,6 +140,11 @@
         cursor: pointer;
         padding: 8px;
         width: 200px;
+    }
+    @media (max-width: 425px) {
+        #ready_botton {
+            width: 150px;
+        }
     }
     .stat_wrap {
         display: flex;
@@ -186,20 +220,24 @@
         grid-template-rows: 15% repeat(3, 1fr);
         height: 100vh; 
     }
-    /* .lobby_cap{
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-      grid-column: 1 / 3;  
-    } */
+    @media (max-width: 425px) {
+        #lobby{
+            display: flex;
+            flex-direction: column;
+            grid-template-rows: 15% repeat(3, 1fr);
+            height: 100vh;
+        }
+        #lobby p{
+            font-size: 10px;
+        }
+    }
     .item_pull, .abilities_pull{
         background-color: #e0e07a;
         border: 8px solid #7a7a3a;
     }
     .item_pull{
         grid-column: 1;
-     }
+    }
     .abilities_pull{
         grid-column: 2;
      }
@@ -232,6 +270,11 @@
         display: flex;
         flex-direction: row;
         justify-content: space-around;
+    }
+    @media (max-width: 425px) {
+        .item_pull{
+            flex-wrap: wrap;
+        }
     }
     .select_and_preview{
         display: flex;
@@ -276,6 +319,11 @@
         justify-content: center;
         align-items: center;
     }
+    @media (max-width: 425px) {
+        .left_block{
+            align-items: flex-end;
+        }
+    }
     #player_stats, #meta_info{
         display: flex;
         flex-direction: row;
@@ -298,7 +346,6 @@
         position: fixed;
         width: 800px;
         left: calc(50% - 400px);
-        height: 500;
         top: calc(50% - 250px);
         background-color: #b8b85c;
         border: 6px solid #7a7a3a;
@@ -306,6 +353,18 @@
         flex-direction: row;
         align-items: flex-start;
         justify-content: space-between;
+    }
+    @media (max-width: 425px) {
+        #forge{
+            width: 400px;
+            left: calc(50% - 200px);
+            font-size: 10px;
+        }
+        #forge img{
+            width: 40px;
+            height: 40px;
+            
+        }
     }
     #upgrades{
         display: flex;
@@ -353,10 +412,6 @@
         width: 120px;
         height: 120px;
         border-radius: 50%;
-
-        touch-action: none;
-    }
-    #joystick {
         position: fixed;
         bottom: 22%;
         left: 10px;
@@ -371,6 +426,7 @@
         touch-action: none;
         display: flex;
         flex-direction: column;
+        touch-action: none;
     }
     #defend_and_special{
         position: fixed;

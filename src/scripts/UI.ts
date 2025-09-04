@@ -123,6 +123,10 @@ export default class UI{
         }
         title_div.appendChild(text)
 
+        title_div.addEventListener('touchstart' ,() => {
+            this.closeTitle()
+        })
+
         document.getElementsByTagName('body')[0].appendChild(title_div)
 
         const rect = title_div.getBoundingClientRect();
@@ -151,6 +155,7 @@ export default class UI{
             this.createTitle(info, e)
             e.stopPropagation()
         })
+
         elem.addEventListener('mouseleave' , () => {
             this.closeTitle()
         })

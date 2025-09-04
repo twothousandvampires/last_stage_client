@@ -99,36 +99,50 @@ export default class Input {
     }
 
     createTouchZone() {
-        this.touch_zone = document.getElementById('touch-zone');
-        this.special = document.getElementById('special');
-        this.defend = document.getElementById('defend');
+        let touch_zone = document.createElement('div')
+        touch_zone.id = 'touch-zone'
+        this.touch_zone = touch_zone
+        let special_div = document.createElement('div');
+        special_div.id = 'special'
 
-        this.special.addEventListener('touchstart', (e) => {
+        let defend_div = document.createElement('div');
+        defend_div.id = 'defend'
+
+        special_div.addEventListener('touchstart', (e) => {
             e.preventDefault()
             this.pressed[69] = true
         })
-        this.special.addEventListener('touchend', (e) => {
+
+        special_div.addEventListener('touchend', (e) => {
             e.preventDefault()
             this.pressed[69] = false
         })
 
-        this.defend.addEventListener('touchstart', (e) => {
+        defend_div.addEventListener('touchstart', (e) => {
             e.preventDefault()
             this.pressed[32] = true
         })
-        this.defend.addEventListener('touchend', (e) => {
+
+        defend_div.addEventListener('touchend', (e) => {
             e.preventDefault()
             this.pressed[32] = false
         })
 
-        this.touch_zone.addEventListener('touchstart', (e: TouchEvent) =>{
+        let wrap = document.createElement('div')
+        wrap.id = 'defend_and_special'
+        wrap.appendChild(defend_div)
+        wrap.appendChild(special_div)
+
+        document.getElementsByTagName('body')[0].appendChild(wrap)
+
+        touch_zone.addEventListener('touchstart', (e: TouchEvent) => {
             e.stopPropagation()
             this.updateDirection(e);
             this.stick_touch_id = e.touches[0].identifier
             e.preventDefault()
         }, { passive: false });
         
-        this.touch_zone.addEventListener('touchmove', (e: TouchEvent) => {
+        touch_zone.addEventListener('touchmove', (e: TouchEvent) => {
             e.stopPropagation()
            
             this.updateDirection(e);
@@ -136,7 +150,7 @@ export default class Input {
             console.log(this.stick_touch_id)
         }, { touch_zone: false });
     
-        this.touch_zone.addEventListener('touchend', (e: TouchEvent) => {
+        touch_zone.addEventListener('touchend', (e: TouchEvent) => {
             e.stopPropagation()
            
             this.last.forEach(key => {
@@ -145,8 +159,9 @@ export default class Input {
             this.stick_touch_id = undefined
              e.preventDefault();
         }, { touch_zone: false });
+        document.getElementsByTagName('body')[0].appendChild(touch_zone)
 
-       this.canvas.addEventListener('touchstart', (e: TouchEvent) => {
+        this.canvas.addEventListener('touchstart', (e: TouchEvent) => {
             e.preventDefault();
             let touch = e.touches[0];
             if(touch.identifier === this.stick_touch_id){
