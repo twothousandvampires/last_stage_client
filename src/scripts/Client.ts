@@ -19,6 +19,40 @@ export default class Client{
     
     private initSocket(){
         Sound.lobby_back.play()
+
+        let info = document.getElementById('info')
+        
+        if(info){
+            info.title = 'click to show info'
+              info?.addEventListener('click', () => {
+                let state = info.getAttribute('attr-closed')
+                if(state == '1'){
+                    info.setAttribute('attr-closed', '0')
+                    info.style.width = 'auto'
+                    info.style.height = 'auto'
+                    info.style.bottom = '90%'
+                    info.style.left = '10px'
+                    info.innerText = 'INFO'
+                }
+                else{
+                    info.setAttribute('attr-closed', '1')
+                    info.style.width = '100vw'
+                    info.style.height = '100%'
+                    info.style.bottom = 'auto'
+                    info.style.left = 'auto'
+                    if('ontouchstart' in window || navigator.maxTouchPoints > 0){
+                        info.innerText = `Use the stick in the lower left corner to move.
+Tap the screen to use skills. Single tap - uses the first skill, long tap uses the second and third skills (if there are enough resources).
+Tap on the shield for protection. Tap the yellow circle to use the utility skill (if it requires coordinates on the field, the last tap on it will be used).`
+                    }
+                    else{
+                         info.innerText = `Use WASD to move, space to block, E to use utility abilities.`
+                    }
+                }
+            })
+        
+        }
+      
         this.socket.on('update_lobby_data', (data, items) => {
             this.UI.updateStats(data, items)
         })

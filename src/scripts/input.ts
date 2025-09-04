@@ -33,7 +33,7 @@ export default class Input {
         }
         this.setInputs()
     }
-
+    
     setInputs(){
         if(!this.isTouchDevice()){
             this.canvas.addEventListener('mousemove',(e)=>{
@@ -99,9 +99,7 @@ export default class Input {
     }
 
     createTouchZone() {
-        let touch_zone = document.createElement('div')
-        touch_zone.id = 'touch-zone'
-        this.touch_zone = touch_zone
+    
         let special_div = document.createElement('div');
         special_div.id = 'special'
 
@@ -135,6 +133,9 @@ export default class Input {
 
         document.getElementsByTagName('body')[0].appendChild(wrap)
 
+        let touch_zone = document.createElement('div')
+        touch_zone.id = 'touch-zone'
+        this.touch_zone = touch_zone
         touch_zone.addEventListener('touchstart', (e: TouchEvent) => {
             e.stopPropagation()
             this.updateDirection(e);
@@ -188,6 +189,8 @@ export default class Input {
             }, 250);
         })
 
+        // this.createSecondZone()
+
         this.canvas.addEventListener('touchend', (e) => {
             e.preventDefault();
             if(this.was_long_touch){
@@ -209,6 +212,32 @@ export default class Input {
                 }, 50)
             }     
         });
+    }
+
+    createSecondZone(){
+        let second_touch_zone = document.createElement('div')
+        second_touch_zone.id = 'second-touch-zone'
+        this.second_touch_zone = second_touch_zone
+
+        second_touch_zone.addEventListener('touchstart', (e: TouchEvent) => {
+            e.stopPropagation()
+            e.preventDefault()
+
+        }, { passive: false })
+        
+        second_touch_zone.addEventListener('touchmove', (e: TouchEvent) => {
+            e.stopPropagation()
+            e.preventDefault()
+    
+        }, { touch_zone: false })
+    
+        second_touch_zone.addEventListener('touchend', (e: TouchEvent) => {
+            e.stopPropagation()
+            e.preventDefault()
+
+        }, { touch_zone: false })
+
+        document.getElementsByTagName('body')[0].appendChild(second_touch_zone)
     }
 
     public getInputs(){

@@ -48,6 +48,7 @@ export default class UI{
             image.addEventListener('click', () => {
                 Sound.setSound('select_skill')
                 this.socket.emit('select_skill', elem.name)
+
             })
             this.applyTitle(image, {
                 main_title: elem.name,
@@ -152,11 +153,12 @@ export default class UI{
         }
       
         elem.addEventListener('mouseover', (e) => {
+            e.preventDefault()
             this.createTitle(info, e)
             e.stopPropagation()
         })
 
-        elem.addEventListener('mouseleave' , () => {
+        elem.addEventListener('mouseleave' , (e) => {
             this.closeTitle()
         })
     }
@@ -392,16 +394,13 @@ export default class UI{
     }
 
     updateStats(data: any, items: any){
+        this.closeTitle()
         // fill a lobby
         let lobby = document.getElementById('lobby')
         
         if(!lobby) return
         
         lobby.innerHTML = ''
-
-        //create cap(items and abilities)
-
-        // let lobby_cap = this.createDiv('lobby_cap')
 
         // items
         let items_div = this.createDiv('item_pull')

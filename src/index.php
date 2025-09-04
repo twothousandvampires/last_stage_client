@@ -17,6 +17,9 @@
        <img id="logo" src="preview/logo.png" alt="logo">
     </div>
     <div id="wrap">
+        <div id="top-panel">
+            <div id="info" attr-closed="0">Click to learn the basics</div>         
+        </div>
         <div id="lobby"></div>
         <div id="canvas-wrap">
             <div id="hud">
@@ -120,7 +123,9 @@
             background-color: #b8b85c;
             width: 150px;
             align-items: flex-start;
-            left: 60px;
+            height: 130px;
+            left: 30px;
+            top: -15px;
         }
     }
     .pointer{
@@ -228,7 +233,7 @@
             height: 100vh;
         }
         #lobby p{
-            font-size: 10px;
+            font-size: 8px;
         }
     }
     .item_pull, .abilities_pull{
@@ -407,6 +412,27 @@
         justify-content: center;
         align-items: center;
     }
+    #second-touch-zone{
+        background-image: url('/preview/joystick.png');
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        position: fixed;
+        bottom: 22%;
+        left: 80%;
+        z-index: 1000;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: none;
+        display: flex;
+        flex-direction: column;
+        touch-action: none;
+    }
     #touch-zone{
         background-image: url('/preview/joystick.png');
         width: 120px;
@@ -455,5 +481,24 @@
         width: 40px;
         height: 40px;
         background-image: url('./preview/special.png');
+    }
+    #top-panel{
+        z-index: 666666666666;
+        background-color: #3a7da3;
+        position: sticky;
+        top: 0;
+    }
+    #info {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: none;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
     }
 </style>
