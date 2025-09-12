@@ -37,7 +37,9 @@ export default class UI{
     createAvailableSkillsBlock(skills: [], title: string){
 
         let div = document.createElement('div')
+        div.style.margin = '4px'
         let p = this.createParagraph(title)
+        p.style.fontSize = '12px'
         div.appendChild(p)
         
         let div_wrap = document.createElement('div')

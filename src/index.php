@@ -274,7 +274,8 @@
     .item_pull, .abilities_pull{
         display: flex;
         flex-direction: row;
-        justify-content: space-around;
+        justify-content: flex-start;
+        flex-wrap: wrap;
     }
     @media (max-width: 425px) {
         .item_pull{
