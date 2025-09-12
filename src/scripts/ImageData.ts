@@ -215,6 +215,18 @@ export default class ImageData{
             path:  'flying bones/fbones6.png',
         },
         {
+            name: 'ghost1',
+            path:  'ghost/ghost1.png',
+        },
+        {
+            name: 'slime1',
+            path:  'slime/slime1.png',
+        },
+        {
+            name: 'magic_slime1',
+            path:  'magic_slime/magic_slime1.png',
+        },
+        {
             name: 'tooth',
             path:  'proj/tooth.png',
         },

@@ -32,6 +32,8 @@ export default abstract class Sprite{
     can_share_light: boolean
     light_z: number
 
+     invisible: boolean = false
+
     constructor(public id: number){
       
         this.flipped = false
@@ -88,5 +90,6 @@ export default abstract class Sprite{
         this.box_y = data.box_y
         this.z = data.z
         this.light_r = data.light_r
+        this.invisible = data.invisible
     }
 }

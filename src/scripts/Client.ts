@@ -112,13 +112,19 @@ Take 2 items, distribute stats and press ready button.`
         })
     }
     private startGame(){
+        let tick = 0
         this.input = new Input(this.socket)
         this.render = new Render(this.socket)
 
         this.loop_interval = setInterval(() => {
             let inputs = this.input?.getInputs()
             this.render?.draw(inputs)
-            this.socket.emit('inputs', inputs)
+            tick ++
+            
+            if(tick % 2 === 0){
+                this.socket.emit('inputs', inputs)
+            }
+            
         }, 30)
 
         this.socket.on('tick_data', (server_data: any) => {

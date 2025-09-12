@@ -75,6 +75,14 @@ import ClosedGate from "../Sprites/Effect/ClosedGate"
 import Forger from "../Sprites/Effect/Forger"
 import Gate from "../Sprites/Effect/Gate"
 import StrangeLanguage from "../Sprites/Effect/StrangeLanguage"
+import Ghost from "src/Sprites/Enemy/Ghost"
+import FrostBolt from "src/Sprites/Proj/FrostBolt"
+import Slime from "src/Sprites/Enemy/Slime"
+import PuddleOfPoison from "src/Sprites/Effect/PuddleOfPoison"
+import PuddleOfStream from "src/Sprites/Effect/PuddleOfStream"
+import MagicSlime from "src/Sprites/Enemy/MagicSlime"
+import ShadowDrop from "src/Sprites/Effect/ShadowDrop"
+import Gold from "src/Sprites/Effect/Gold"
 
 export default class Render{
     ctx: any
@@ -434,6 +442,30 @@ export default class Render{
         else if(elem.name === 'strange language'){
             return new StrangeLanguage(elem.id)
         }   
+        else if(elem.name === 'ghost'){
+            return new Ghost(elem.id)
+        }
+        else if(elem.name === 'frost bolt'){
+            return new FrostBolt(elem.id)
+        } 
+        else if(elem.name === 'slime'){
+            return new Slime(elem.id)
+        } 
+        else if(elem.name === 'puddle of poison'){
+            return new PuddleOfPoison(elem.id)
+        }
+        else if(elem.name === 'puddle of stream'){
+            return new PuddleOfStream(elem.id)
+        }
+        else if(elem.name === 'magic slime'){
+            return new MagicSlime(elem.id)
+        }
+        else if(elem.name === 'shadow drop'){
+            return new ShadowDrop(elem.id)
+        }
+        else if(elem.name === 'gold'){
+            return new Gold(elem.id)
+        }
     }
 
     public updateData(data: any){
