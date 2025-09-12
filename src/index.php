@@ -276,6 +276,7 @@
         flex-direction: row;
         justify-content: flex-start;
         flex-wrap: wrap;
+        overflow-y: auto;
     }
     @media (max-width: 425px) {
         .item_pull{
