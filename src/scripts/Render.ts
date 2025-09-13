@@ -85,6 +85,7 @@ import ShadowDrop from "src/Sprites/Effect/ShadowDrop"
 import Gold from "src/Sprites/Effect/Gold"
 import Spark from "src/Sprites/Effect/Spark"
 import SpectralSword from "src/Sprites/Enemy/SpectralSword"
+import FlyingMucus from "src/Sprites/Effect/FlyingMucus"
 
 export default class Render{
     ctx: any
@@ -473,6 +474,9 @@ export default class Render{
         }
         else if(elem.name === 'spectral sword'){
             return new SpectralSword(elem.id)
+        }
+        else if(elem.name === 'flying mucus'){
+            return new FlyingMucus(elem.id)
         }
     }
 
