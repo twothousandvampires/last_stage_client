@@ -143,7 +143,9 @@ export default class PlayerSprite extends UnitSprite{
             this.y_frame_offset = 480
             this.max_frame = 8
             this.max_frame_tick = Math.round( (1500 / this.max_frame) / 30)
+            this.action_frame = 7
             this.repeatable = false
+            this.need_send_end = true
         }
         else if(this.state === 'charge'){
             this.sprite_name = 'swordman3'

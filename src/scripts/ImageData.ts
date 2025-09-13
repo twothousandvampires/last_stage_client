@@ -227,6 +227,10 @@ export default class ImageData{
             path:  'magic_slime/magic_slime1.png',
         },
         {
+            name: 'spectral_sword1',
+            path:  'spectral_sword/spectral_sword.png',
+        },
+        {
             name: 'tooth',
             path:  'proj/tooth.png',
         },

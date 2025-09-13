@@ -83,6 +83,8 @@ import PuddleOfStream from "src/Sprites/Effect/PuddleOfStream"
 import MagicSlime from "src/Sprites/Enemy/MagicSlime"
 import ShadowDrop from "src/Sprites/Effect/ShadowDrop"
 import Gold from "src/Sprites/Effect/Gold"
+import Spark from "src/Sprites/Effect/Spark"
+import SpectralSword from "src/Sprites/Enemy/SpectralSword"
 
 export default class Render{
     ctx: any
@@ -465,6 +467,12 @@ export default class Render{
         }
         else if(elem.name === 'gold'){
             return new Gold(elem.id)
+        }
+        else if(elem.name === 'spark'){
+            return new Spark(elem.id)
+        }
+        else if(elem.name === 'spectral sword'){
+            return new SpectralSword(elem.id)
         }
     }
 
