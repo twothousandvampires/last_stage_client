@@ -140,9 +140,10 @@ Take 2 items, distribute stats and press ready button.`
         }, 30)
 
         this.socket.on('tick_data', (server_data: any, time, work) => {
+            console.log(Date.now() - time, work)
             Sound.updateData(server_data, this.render?.getPlayerSprite())
             this.render?.updateData(server_data)
-            console.log(Date.now() - time, work)
+            
         })
     }
 }
