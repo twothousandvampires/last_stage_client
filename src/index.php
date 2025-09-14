@@ -365,6 +365,19 @@
         align-items: flex-start;
         justify-content: space-between;
     }
+    #suggest{
+        z-index: 667;
+        position: fixed;
+        width: 800px;
+        left: calc(50% - 400px);
+        top: calc(50% - 250px);
+        background-color: #b8b85c;
+        border: 6px solid #7a7a3a;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+    }
     @media (max-width: 425px) {
         #forge{
             width: 400px;

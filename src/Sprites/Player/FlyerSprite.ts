@@ -178,15 +178,15 @@ export default class FlyerSprite extends UnitSprite{
             this.y_frame_offset = 400
             this.max_frame = 12
             this.max_frame_tick = Math.round( (this.action_time / this.max_frame) / 30)
-            this.action_frame = 11
+            this.need_send_end = true
         }
         else if(this.state === 'teleport end'){
             this.repeatable = false
             this.sprite_name = 'flyer3'
             this.y_frame_offset = 480
-            this.max_frame = 12
+            this.max_frame = 11
             this.max_frame_tick = Math.round( (this.action_time / this.max_frame) / 30)
-            this.action_frame = 11
+            this.need_send_end = true
         }
     }
 }

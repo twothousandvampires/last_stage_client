@@ -499,6 +499,83 @@ export default class UI{
         
     }
 
+    createSuggestForgings(data, item_id){
+        let exist = document.getElementById('suggest')
+        
+        if(exist){
+            return
+        }
+
+        let parrent = document.createElement('div')
+        parrent.id = 'suggest'
+
+        data.forEach((item, index) => {
+            let wrap = this.createDiv('forge_item')
+            let p = this.createParagraph(item.name)
+
+            this.applyTitle(p, {
+                main_title: item.name,
+                text: item.description
+            })
+
+            p.addEventListener('click', (e) => {
+                e.stopPropagation()
+                this.socket.emit('pick_forging', item_id, index)
+            })
+
+            wrap.appendChild(p)
+            wrap.addEventListener('click', () => {
+                this.closeSuggest()
+            })
+            parrent.appendChild(wrap)
+
+        })
+
+        document.getElementsByTagName('body')[0].appendChild(parrent)
+    }
+
+    createSuggestItem(data){
+        let exist = document.getElementById('suggest')
+        
+        if(exist){
+            return
+        }
+
+        let parrent = document.createElement('div')
+        parrent.id = 'suggest'
+
+        data.forEach((item, index) => {
+            let wrap = this.createDiv('forge_item')
+            let img = this.createImage('./icons/' + item.name + '.png', 80, 80)
+            this.applyTitle(img, {
+                main_title: item.name,
+                text: item.description
+            })
+
+            img.addEventListener('click', (e) => {
+                e.stopPropagation()
+                this.socket.emit('buy_item', index)
+                Sound.setSound('gold spending')
+            })
+
+            wrap.appendChild(img)
+            wrap.addEventListener('click', () => {
+                this.closeSuggest()
+            })
+            parrent.appendChild(wrap)
+        })
+
+        document.getElementsByTagName('body')[0].appendChild(parrent)
+    }
+
+    closeSuggest(){
+        let exist = document.getElementById('suggest')
+        
+        if(exist){
+            exist.parentNode?.removeChild(exist)
+        }
+    }
+
     showForgings(data: any){
         let exist = document.getElementById('forge')
         

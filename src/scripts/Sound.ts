@@ -80,6 +80,7 @@ class Sound{
             let v = ['gold.wav', 'gold1.wav']
 
             result.src = v[Math.floor(Math.random() * v.length)]
+            result.max_volume = 0.4
         }
 
         else if(name === 'upgrade'){

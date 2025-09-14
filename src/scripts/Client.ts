@@ -110,6 +110,18 @@ Take 2 items, distribute stats and press ready button.`
         this.socket.on('status_end' ,(name) => {
            this.UI.deleteStatus(name)
         })
+
+        this.socket.on('suggest_items' ,(data) => {
+           this.UI.createSuggestItem(data)
+        })
+
+        this.socket.on('close_suggest' ,() => {
+           this.UI.closeSuggest()
+        })
+
+        this.socket.on('suggest_forgings' ,(data, item_id) => {
+           this.UI.createSuggestForgings(data, item_id)
+        })
     }
     private startGame(){
         let tick = 0
