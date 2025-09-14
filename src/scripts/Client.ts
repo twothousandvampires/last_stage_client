@@ -83,8 +83,8 @@ Take 2 items, distribute stats and press ready button.`
            this.UI.newStatus(status)
         })
 
-        this.socket.on('change_level', (level_id: number) => {
-           this.render?.actors.get(this.socket.id).setLevelId(level_id)
+        this.socket.on('change_level', (level_id: number, x, y) => {
+           this.render?.actors.get(this.socket.id).setLevelId(level_id,x ,y)
         })
 
         this.socket.on('show_upgrades', (upgrades: number) => {
@@ -142,6 +142,7 @@ Take 2 items, distribute stats and press ready button.`
         this.socket.on('tick_data', (server_data: any) => {
             Sound.updateData(server_data, this.render?.getPlayerSprite())
             this.render?.updateData(server_data)
+            console.log(Date.now() - server_data.meta.time)
         })
     }
 }

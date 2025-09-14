@@ -11,6 +11,7 @@ export default abstract class UnitSprite extends Sprite{
     real_y: number | undefined
     need_send_end: boolean = false
     is_end: boolean = false
+    level_id: number = 0
 
     constructor(id: number){
         super(id)
@@ -22,6 +23,12 @@ export default abstract class UnitSprite extends Sprite{
     }
 
     abstract setState(state: string): void
+
+    setLevelId(id: number, x ,y){
+        this.level_id = id
+        this.x = x
+        this.y = y
+    }
 
     public act(){
         if(this.stopped) return

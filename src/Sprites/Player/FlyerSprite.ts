@@ -39,10 +39,6 @@ export default class FlyerSprite extends UnitSprite{
         this.ward = data.ward
         this.invisible = data.invisible
     }
-
-    setLevelId(id: number){
-        this.level_id = id
-    }
     
     setState(state: string){
         this.state = state
