@@ -83,8 +83,8 @@ export default abstract class Sprite{
     }
 
     public update(data: any){
-        this.x = data.x
-        this.y = data.y
+        this.x = (data.x + this.x) / 2
+        this.y = (data.y + this.y) / 2
         this.flipped = data.flipped
         this.box_x = data.box_x
         this.box_y = data.box_y

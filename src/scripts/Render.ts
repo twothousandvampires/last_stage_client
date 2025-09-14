@@ -496,6 +496,8 @@ export default class Render{
                 sprite = this.getSprite(elem)
             
                 if(sprite){
+                    sprite.x = elem.x
+                    sprite.y = elem.y
                     sprite.update(elem)
                     this.actors.set(elem.id, sprite)
                 }
