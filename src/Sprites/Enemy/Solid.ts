@@ -43,7 +43,7 @@ export default class Solid extends UnitSprite{
         else if(this.state === 'dead'){
             this.sprite_name = 'solid3'
             this.max_frame = 11
-            this.max_frame_tick = 6
+            this.max_frame_tick = Math.round( (this.action_time / this.max_frame) / 30)
             this.repeatable = false
 
         }

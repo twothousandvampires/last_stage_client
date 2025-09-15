@@ -18,10 +18,8 @@
     </div>
     <div id="wrap">
         <div id="top-panel">
-            <div id="info" attr-closed="0">i
-                <p>info</p>
-                <p id='record'>records</p>
-            </div>         
+            <p style="margin-right: 20px;">info</p>
+            <p id='record'>records</p>  
         </div>
         <div id="lobby"></div>
         <div id="canvas-wrap">
@@ -52,7 +50,9 @@
 </body>
 </html>
 <style>
-    
+    body{
+        background-color: black;
+    }
      @font-face {
         font-family: o;
         src: url("./fonts/manaspc.ttf");
@@ -216,7 +216,6 @@
         flex-direction: row;
     }
     #wrap{
-        background-color: black;
         width: 100%;
         height: 100vh;
         display: none;
@@ -509,19 +508,14 @@
         background-color: #3a7da3;
         position: sticky;
         top: 0;
-    }
-    #info {
-        -webkit-touch-callout: none;
-        -webkit-user-select: none;
-        -khtml-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-        -webkit-tap-highlight-color: transparent;
-        touch-action: none;
         display: flex;
-        flex-direction: row;
-        justify-content: space-between;
+        justify-content: center;
+        align-items: center;
+        height: 40px;
         position: sticky;
+    }
+    #top-panel p{
+        cursor: pointer;
+        font-size: 18px;
     }
 </style>
