@@ -18,7 +18,10 @@
     </div>
     <div id="wrap">
         <div id="top-panel">
-            <div id="info" attr-closed="0">Click to learn the basics</div>         
+            <div id="info" attr-closed="0">i
+                <p>info</p>
+                <p id='record'>records</p>
+            </div>         
         </div>
         <div id="lobby"></div>
         <div id="canvas-wrap">
@@ -519,5 +522,6 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        position: sticky;
     }
 </style>

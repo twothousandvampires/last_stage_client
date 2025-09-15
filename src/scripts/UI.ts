@@ -178,6 +178,19 @@ export default class UI{
         document.getElementsByTagName('body')[0].appendChild(bar)
     }
 
+    createRecordsTable(data){
+        console.log(data)
+        let exist = document.getElementById('records_table')
+
+        if(exist){
+            return
+        }
+
+        let parent = this.createDiv('records_table')
+
+        document.getElementsByTagName('body')[0].appendChild(parent)
+    }
+
     createStats(item: any){
         let wrap = document.createElement('div')
         wrap.className = 'stat_wrap'
@@ -498,6 +511,36 @@ export default class UI{
         }
         
     }
+
+    createSuggestRecord(){
+        let exist = document.getElementById('suggest')
+        
+        if(exist){
+            return
+        }
+
+         let parrent = document.createElement('div')
+        parrent.id = 'suggest'
+        parrent.style.width = '300px'
+
+        let p = document.createElement('input')
+        let b = document.createElement('button')
+        b.innerText = 'submit'
+
+        b.addEventListener('click', () => {
+            let name = p.value  
+            if(name != ''){
+                this.socket.emit('add_record', name)
+                this.closeSuggest()
+            }
+        })
+
+        parrent.appendChild(p)
+        parrent.appendChild(b)
+
+        document.getElementsByTagName('body')[0].appendChild(parrent)
+    }
+
 
     createSuggestForgings(data, item_id){
         let exist = document.getElementById('suggest')
