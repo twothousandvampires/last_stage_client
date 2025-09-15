@@ -66,13 +66,11 @@ export default class PlayerSprite extends UnitSprite{
         }
         else if(this.state === 'attack'){
             let r = Math.random()
-            this.need_send_end = true
             if(r < 0.33){
                 this.sprite_name = 'swordman2'
                 this.y_frame_offset = 0
                 this.max_frame = 8
                 this.max_frame_tick = Math.round( (this.action_time / this.max_frame) / 30)
-                this.action_frame = 5
                 this.repeatable = false
             }
             else if(r < 0.66){
@@ -80,7 +78,6 @@ export default class PlayerSprite extends UnitSprite{
                 this.y_frame_offset = 80
                 this.max_frame = 8
                 this.max_frame_tick = Math.round( (this.action_time / this.max_frame) / 30)
-                this.action_frame = 6
                 this.repeatable = false
             }
             else{
@@ -88,17 +85,14 @@ export default class PlayerSprite extends UnitSprite{
                 this.y_frame_offset = 160
                 this.max_frame = 8
                 this.max_frame_tick = Math.round( (this.action_time / this.max_frame) / 30)
-                this.action_frame = 7
                 this.repeatable = false
             }
         }
         else if(this.state === 'swing'){
-            this.need_send_end = true
             this.sprite_name = 'swordman2'
             this.y_frame_offset = 240
             this.max_frame = 8
             this.max_frame_tick = 3
-            this.action_frame = 4 
         }
         else if(this.state === 'jump'){
             this.sprite_name = 'swordman2'
@@ -138,17 +132,14 @@ export default class PlayerSprite extends UnitSprite{
             this.sprite_name = 'swordman1'
             this.y_frame_offset = 480
             this.max_frame = 8
-            this.max_frame_tick = Math.round( (1500 / this.max_frame) / 30)
-            this.action_frame = 7
+            this.max_frame_tick = Math.round( (this.action_time / this.max_frame) / 30)
             this.repeatable = false
-            this.need_send_end = true
         }
         else if(this.state === 'charge'){
             this.sprite_name = 'swordman3'
             this.y_frame_offset = 0
             this.max_frame = 3
             this.max_frame_tick = 8
-            this.action_frame = 3
             this.repeatable = false
         }
         else if(this.state === 'freezed'){

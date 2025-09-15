@@ -67,27 +67,25 @@ export default class Cultist extends UnitSprite{
         else if(this.state === 'attack'){
             let r = Math.random()
             this.repeatable = false
-            this.need_send_end = true
+
             if(r < 0.33){
                 this.sprite_name = 'cultist2'
                 this.y_frame_offset = 0
                 this.max_frame = 10
                 this.max_frame_tick = Math.round( (this.action_time / this.max_frame) / 30)
-                this.action_frame = 8
             }
             else if(r < 0.66){
                 this.sprite_name = 'cultist2'
                 this.y_frame_offset = 80
                 this.max_frame = 9
                 this.max_frame_tick = Math.round( (this.action_time / this.max_frame) / 30)
-                this.action_frame = 7
+
             }
             else{
                 this.sprite_name = 'cultist2'
                 this.y_frame_offset = 160
                 this.max_frame = 8
                 this.max_frame_tick = Math.round( (this.action_time / this.max_frame) / 30)
-                this.action_frame = 7
             }
         }
         else if(this.state === 'damaged'){
@@ -118,22 +116,18 @@ export default class Cultist extends UnitSprite{
             this.repeatable = false
         }
         else if(this.state === 'cast'){
-            this.need_send_end = true
             this.sprite_name = 'cultist1'
             this.y_frame_offset = 400
             this.max_frame = 10
             this.max_frame_tick = Math.round( (this.action_time / this.max_frame) / 30)
             this.repeatable = false
-            this.action_frame = 9
         }
         else if(this.state === 'shield hit'){
-            this.need_send_end = true
             this.sprite_name = 'cultist2'
             this.y_frame_offset = 240
             this.max_frame = 8
             this.max_frame_tick = Math.round( (this.action_time / this.max_frame) / 30)
             this.repeatable = false
-            this.action_frame = 7
         }
         else if(this.state === 'freezed'){
             this.sprite_name = 'cultist3'

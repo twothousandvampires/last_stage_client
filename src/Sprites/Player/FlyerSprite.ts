@@ -58,13 +58,11 @@ export default class FlyerSprite extends UnitSprite{
         }
         else if(this.state === 'cast'){
             let r = Math.random()
-            this.need_send_end = true
             if(r < 0.33){
                 this.sprite_name = 'flyer2'
                 this.y_frame_offset = 0
                 this.max_frame = 8
                 this.max_frame_tick = Math.round( (this.action_time / this.max_frame) / 30)
-                this.action_frame = 6
                 this.repeatable = false
             }
             else if(r < 0.66){
@@ -72,7 +70,6 @@ export default class FlyerSprite extends UnitSprite{
                 this.y_frame_offset = 80
                 this.max_frame = 8
                 this.max_frame_tick = Math.round( (this.action_time / this.max_frame) / 30)
-                this.action_frame = 6
                 this.repeatable = false
             }
             else{
@@ -80,7 +77,6 @@ export default class FlyerSprite extends UnitSprite{
                 this.y_frame_offset = 160
                 this.max_frame = 8
                 this.max_frame_tick = Math.round( (this.action_time / this.max_frame) / 30)
-                this.action_frame = 6
                 this.repeatable = false
             }
         }
@@ -137,7 +133,6 @@ export default class FlyerSprite extends UnitSprite{
             this.max_frame = 7
             this.max_frame_tick =  Math.round( (this.action_time / this.max_frame) / 30)
             this.repeatable = false
-            this.action_frame = 7
         }
         else if(this.state === 'fly down'){
             this.can_share_light = false
@@ -146,7 +141,6 @@ export default class FlyerSprite extends UnitSprite{
             this.max_frame = 7
             this.max_frame_tick =  Math.round( (this.action_time / this.max_frame) / 30)
             this.repeatable = false
-            this.action_frame = 7
         }
         else if(this.state === 'light beacon'){
             this.can_share_light = true
@@ -174,7 +168,6 @@ export default class FlyerSprite extends UnitSprite{
             this.y_frame_offset = 400
             this.max_frame = 12
             this.max_frame_tick = Math.round( (this.action_time / this.max_frame) / 30)
-            this.need_send_end = true
         }
         else if(this.state === 'teleport end'){
             this.repeatable = false
@@ -182,7 +175,6 @@ export default class FlyerSprite extends UnitSprite{
             this.y_frame_offset = 480
             this.max_frame = 11
             this.max_frame_tick = Math.round( (this.action_time / this.max_frame) / 30)
-            this.need_send_end = true
         }
     }
 }

@@ -32,7 +32,6 @@ export default class Statue extends UnitSprite{
             this.y_frame_offset = 160
             this.max_frame = 11
             this.max_frame_tick = 4
-            this.action_frame = 9
         }
         else{
             this.sprite_name = 'statue1'

@@ -60,7 +60,6 @@ export default class Ghost extends UnitSprite{
             this.y_frame_offset = 160
             this.max_frame = 11
             this.max_frame_tick = Math.round( (this.action_time / this.max_frame) / 30)
-            this.action_frame = 10
             this.repeatable = false    
         }
         else if(this.state === 'explode'){

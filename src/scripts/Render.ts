@@ -604,16 +604,6 @@ export default class Render{
 
             elem.act()
 
-            if(!elem.action && elem.is_action_frame){
-                elem.action = true
-                this.socket.emit('action', elem.id) 
-            }
-
-            if(elem.is_end){
-                this.socket.emit('action_end', elem.id) 
-                elem.is_end = false
-            }
-            
             if(elem.real_x && elem.real_y && inputs.l_click){
                 if(inputs.canvas_x >= rel_x - elem.real_x/2 && inputs.canvas_x <= rel_x + elem.real_x / 2 &&
                     inputs.canvas_y >= rel_y - elem.real_y && inputs.canvas_y <= rel_y

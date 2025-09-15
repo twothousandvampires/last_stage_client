@@ -40,7 +40,6 @@ export default class Skull extends UnitSprite{
             this.y_frame_offset = 100
             this.max_frame = 6
             this.max_frame_tick = Math.round( (this.action_time / this.max_frame) / 30)
-            this.action_frame = 6
         }
         else if(this.state === 'zaped'){
             this.sprite_name = 'skull1'

@@ -31,7 +31,6 @@ export default class FrostSpire extends UnitSprite{
             this.y_frame_offset = 320
             this.max_frame = 7
             this.max_frame_tick = Math.round( (this.action_time / this.max_frame) / 30)
-            this.action_frame = 6
             this.repeatable = false
         }
         else if(this.state === 'dying'){

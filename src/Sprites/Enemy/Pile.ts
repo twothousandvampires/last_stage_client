@@ -32,7 +32,6 @@ export default class Pile extends UnitSprite{
             this.y_frame_offset = 160
             this.max_frame = 8
             this.max_frame_tick = Math.round( (this.action_time / this.max_frame) / 30)
-            this.action_frame = 7
         }
         else if(this.state === 'dying'){
             this.sprite_name = 'pile1'

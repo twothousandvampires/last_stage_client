@@ -95,14 +95,12 @@ export default class FlyingBones extends UnitSprite{
                 this.y_frame_offset = 160
                 this.max_frame = 9
                 this.max_frame_tick = Math.round( (this.action_time / this.max_frame) / 30)
-                this.action_frame = 7
             }
             else{   
                 this.sprite_name = 'fbones1'
                 this.y_frame_offset = 240
                 this.max_frame = 9
                 this.max_frame_tick = Math.round( (this.action_time / this.max_frame) / 30)
-                this.action_frame = 7
             }
         }
         else if(this.state === 'explode'){

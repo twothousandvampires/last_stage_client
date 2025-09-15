@@ -72,14 +72,12 @@ export default class ImpySprite extends UnitSprite{
                 this.y_frame_offset = 240
                 this.max_frame = 6
                 this.max_frame_tick = Math.round( (this.action_time / this.max_frame) / 30)
-                this.action_frame = 5
             }
             else{   
                 this.sprite_name = 'impy1'
                 this.y_frame_offset = 320
                 this.max_frame = 6
                 this.max_frame_tick = Math.round( (this.action_time / this.max_frame) / 30)
-                this.action_frame = 5
             }
         }
         else if(this.state === 'explode'){

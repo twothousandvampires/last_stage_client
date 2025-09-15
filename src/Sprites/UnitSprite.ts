@@ -4,19 +4,16 @@ export default abstract class UnitSprite extends Sprite{
 
     state: string | undefined
     action: boolean
-    action_frame: number | undefined
-    is_action_frame: boolean
+  
     min_frame: number
     real_x: number | undefined
     real_y: number | undefined
-    need_send_end: boolean = false
-    is_end: boolean = false
+
     level_id: number = 0
 
     constructor(id: number){
         super(id)
         this.action = false
-        this.is_action_frame = false
         this.sprite_h = 80
         this.sprite_w = 80
         this.min_frame = 0
@@ -39,27 +36,14 @@ export default abstract class UnitSprite extends Sprite{
             this.frame_tick = 0
             this.frame ++
 
-            if(this.action_frame === this.frame){
-                this.is_action_frame = true
-            }
-            else{
-                this.is_action_frame = false
-            }
-           
             if(this.frame >= this.max_frame){
                 if(this.removable){
                     this.need_to_remove = true
                 }
                 else if(this.repeatable){
                     this.frame = this.min_frame
-                    if(this.need_send_end){
-                        this.is_end = true
-                    }
                 }
                 else{
-                    if(this.need_send_end){
-                        this.is_end = true
-                    }
                     this.frame -= 1
                     this.stopped = true
                 }
@@ -84,12 +68,8 @@ export default abstract class UnitSprite extends Sprite{
         this.stopped = false
         this.stopped = false
         this.repeatable = true
-        this.is_action_frame = false
-        this.action_frame = undefined
         this.action = false
         this.removable = false
         this.is_bottom = false
-        this.is_end = false
-        this.need_send_end = false
     }   
 }

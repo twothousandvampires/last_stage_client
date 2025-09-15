@@ -45,7 +45,7 @@ export default class Solid extends UnitSprite{
             this.max_frame = 11
             this.max_frame_tick = 6
             this.repeatable = false
-            this.action_frame = 11
+
         }
         else if(this.state === 'explode'){
              this.sprite_name = 'solid4'
@@ -72,7 +72,6 @@ export default class Solid extends UnitSprite{
             this.y_frame_offset = 200
             this.max_frame = 8
             this.max_frame_tick = Math.round( (this.action_time / this.max_frame) / 30)
-            this.action_frame = 5
         }
         else if(this.state === 'stunned'){
             this.sprite_name = 'solid4'
