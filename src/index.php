@@ -367,6 +367,26 @@
         align-items: flex-start;
         justify-content: space-between;
     }
+    #record-name-input{
+        padding: 6px;
+        z-index: 668;
+        position: fixed;
+        width: auto;
+        height: 120px;
+        left: calc(50% - 180px);
+        top: calc(50% - 60px);
+        background-color: #b8b85c;
+        border: 6px solid #7a7a3a;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    #record-name-input .bot{
+        width: 60%;
+        display: flex;
+        flex-direction: column;
+    }
     #suggest{
         z-index: 667;
         position: fixed;

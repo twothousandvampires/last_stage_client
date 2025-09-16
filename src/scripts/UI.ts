@@ -512,20 +512,26 @@ export default class UI{
         
     }
 
-    createSuggestRecord(){
+    createSuggestRecord(kills: number = 666){
         let exist = document.getElementById('suggest')
         
         if(exist){
             return
         }
 
-         let parrent = document.createElement('div')
-        parrent.id = 'suggest'
-        parrent.style.width = '300px'
+        let parrent = this.createDiv('')
+        parrent.id = 'record-name-input'
+        
+        let top = this.createDiv('')
+        let kills_p = this.createParagraph(kills + ' ' +  'enemies defeated, who are you stranger?')
+        top.appendChild(kills_p)
+
+        let bot = this.createDiv('bot')
 
         let p = document.createElement('input')
+        p.style.marginBottom = '6px'
         let b = document.createElement('button')
-        b.innerText = 'submit'
+        b.innerText = 'remember me as...'
 
         b.addEventListener('click', () => {
             let name = p.value  
@@ -535,8 +541,11 @@ export default class UI{
             }
         })
 
-        parrent.appendChild(p)
-        parrent.appendChild(b)
+        bot.appendChild(p)
+        bot.appendChild(b)
+        
+        parrent.appendChild(top)
+        parrent.appendChild(bot)
 
         document.getElementsByTagName('body')[0].appendChild(parrent)
     }

@@ -92,7 +92,7 @@ class Sound{
 
         else if(name === 'ambient'){
             let v = ['drip1.wav', 'drip2.wav', 'drip3.wav', 'drip4.wav', 'drip5.wav', 'drip6.wav', 'drip7.wav','drip8.wav', 'vtheft.wav', 'breath1.wav',
-                'breath2.wav','breath3.wav', 'breath4.wav' , 'breath5.wav', 'breath6.wav', 'breath7.wav', 'breath8.wav', 'breath9.wav'
+                'breath2.wav','breath3.wav', 'breath4.wav' , 'breath5.wav', 'breath6.wav', 'breath7.wav', 'breath8.wav', 'breath9.wav', 'scream1.wav', 'scream2.wav'
             ]
             
             result.max_volume = 0.7
@@ -129,10 +129,22 @@ class Sound{
             result.max_volume = 0.4
         }
         else if(name === 'fire cast'){
-            let v = ['firecast.wav', 'firelaunch1.wav', 'firelaunch2.wav']
+            let v = ['firecast.wav', 'firelaunch1.wav', 'firelaunch2.wav', 'die1.wav' , 'die4.wav']
          
             result.src = v[Math.floor(Math.random() * v.length)]
             result.max_volume = 0.1
+        }
+        else if(name === 'skullpile'){
+            let v = ['skullpile1.wav', 'skullpile2.wav', 'skullpile3.wav', 'skullpile4.wav', 'skullpile5.wav']
+         
+            result.src = v[Math.floor(Math.random() * v.length)]
+            result.max_volume = 0.25
+        }
+        else if(name === 'goo'){
+            let v = ['goopile1.wav', 'goopile3.wav', 'goopile2.wav']
+         
+            result.src = v[Math.floor(Math.random() * v.length)]
+            result.max_volume = 0.2
         }
         else if(name === 'cold cast'){
             let v = ['coldcast.wav', 'icebolt2.wav']
@@ -171,7 +183,7 @@ class Sound{
             result.max_volume = 0.1
         }
         else if(name === 'dark cast'){
-            let v = ['cursecast.wav', 'revivecast.wav', 'cast3.wav', 'Cast10.wav']
+            let v = ['cursecast.wav', 'revivecast.wav', 'cast3.wav', 'Cast10.wav', 'dark_cast.wav']
          
             result.src = v[Math.floor(Math.random() * v.length)]
             result.max_volume = 0.1

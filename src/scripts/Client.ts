@@ -134,8 +134,8 @@ export default class Client{
            this.UI.createSuggestForgings(data, item_id)
         })
 
-        this.socket.on('suggers_record' ,() => {
-           this.UI.createSuggestRecord()
+        this.socket.on('suggers_record' ,(kills) => {
+           this.UI.createSuggestRecord(kills)
         })
 
         
