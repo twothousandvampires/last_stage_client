@@ -73,6 +73,8 @@
                 </p>
                 <h4>Block</h4>
                 <p>You can block damage by pressing space, each class has a different block chance and it can be increased in different ways.</p>
+                <p>You immediately enter a blocked state after pressing SPACE. Don't rely on the animation.</p>
+                
                 <h4>Armour rate</h4>
                 <p>
                     The units have an armor rating, which is calculated if there was no block, the armor rating gives a chance not to receive damage, the "PIERCE" <span><img width="60px" height="60px" src="icons/pressure.png" title="you can learn it by grace"> characteristic helps to bypass the armor. 
