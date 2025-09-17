@@ -20,44 +20,23 @@ export default class Client{
     private initSocket(){
         Sound.lobby_back.play()
 
-//         let info = document.getElementById('info')
-        
-//         if(info){
-//             info.title = 'click to show info'
-//               info?.addEventListener('click', () => {
-//                 let state = info.getAttribute('attr-closed')
-//                 if(state == '1'){
-//                     info.setAttribute('attr-closed', '0')
-//                     info.style.width = 'auto'
-//                     info.style.height = 'auto'
-//                     info.style.bottom = '90%'
-//                     info.style.left = '10px'
-//                     info.innerText = 'INFO'
-//                 }
-//                 else{
-//                     info.setAttribute('attr-closed', '1')
-//                     info.style.width = '100vw'
-//                     info.style.height = '100%'
-//                     info.style.bottom = 'auto'
-//                     info.style.left = 'auto'
-//                     if('ontouchstart' in window || navigator.maxTouchPoints > 0){
-//                         info.innerText = `Use the stick in the lower left corner to move.
-// Tap the screen to use skills. Single tap - uses the first skill, long tap uses the second and third skills (if there are enough resources).
-// Tap on the shield for protection. Tap the yellow circle to use the utility skill (if it requires coordinates on the field, the last tap on it will be used).You can move and attack at the same time. 
-// Take 2 items, distribute stats and press ready button.`
-//                     }
-//                     else{
-//                          info.innerText = `Use WASD to move, space to block, E to use utility abilities.`
-//                     }
-//                 }
-//             })
-        
-//         }
-      
         let record_button = document.getElementById('record')
 
         record_button?.addEventListener('click', () => {
             this.socket.emit('get_records')
+        })
+
+        let info_btn = document.getElementById('info')
+
+        info_btn?.addEventListener('click', () => {
+            let block = document.getElementById('game-info')
+            
+            if(!block) return
+
+            block.style.display = 'block'
+            block.addEventListener('click', () => {
+                block.style.display = 'none'
+            })
         })
 
         this.socket.on('records', (data) => {
@@ -157,7 +136,6 @@ export default class Client{
         }, 30)
 
         this.socket.on('tick_data', (server_data: any, time, work) => {
-            console.log(Date.now() - time, work)
             Sound.updateData(server_data, this.render?.getPlayerSprite())
             this.render?.updateData(server_data)   
         })

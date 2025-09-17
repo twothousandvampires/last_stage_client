@@ -86,6 +86,7 @@ import Gold from "src/Sprites/Effect/Gold"
 import Spark from "src/Sprites/Effect/Spark"
 import SpectralSword from "src/Sprites/Enemy/SpectralSword"
 import FlyingMucus from "src/Sprites/Effect/FlyingMucus"
+import Ward from "src/Sprites/Effect/Ward"
 
 export default class Render{
     ctx: any
@@ -384,6 +385,9 @@ export default class Render{
         }
         else if(elem.name === 'attacking ghost cultist'){
             return new AttackingGhostCultist(elem.id)
+        }
+        else if(elem.name === 'ward'){
+            return new Ward(elem.id)
         }
         else if(elem.name === 'banner of armour'){
             return new BannerOfArmour(elem.id)

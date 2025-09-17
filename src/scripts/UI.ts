@@ -179,7 +179,6 @@ export default class UI{
     }
 
     createRecordsTable(data){
-        console.log(data)
         let exist = document.getElementById('records_table')
 
         if(exist){

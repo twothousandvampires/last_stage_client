@@ -12,6 +12,7 @@ export default class Input {
         [key: string]: any}
     socket: any
     touch_zone: any
+    second_touch_zone: any
     last: any[] = []
     last_touch_time: number = Date.now()
     canvas_touch_event: TouchEvent | undefined
@@ -126,12 +127,12 @@ export default class Input {
             this.pressed[32] = false
         })
 
-        let wrap = document.createElement('div')
-        wrap.id = 'defend_and_special'
-        wrap.appendChild(defend_div)
-        wrap.appendChild(special_div)
+        // let wrap = document.createElement('div')
+        // wrap.id = 'defend_and_special'
+        // wrap.appendChild(defend_div)
+        // wrap.appendChild(special_div)
 
-        document.getElementsByTagName('body')[0].appendChild(wrap)
+        // document.getElementsByTagName('body')[0].appendChild(wrap)
 
         let touch_zone = document.createElement('div')
         touch_zone.id = 'touch-zone'
@@ -148,7 +149,6 @@ export default class Input {
            
             this.updateDirection(e);
             e.preventDefault();
-            console.log(this.stick_touch_id)
         }, { touch_zone: false });
     
         touch_zone.addEventListener('touchend', (e: TouchEvent) => {
@@ -160,39 +160,57 @@ export default class Input {
             this.stick_touch_id = undefined
              e.preventDefault();
         }, { touch_zone: false });
+
         document.getElementsByTagName('body')[0].appendChild(touch_zone)
 
-        this.canvas.addEventListener('touchstart', (e: TouchEvent) => {
-            e.preventDefault();
-            let touch = e.touches[0];
-            if(touch.identifier === this.stick_touch_id){
-                touch = e.touches[1]
-            }
-            const rect = this.canvas.getBoundingClientRect();
-            const scaleX = this.canvas.width / rect.width;
-            const scaleY = this.canvas.height / rect.height;
+        // this.canvas.addEventListener('touchstart', (e: TouchEvent) => {
+        //     e.preventDefault();
+        //     let touch = e.touches[0];
+        //     if(touch.identifier === this.stick_touch_id){
+        //         touch = e.touches[1]
+        //     }
+        //     const rect = this.canvas.getBoundingClientRect();
+        //     const scaleX = this.canvas.width / rect.width;
+        //     const scaleY = this.canvas.height / rect.height;
         
-            const canvasX = (touch.clientX - rect.left) * scaleX;
-            const canvasY = (touch.clientY - rect.top) * scaleY;
+        //     const canvasX = (touch.clientX - rect.left) * scaleX;
+        //     const canvasY = (touch.clientY - rect.top) * scaleY;
             
-            let x = Math.floor(canvasX / 5);
-            let y = Math.floor(canvasY / 5);
+        //     let x = Math.floor(canvasX / 5);
+        //     let y = Math.floor(canvasY / 5);
 
-            this.pressed.canvas_x = x;
-            this.pressed.canvas_y = y;
-            this.pressed.over_x = x
-            this.pressed.over_y = y
+        //     console.log(x, y)
+
+        //     this.pressed.canvas_x = x;
+        //     this.pressed.canvas_y = y;
+        //     this.pressed.over_x = x
+        //     this.pressed.over_y = y
          
-            this.long_touch = setTimeout(() => {
-                this.pressed.r_click = true
-                this.was_long_touch = true            
-            }, 250);
-        })
+        //     this.long_touch = setTimeout(() => {
+        //         this.pressed.r_click = true
+        //         this.was_long_touch = true            
+        //     }, 250);
+        // })
 
-        // this.createSecondZone()
+        this.createSecondZone()
 
-        this.canvas.addEventListener('touchend', (e) => {
-            e.preventDefault();
+    }
+
+    createSecondZone(){
+        let second_touch_zone = document.createElement('div')
+        second_touch_zone.id = 'second-touch-zone'
+        this.second_touch_zone = second_touch_zone
+
+        second_touch_zone.addEventListener('touchstart', (e: TouchEvent) => {
+            e.stopPropagation()
+            this.updateDirection2(e);
+            e.preventDefault()
+
+        }, { passive: false })
+
+        second_touch_zone.addEventListener('touchend', (e: TouchEvent) => {
+            e.stopPropagation()
+    
             if(this.was_long_touch){
                 this.was_long_touch = false
                 this.pressed.r_click = false
@@ -204,35 +222,12 @@ export default class Input {
                 
                 this.pressed.l_click = true
                 
-                
                 setTimeout(()=>{
                     this.pressed.l_click = false
                     this.pressed.canvas_x = undefined
                     this.pressed.canvas_y = undefined
                 }, 50)
-            }     
-        });
-    }
-
-    createSecondZone(){
-        let second_touch_zone = document.createElement('div')
-        second_touch_zone.id = 'second-touch-zone'
-        this.second_touch_zone = second_touch_zone
-
-        second_touch_zone.addEventListener('touchstart', (e: TouchEvent) => {
-            e.stopPropagation()
-            e.preventDefault()
-
-        }, { passive: false })
-        
-        second_touch_zone.addEventListener('touchmove', (e: TouchEvent) => {
-            e.stopPropagation()
-            e.preventDefault()
-    
-        }, { touch_zone: false })
-    
-        second_touch_zone.addEventListener('touchend', (e: TouchEvent) => {
-            e.stopPropagation()
+            } 
             e.preventDefault()
 
         }, { touch_zone: false })
@@ -243,7 +238,43 @@ export default class Input {
     public getInputs(){
         return this.pressed
     }
+    updateDirection2(e: TouchEvent){
+        const touch = e.touches[0];
+        let rect = this.second_touch_zone.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        
+        const deltaX = touch.clientX - centerX;
+        const deltaY = touch.clientY - centerY;
+        
+        
+        // let angle = Math.atan2(deltaY, deltaX) * 180 / Math.PI;
+        const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+        // angle = (angle - 90) % 360;
 
+        let angle = Math.atan2(deltaY, deltaX)
+
+        angle = -angle + Math.PI / 2;
+
+        // Нормализуем в диапазон [0, 2π)
+        if (angle < 0) {
+            angle += 2 * Math.PI;
+        }
+        if (angle >= 2 * Math.PI) {
+            angle -= 2 * Math.PI;
+        }
+
+        this.pressed.canvas_x = 40 + (Math.sin(angle) *  Math.floor(distance/ 3))
+        this.pressed.canvas_y = 40 + (Math.cos(angle) *  Math.floor(distance/ 3))
+        this.pressed.over_x = this.pressed.canvas_x
+        this.pressed.over_y = this.pressed.canvas_y
+         
+        this.long_touch = setTimeout(() => {
+            this.pressed.r_click = true
+            this.was_long_touch = true            
+        }, 250);
+
+    }
      updateDirection(e: TouchEvent) {
         const touch = e.touches[0];
         let rect = this.touch_zone.getBoundingClientRect();
@@ -253,9 +284,10 @@ export default class Input {
         const deltaX = touch.clientX - centerX;
         const deltaY = touch.clientY - centerY;
         
-        const angle = Math.atan2(deltaY, deltaX) * 180 / Math.PI;
+        let angle = Math.atan2(deltaY, deltaX) * 180 / Math.PI;
         const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
         
+
         if(distance > 12){
             const newDirection = this.getDirectionFromAngle(angle);
             this.last.forEach(key => {
