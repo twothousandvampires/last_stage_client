@@ -99,7 +99,7 @@
                     <ul>
                         <li>Grace - gives you 1 grace <span><img width="120px" height="120px" src="preview/grace.png"></span></li>
                         <li>Essence - increases health and briefly increases vision radius <span><img  width="120px" height="120px" src="preview/entity.png"></span></li>
-                        <li>Energy sphere - gives 2 energy and briefly increases speed <span><img width="120px" height="120px" src="preview/charged_sphere.png"></span></li>
+                        <li>Energy sphere - gives 2 energy and phasing<span><img width="120px" height="120px" src="preview/charged_sphere.png"></span></li>
                         <li>Rift - spends 1 grace and casts a powerful spell <span><img class="bg" width="120px" height="120px" src="preview/split.gif"></span></li>
                         <li>Item - gives a random item <span><img  width="120px" height="120px" src="preview/item_drop.gif"></li>
                     </ul>
@@ -118,8 +118,8 @@
                         <li>poison - you can't gain life <span><img width="60px" height="60px" src="icons/poison.png"></span></li>
                         <li>stream - receiving energy every 2 seconds <span><img width="60px" height="60px" src="icons/stream.png"></span></li>
                         <li>immortality - you can't take damage <span><img width="60px" height="60px" src="icons/immortality.png"></span></li>
-
-                        etc.
+                        <li>phasing - you can move through enemies <span><img width="60px" height="60px" src="icons/phase.png"></span></li>
+                        <li>etc.</li>
                     </ul>
                 </p>
                 <h2>HAFE FUN!</h2>
