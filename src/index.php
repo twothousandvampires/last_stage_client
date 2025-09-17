@@ -630,6 +630,19 @@
         height: 40px;
         background-image: url('./preview/special.png');
     }
+    #records_table{
+        width: 40%;
+        position: fixed;
+        top: 25%;
+        background-color: #e0e07a;
+        left: 30%;
+        height: 25%;
+        padding: 6px;
+        border: 4px solid #7a7a3a;
+    }
+    #records_table table{
+        width: 100%;
+    }
     #game-info{
         display: none;
         width: 80%;
