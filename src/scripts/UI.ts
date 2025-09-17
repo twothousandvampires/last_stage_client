@@ -714,7 +714,7 @@ export default class UI{
 
         cost_and_buy.appendChild(donate)
 
-        if(data.items.length < 4){
+        if(data.can_buy){
             let buy = this.createParagraph('buy item')
 
             this.applyTitle(buy, {
