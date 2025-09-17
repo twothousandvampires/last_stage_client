@@ -101,7 +101,7 @@
                         <li>Essence - increases health and briefly increases vision radius <span><img  width="120px" height="120px" src="preview/entity.png"></span></li>
                         <li>Energy sphere - gives 2 energy and briefly increases speed <span><img width="120px" height="120px" src="preview/charged_sphere.png"></span></li>
                         <li>Rift - spends 1 grace and casts a powerful spell <span><img class="bg" width="120px" height="120px" src="preview/split.gif"></span></li>
-                        <li>Item - gives a random item</li>
+                        <li>Item - gives a random item <span><img  width="120px" height="120px" src="preview/item_drop.gif"></li>
                     </ul>
                 </p>
                 <h4>If you kill a enemy by youself you will get gold.</h4>

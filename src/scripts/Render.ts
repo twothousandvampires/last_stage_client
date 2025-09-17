@@ -87,6 +87,7 @@ import Spark from "src/Sprites/Effect/Spark"
 import SpectralSword from "src/Sprites/Enemy/SpectralSword"
 import FlyingMucus from "src/Sprites/Effect/FlyingMucus"
 import Ward from "src/Sprites/Effect/Ward"
+import ItemDrop from "src/Sprites/Effect/ItemDrop"
 
 export default class Render{
     ctx: any
@@ -409,6 +410,9 @@ export default class Render{
         }
         else if(elem.name === 'gifter'){
             return new Gifter(elem.id)
+        }
+        else if(elem.name === 'item drop'){
+            return new ItemDrop(elem.id)
         }
         else if(elem.name === 'boss'){
             return new Boss(elem.id)

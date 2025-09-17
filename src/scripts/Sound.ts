@@ -13,8 +13,8 @@ class Sound{
         this.back.volume = 0.2
 
         this.lobby_back = new Audio()
-        this.lobby_back.src = 'sounds/Cult Play-The Woods-kissvk.com.mp3'
-        this.lobby_back.volume = '0.15'
+        this.lobby_back.src = 'sounds/ls_stage_lobby.mp3'
+        this.lobby_back.volume = 0.15
     }
 
     static distance(x, y, x1, y1){
