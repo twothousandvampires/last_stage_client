@@ -554,7 +554,7 @@
         border-radius: 50%;
         position: fixed;
         bottom: 22%;
-        left: 65%;
+        left: 62%;
         z-index: 1000;
         -webkit-touch-callout: none;
         -webkit-user-select: none;
@@ -591,9 +591,9 @@
     }
     #defend_and_special{
         position: fixed;
-        bottom: 22%;
+        bottom: 18%;
         width: 100px;
-        left: 65%;
+        left: 35%;
         z-index: 1000;
         -webkit-touch-callout: none;
         -webkit-user-select: none;

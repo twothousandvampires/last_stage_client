@@ -19,7 +19,9 @@ export default class Input {
     long_touch: any
     was_long_touch: boolean = false
     special_pressed: boolean = false
-   
+    stick_touch_id: any
+    second_stick_touch_id: any
+
     constructor(socket: any) {
         this.canvas = document.getElementById('canvas')
         this.canvas.addEventListener('contextmenu', e => e.preventDefault())
@@ -127,71 +129,51 @@ export default class Input {
             this.pressed[32] = false
         })
 
-        // let wrap = document.createElement('div')
-        // wrap.id = 'defend_and_special'
-        // wrap.appendChild(defend_div)
-        // wrap.appendChild(special_div)
+        let wrap = document.createElement('div')
+        wrap.id = 'defend_and_special'
+         wrap.appendChild(special_div)
+        wrap.appendChild(defend_div)
+       
 
-        // document.getElementsByTagName('body')[0].appendChild(wrap)
+        document.getElementsByTagName('body')[0].appendChild(wrap)
 
         let touch_zone = document.createElement('div')
         touch_zone.id = 'touch-zone'
         this.touch_zone = touch_zone
         touch_zone.addEventListener('touchstart', (e: TouchEvent) => {
             e.stopPropagation()
-            this.updateDirection(e);
-            this.stick_touch_id = e.touches[0].identifier
+            this.updateDirection(e.changedTouches[0]);
+            this.stick_touch_id = e.changedTouches[0].identifier
             e.preventDefault()
         }, { passive: false });
         
         touch_zone.addEventListener('touchmove', (e: TouchEvent) => {
             e.stopPropagation()
-           
-            this.updateDirection(e);
+            const touch = Array.from(e.touches).find(t => t.identifier === this.stick_touch_id);
+            if(touch) {
+                this.updateDirection(touch);
+            }
             e.preventDefault();
         }, { touch_zone: false });
     
         touch_zone.addEventListener('touchend', (e: TouchEvent) => {
+            console.log(e)
             e.stopPropagation()
+
+            const touch = Array.from(e.changedTouches).find(t => t.identifier === this.stick_touch_id);
+
+            if(touch) {
+                console.log('ee')
+                this.last.forEach(key => {
+                    this.pressed[key] = false
+                })
+                this.stick_touch_id = undefined
+            }
            
-            this.last.forEach(key => {
-                this.pressed[key] = false
-            })
-            this.stick_touch_id = undefined
              e.preventDefault();
         }, { touch_zone: false });
 
         document.getElementsByTagName('body')[0].appendChild(touch_zone)
-
-        // this.canvas.addEventListener('touchstart', (e: TouchEvent) => {
-        //     e.preventDefault();
-        //     let touch = e.touches[0];
-        //     if(touch.identifier === this.stick_touch_id){
-        //         touch = e.touches[1]
-        //     }
-        //     const rect = this.canvas.getBoundingClientRect();
-        //     const scaleX = this.canvas.width / rect.width;
-        //     const scaleY = this.canvas.height / rect.height;
-        
-        //     const canvasX = (touch.clientX - rect.left) * scaleX;
-        //     const canvasY = (touch.clientY - rect.top) * scaleY;
-            
-        //     let x = Math.floor(canvasX / 5);
-        //     let y = Math.floor(canvasY / 5);
-
-        //     console.log(x, y)
-
-        //     this.pressed.canvas_x = x;
-        //     this.pressed.canvas_y = y;
-        //     this.pressed.over_x = x
-        //     this.pressed.over_y = y
-         
-        //     this.long_touch = setTimeout(() => {
-        //         this.pressed.r_click = true
-        //         this.was_long_touch = true            
-        //     }, 250);
-        // })
-
         this.createSecondZone()
 
     }
@@ -203,31 +185,40 @@ export default class Input {
 
         second_touch_zone.addEventListener('touchstart', (e: TouchEvent) => {
             e.stopPropagation()
-            this.updateDirection2(e);
+            
+            this.updateDirection2(e.changedTouches[0]);
+     
+            this.second_stick_touch_id = e.changedTouches[0].identifier
             e.preventDefault()
 
         }, { passive: false })
 
         second_touch_zone.addEventListener('touchend', (e: TouchEvent) => {
             e.stopPropagation()
-    
-            if(this.was_long_touch){
+            
+            const touch = Array.from(e.changedTouches).find(t => t.identifier === this.second_stick_touch_id);
+            if(touch) {
+                if(this.was_long_touch){
                 this.was_long_touch = false
                 this.pressed.r_click = false
                 this.pressed.canvas_x = undefined
                 this.pressed.canvas_y = undefined
+                }
+                else{
+                    clearTimeout(this.long_touch)
+                    
+                    this.pressed.l_click = true
+                    
+                    setTimeout(()=>{
+                        this.pressed.l_click = false
+                        this.pressed.canvas_x = undefined
+                        this.pressed.canvas_y = undefined
+                    }, 50)
+                } 
+
+                this.second_stick_touch_id =undefined
             }
-            else{
-                clearTimeout(this.long_touch)
-                
-                this.pressed.l_click = true
-                
-                setTimeout(()=>{
-                    this.pressed.l_click = false
-                    this.pressed.canvas_x = undefined
-                    this.pressed.canvas_y = undefined
-                }, 50)
-            } 
+           
             e.preventDefault()
 
         }, { touch_zone: false })
@@ -238,8 +229,8 @@ export default class Input {
     public getInputs(){
         return this.pressed
     }
-    updateDirection2(e: TouchEvent){
-        const touch = e.touches[0];
+    updateDirection2(t){
+        const touch = t;
         let rect = this.second_touch_zone.getBoundingClientRect();
         const centerX = rect.left + rect.width / 2;
         const centerY = rect.top + rect.height / 2;
@@ -275,8 +266,8 @@ export default class Input {
         }, 250);
 
     }
-     updateDirection(e: TouchEvent) {
-        const touch = e.touches[0];
+     updateDirection(t) {
+        const touch = t
         let rect = this.touch_zone.getBoundingClientRect();
         const centerX = rect.left + rect.width / 2;
         const centerY = rect.top + rect.height / 2;
