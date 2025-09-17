@@ -815,6 +815,7 @@ export default class UI{
        
         data.upgrades.forEach(elem => {
             let div =  document.createElement('div')
+            div.style.minWidth = '130px'
             let under_div = document.createElement('div')
             under_div.className = 'underdiv'
 

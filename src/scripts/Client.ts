@@ -119,9 +119,7 @@ export default class Client{
 
         this.socket.on('suggers_record' ,(kills) => {
            this.UI.createSuggestRecord(kills)
-        })
-
-        
+        })       
     }
     private startGame(){
         let tick = 0
