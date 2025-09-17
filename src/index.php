@@ -22,6 +22,13 @@
             <p id='record'>records</p>
             <div id="game-info">
                 <h1 style="text-align: center;">LAST STAGE</h1>
+                <div id="modile-info">
+                    <h3>Smartphone movement</h3>
+                    <p>
+                        If you play on a smartphone, there are 2 sticks.The first one is for movement, the second one is for using abilities.
+                        The distance from the center of the second stick will determine how far away the point on the map will be, if the ability requires it.
+                    </p>
+                </div>
                 <h3>There are 2 types of resources in the game:</h3>
                 <ul>
                     <li>energy</li>
@@ -37,6 +44,9 @@
                     Each ability except the last one does not consume energy, you just need to have enough energy to use it.
                     The last ability consumes energy when used. Utility skills only have a cooldown.
                     The main gameplay is using the first skill, getting enough energy for the second, and then using the last one.
+                </p>
+                <p>
+                    Utility uses by pressing 'E'.
                 </p>
                 <p>Courage hiddenly affects the strength of skills and the character, and is lost when receiving damage.</p>
                 <br>
@@ -588,6 +598,9 @@
         display: flex;
         flex-direction: column;
         touch-action: none;
+    }
+    #modile-info{
+        display: none;
     }
     #defend_and_special{
         position: fixed;

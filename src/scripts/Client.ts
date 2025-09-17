@@ -34,6 +34,11 @@ export default class Client{
             if(!block) return
 
             block.style.display = 'block'
+
+            if('ontouchstart' in window || navigator.maxTouchPoints > 0){
+                let m_block = document.getElementById('modile-info')
+                m_block.style.display = 'block'
+            }
             block.addEventListener('click', () => {
                 block.style.display = 'none'
             })
