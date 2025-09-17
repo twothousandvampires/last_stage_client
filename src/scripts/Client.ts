@@ -45,7 +45,6 @@ export default class Client{
         })
 
         this.socket.on('records', (data) => {
-            console.log(data)
             this.UI.createRecordsTable(JSON.parse(data))
         })
 

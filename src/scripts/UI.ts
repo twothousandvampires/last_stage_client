@@ -185,7 +185,63 @@ export default class UI{
             return
         }
 
-        let parent = this.createDiv('records_table')
+
+        let parent = this.createDiv('')
+
+        parent.addEventListener('click', () => {
+            parent.parentNode?.removeChild(parent)
+        })
+
+        parent.id = 'records_table'
+        data = data[0]
+
+        let table = document.createElement('table')
+        let th = document.createElement('tr')
+        th.style.fontSize = '18px'
+        th.style.fontWeight = 'bold'
+
+        let type = document.createElement('td')
+        type.innerText = 'class'
+        th.appendChild(type)
+
+        let name = document.createElement('td')
+        name.innerText = 'name'
+        th.appendChild(name)
+
+         let kills = document.createElement('td')
+        kills.innerText = 'kills'
+        th.appendChild(kills)
+
+        let date = document.createElement('td')
+        date.innerText = 'date'
+        th.appendChild(date)
+
+        table.appendChild(th)
+
+        for(let i = 0; i < data.length; i++){
+            let e = data[i]
+            let tr = document.createElement('tr')
+
+            let type = document.createElement('td')
+            type.innerText = e.class
+            tr.appendChild(type)
+
+            let name = document.createElement('td')
+            name.innerText = e.name
+            tr.appendChild(name)
+
+            let kills = document.createElement('td')
+            kills.innerText = e.kills
+            tr.appendChild(kills)
+
+            let date = document.createElement('td')
+            date.innerText = e.created.split('T')[0]
+            tr.appendChild(date)
+
+
+            table.appendChild(tr)
+        }
+        parent.appendChild(table)
 
         document.getElementsByTagName('body')[0].appendChild(parent)
     }
