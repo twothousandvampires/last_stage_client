@@ -92,6 +92,8 @@ import MetalThorns from "../Sprites/Effect/MetalThorns"
 import ElementalEnchanted from "../Sprites/Effect/ElementalEnchanted"
 import UnholyPower from "src/Sprites/Effect/UnholyPower"
 import UnholySkull from "src/Sprites/Effect/UnholySkull"
+import LigthNova from "src/Sprites/Effect/LigthNova"
+import Soul from "src/Sprites/Effect/Soul"
 
 export default class Render{
     ctx: any
@@ -502,6 +504,12 @@ export default class Render{
         else if(elem.name === 'flying mucus'){
             return new FlyingMucus(elem.id)
         }
+        else if(elem.name === 'light nova'){
+            return new LigthNova(elem.id)
+        }
+        else if(elem.name === 'soul'){
+            return new Soul(elem.id)
+        }
     }
 
     public updateData(data: any){
@@ -510,13 +518,14 @@ export default class Render{
         this.killed = data.meta.killed
 
         data.deleted.forEach(id => {
+            console.log(id)
             this.actors.delete(id)
         })
 
         data.actors.forEach(elem => {
             let sprite = this.actors.get(elem.id)
 
-            if(!sprite){
+            if(!sprite && !data.deleted.includes(elem.id)){
                 sprite = this.getSprite(elem)
             
                 if(sprite){
@@ -526,7 +535,7 @@ export default class Render{
                     this.actors.set(elem.id, sprite)
                 }
             }
-            else{
+            else if(!data.deleted.includes(elem.id)){
                 sprite.update(elem)
             }
         })
