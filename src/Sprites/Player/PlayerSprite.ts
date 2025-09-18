@@ -155,6 +155,13 @@ export default class PlayerSprite extends UnitSprite{
             this.max_frame = 9
             this.max_frame_tick = 2
         }
+        else if(this.state === 'dash'){
+            this.repeatable = false
+            this.sprite_name = 'swordman3'
+            this.y_frame_offset = 400
+            this.max_frame = 6
+            this.max_frame_tick = 2
+        }
         else if(this.state === 'explode'){
             this.repeatable = false
             this.sprite_name = 'swordman3'

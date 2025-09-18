@@ -88,6 +88,7 @@ import SpectralSword from "../Sprites/Enemy/SpectralSword"
 import FlyingMucus from "../Sprites/Effect/FlyingMucus"
 import Ward from "../Sprites/Effect/Ward"
 import ItemDrop from "../Sprites/Effect/ItemDrop"
+import MetalThorns from "../Sprites/Effect/MetalThorns"
 
 export default class Render{
     ctx: any
@@ -284,6 +285,9 @@ export default class Render{
         }
         else if(elem.name === 'frost explosion medium'){
             return new FrostExplosionMedium(elem.id)
+        }
+        else if(elem.name === 'metal thorns'){
+            return new MetalThorns(elem.id)
         }
         else if(elem.name === 'fire_explosion_medium'){
             return new FireExplosionMedium(elem.id)

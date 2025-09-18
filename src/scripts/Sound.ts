@@ -6,7 +6,7 @@ class Sound{
     lobby_back: any
 
     constructor(){
-        this.pool = [new Track(), new Track(), new Track(),  new Track()]
+        this.pool = [new Track(), new Track(), new Track(),  new Track(), new Track()]
 
         this.back = new Audio()
         this.back.src = 'sounds/99_Cavern_of_Lost_Souls.mp3'
@@ -33,7 +33,7 @@ class Sound{
     } 
 
     setSound(name: string, distance = 0){
-        let track = this.pool[3]
+        let track = this.pool[4]
 
         if(distance < track.distance){
             let info = this.getSrcByName(name)
@@ -177,7 +177,7 @@ class Sound{
             result.max_volume = 0.1
         }
         else if(name === 'holy cast'){
-            let v = ['holybolt1.wav', 'holybolt2.wav', 'holybolt3.wav']
+            let v = ['holybolt1.wav', 'holybolt2.wav', 'holybolt3.wav','handofgodbolt.wav']
          
             result.src = v[Math.floor(Math.random() * v.length)]
             result.max_volume = 0.1
