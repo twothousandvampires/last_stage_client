@@ -89,6 +89,9 @@ import FlyingMucus from "../Sprites/Effect/FlyingMucus"
 import Ward from "../Sprites/Effect/Ward"
 import ItemDrop from "../Sprites/Effect/ItemDrop"
 import MetalThorns from "../Sprites/Effect/MetalThorns"
+import ElementalEnchanted from "../Sprites/Effect/ElementalEnchanted"
+import UnholyPower from "src/Sprites/Effect/UnholyPower"
+import UnholySkull from "src/Sprites/Effect/UnholySkull"
 
 export default class Render{
     ctx: any
@@ -339,6 +342,15 @@ export default class Render{
         }
         else if(elem.name === 'flying bones'){
             return new FlyingBones(elem.id)
+        }
+        else if(elem.name === 'elemental enchanted'){
+            return new ElementalEnchanted(elem.id)
+        }
+        else if(elem.name === 'unholy power'){
+            return new UnholyPower(elem.id)
+        }
+        else if(elem.name === 'unholy skull'){
+            return new UnholySkull(elem.id)
         }
         else if(elem.name === 'sharped bone'){
             return new SharpedBone(elem.id)

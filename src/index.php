@@ -54,8 +54,14 @@
                 <h3>Damage system</h3>
                 <p>
                     There is no so-called damage amount in the game. There is simply DAMAGE, let's imagine it as just a one damage. Any ability deals one damage.
-                    There are 2 ways to decrease or increase it. The one who deals damage is affected by the critical strike characteristic, which gives a chance to deal double damage. 
-                    The one who receives damage may have the negative "FRAGILE" status, which doubles the damage received. So the maximum damage is 4 (for now).
+                    There are 2 ways to decrease or increase it. The one who deals damage is affected by the critical strike characteristic, which gives a chance to deal double damage.
+                    The one who receives damage may have the negative "FRAGILE" status, which doubles the damage received.
+                    <h4>
+                        If pierce rating is higher than armour rating you have a chance to deal additional damage.
+                    </h4>
+                    <p>
+                        So for now maximum damage is 8. 1(default) + 1(from pierce) * 2 (double damage) * 2 (fragile stutus on target)
+                    </p>
                 </p>
                 </br>
 
@@ -80,6 +86,9 @@
                     The units have an armor rating, which is calculated if there was no block, the armor rating gives a chance not to receive damage, the "PIERCE" <span><img width="60px" height="60px" src="icons/pressure.png" title="you can learn it by grace"> characteristic helps to bypass the armor. 
                     Enemies can also have armor and this "PIERCE"</span>.
                 </p>
+                <h4>
+                    If armour rating is higher than pierce rating you have a chance to block damage.
+                </h4>
                 </br>
 
                 <h3>Other:</h3>
