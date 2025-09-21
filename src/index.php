@@ -409,7 +409,10 @@
     }
     @media (max-width: 425px) {
         .item_pull{
-            flex-wrap: wrap;
+            overflow-y: clip;
+        }
+        .abilities_pull{
+            overflow-y: clip;
         }
     }
     .select_and_preview{
