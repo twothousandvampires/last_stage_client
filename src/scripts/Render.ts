@@ -157,11 +157,14 @@ export default class Render{
         if(sprite.ward > 0){
             return 'warded'
         }
-        else if(sprite.life_status > 3){
+        else if(sprite.life_status > 4){
             return 'blessed'
         }
-        else if(sprite.life_status == 3){
+        else if(sprite.life_status === 4){
             return 'good'
+        }
+        else if(sprite.life_status == 3){
+            return 'damaged'
         }
         else if(sprite.life_status == 2){
             return 'injured'
@@ -643,7 +646,7 @@ export default class Render{
                     t = elem.id
                 }
             }
-            else if(elem instanceof ImpySprite && !t && elem.id != client.id && inputs.mobile && inputs.touch_angle){
+            else if(!t && elem.id != client.id && inputs.mobile && inputs.touch_angle){
                 const deltaX = elem.x -client.x
                 const deltaY = elem.y -client.y
                 
