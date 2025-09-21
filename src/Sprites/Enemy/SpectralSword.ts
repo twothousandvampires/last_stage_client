@@ -7,8 +7,8 @@ export default class SpectralSword extends UnitSprite{
    
     constructor(id: string){
       super(id)
-      this.real_x = 8
-      this.real_y = 6
+      this.real_x = 5
+      this.real_y = 8
     }
     
     setState(state: string){

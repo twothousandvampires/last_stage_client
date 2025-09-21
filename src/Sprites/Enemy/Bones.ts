@@ -7,7 +7,7 @@ export default class Bones extends UnitSprite{
     constructor(id: string){
       super(id)
       this.real_x = 6
-      this.real_y = 8
+      this.real_y = 10
     }
     
     setState(state: string){
