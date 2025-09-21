@@ -32,7 +32,9 @@ export default class Input {
             canvas_y: undefined,
             l_click: false,
             r_click: false,
-            target: undefined
+            target: undefined,
+            mobile: false,
+            touch_angle: undefined
         }
         this.setInputs()
     }
@@ -93,6 +95,7 @@ export default class Input {
             })  
         }
         else{
+            this.pressed.mobile = true
             this.createTouchZone()
         }
     }
@@ -157,13 +160,11 @@ export default class Input {
         }, { touch_zone: false });
     
         touch_zone.addEventListener('touchend', (e: TouchEvent) => {
-            console.log(e)
             e.stopPropagation()
 
             const touch = Array.from(e.changedTouches).find(t => t.identifier === this.stick_touch_id);
 
             if(touch) {
-                console.log('ee')
                 this.last.forEach(key => {
                     this.pressed[key] = false
                 })
@@ -216,9 +217,10 @@ export default class Input {
                     }, 50)
                 } 
 
-                this.second_stick_touch_id =undefined
+                this.second_stick_touch_id = undefined
             }
-           
+            
+            this.pressed.touch_angle = undefined
             e.preventDefault()
 
         }, { touch_zone: false })
@@ -229,9 +231,11 @@ export default class Input {
     public getInputs(){
         return this.pressed
     }
+
     updateDirection2(t){
         const touch = t;
         let rect = this.second_touch_zone.getBoundingClientRect();
+        
         const centerX = rect.left + rect.width / 2;
         const centerY = rect.top + rect.height / 2;
         
@@ -255,6 +259,8 @@ export default class Input {
             angle -= 2 * Math.PI;
         }
 
+        this.pressed.touch_angle = angle
+        
         this.pressed.canvas_x = 40 + (Math.sin(angle) *  Math.floor(distance/ 3))
         this.pressed.canvas_y = 40 + (Math.cos(angle) *  Math.floor(distance/ 3))
         this.pressed.over_x = this.pressed.canvas_x
@@ -266,7 +272,7 @@ export default class Input {
         }, 250);
 
     }
-     updateDirection(t) {
+    updateDirection(t) {
         const touch = t
         let rect = this.touch_zone.getBoundingClientRect();
         const centerX = rect.left + rect.width / 2;

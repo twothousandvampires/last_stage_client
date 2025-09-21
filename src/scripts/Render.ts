@@ -518,7 +518,6 @@ export default class Render{
         this.killed = data.meta.killed
 
         data.deleted.forEach(id => {
-            console.log(id)
             this.actors.delete(id)
         })
 
@@ -636,13 +635,39 @@ export default class Render{
             }
 
             elem.act()
-
-            if(elem.real_x && elem.real_y && inputs.l_click){
+           
+            if(!t && !inputs.mobile && inputs.l_click && elem.real_x && elem.real_y){
                 if(inputs.canvas_x >= rel_x - elem.real_x/2 && inputs.canvas_x <= rel_x + elem.real_x / 2 &&
                     inputs.canvas_y >= rel_y - elem.real_y && inputs.canvas_y <= rel_y
                 ){
                     t = elem.id
                 }
+            }
+            else if(elem instanceof ImpySprite && !t && elem.id != client.id && inputs.mobile && inputs.touch_angle){
+                const deltaX = elem.x -client.x
+                const deltaY = elem.y -client.y
+                
+                // let angle = Math.atan2(deltaY, deltaX) * 180 / Math.PI;
+                const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+                // angle = (angle - 90) % 360;
+
+                let angle = Math.atan2(deltaY, deltaX)
+
+                angle = -angle + Math.PI / 2;
+
+                // Нормализуем в диапазон [0, 2π)
+                if (angle < 0) {
+                    angle += 2 * Math.PI;
+                }
+                if (angle >= 2 * Math.PI) {
+                    angle -= 2 * Math.PI;
+                }   
+  
+                let diff = Math.abs(inputs.touch_angle - angle)
+
+                if(diff <= 0.5){
+                    t = elem.id
+                } 
             }
 
             if((elem.id === this.client_id) || (elem.light_r && elem.can_share_light)){
@@ -663,7 +688,7 @@ export default class Render{
             }
         }
         if(t){
-            this.socket.emit('set_target', t) 
+            this.socket.emit('set_target', t)
         }
         this.drawLight()
         this.ctx.drawImage(this.bg_bottom, 0, 0, 120, 120, rel_x, rel_y, 120, 120) 

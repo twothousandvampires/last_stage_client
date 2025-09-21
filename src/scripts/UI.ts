@@ -264,7 +264,6 @@ export default class UI{
             let data = JSON.parse(localStorage.getItem(item.template.name))
             if(!data) return 
             if(data.name != item.template.name) return
-            console.log(data)
 
             let skills = data.abilities.filter(elem => elem.selected)
             
