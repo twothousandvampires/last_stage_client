@@ -72,9 +72,11 @@ export default class UI{
     getSelectedSkillByType(abilities: any, type: number){
         return abilities.find(elem => elem.type === type && elem.selected)
     }
-    createParagraphAppend(text: string, parent: HTMLElement): void{
+    createParagraphAppend(text: string, parent: HTMLElement): HTMLElement{
         let p = this.createParagraph(text)
         parent.appendChild(p)
+
+        return p
     }
 
     createSelect(item: any): any{
@@ -249,6 +251,50 @@ export default class UI{
     createStats(item: any){
         let wrap = document.createElement('div')
         wrap.className = 'stat_wrap'
+
+        let build = this.createDiv('')
+        let save = this.createParagraphAppend('save build', build)
+        let load = this.createParagraphAppend('load build', build)
+
+        save.addEventListener('click', () => {
+            localStorage.setItem(item.template.name, JSON.stringify(item.template))
+        })
+
+        load.addEventListener('click', () => {
+            let data = JSON.parse(localStorage.getItem(item.template.name))
+            if(!data) return 
+            if(data.name != item.template.name) return
+            console.log(data)
+
+            let skills = data.abilities.filter(elem => elem.selected)
+            
+            skills.forEach(elem => {
+                this.socket.emit('select_skill', elem.name)
+            })
+
+            data.item.forEach(elem => {
+                this.socket.emit('pick_item', elem.name)
+            })
+
+            let keys = Object.keys(data.stats)
+
+
+            keys.forEach(stat_name => {
+                for(let i = 0;i < item.template.stats[stat_name] - data.stats[stat_name]; i++){
+                    this.socket.emit('decrease_stat', stat_name)
+                }
+            })
+            
+            keys.forEach(stat_name => {
+                for(let i = 0; i < data.stats[stat_name] - item.template.stats[stat_name]; i++){
+                    this.socket.emit('increase_stat', stat_name)
+                }
+            })
+            
+        })
+
+        wrap.appendChild(build)
+
         this.createParagraphAppend('remain stat points: ' + item.template.stat_count, wrap)
 
         for(let stat in item.template.stats){
@@ -270,6 +316,7 @@ export default class UI{
 
             let inc = this.createParagraph(item.id === this.socket.id ? '+' : ' ')
             inc.className = 'pointer'
+            
             inc.addEventListener('click', () => {
                 if(item.template.stat_count <= 0 || item.id !== this.socket.id) return
 
