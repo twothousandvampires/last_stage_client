@@ -423,6 +423,11 @@
         justify-content: space-between;
         width: 80%;
     }
+    @media (max-width: 425px) {
+        .right_top{
+            width: 100%;
+        }
+    }
     .right_bottom{
         border-top: 8px solid #7a7a3a;
         display: flex;
