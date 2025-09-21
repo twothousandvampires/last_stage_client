@@ -252,7 +252,7 @@ export default class UI{
         let wrap = document.createElement('div')
         wrap.className = 'stat_wrap'
 
-        let build = this.createDiv('')
+        let build = this.createDiv('build')
         let save = this.createParagraphAppend('save build', build)
         let load = this.createParagraphAppend('load build', build)
 

@@ -236,14 +236,9 @@
     }
     @media (max-width: 425px) {
         .select_ready_equip {
-            z-index: 666;
-            position: relative;
             background-color: #b8b85c;
-            width: 150px;
             align-items: flex-start;
             height: 130px;
-            left: -10px;
-            top: -10px;
         }
     }
     .pointer{
@@ -350,8 +345,20 @@
             height: 100vh;
         }
         #lobby p{
-            font-size: 8px;
+            font-size: 14px;
         }
+    }
+    .build{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+    }
+    .build p {
+        cursor: pointer;
+        padding: 2px;
+        background-color: #b8860b;
+        margin: 4px;
     }
     .item_pull, .abilities_pull{
         background-color: #e0e07a;
@@ -387,6 +394,11 @@
         align-items: center;
         border: 8px solid #7a7a3a;
         font-size: 18px;
+    }
+    @media (max-width: 425px) {
+        .player{
+            flex-direction: column;
+        }
     }
     .item_pull, .abilities_pull{
         display: flex;
@@ -428,7 +440,7 @@
     }
     @media (max-width: 425px) {
         .right_block{
-            width: 40%;
+            width: 90%;
         }
     }
     .selected_skill_div{
@@ -449,7 +461,9 @@
     @media (max-width: 425px) {
         .left_block{
             align-items: flex-end;
-            justify-content: flex-end;
+            justify-content: center;
+            width: 90%;
+            border-left: none;
         }
     }
     #player_stats, #meta_info{
@@ -575,8 +589,8 @@
         height: 120px;
         border-radius: 50%;
         position: fixed;
-        bottom: 22%;
-        left: 62%;
+        bottom: 15%;
+        left: 60%;
         z-index: 1000;
         -webkit-touch-callout: none;
         -webkit-user-select: none;
@@ -596,8 +610,8 @@
         height: 120px;
         border-radius: 50%;
         position: fixed;
-        bottom: 22%;
-        left: 10px;
+        bottom: 15%;
+        left: 12%;
         z-index: 1000;
         -webkit-touch-callout: none;
         -webkit-user-select: none;
@@ -616,10 +630,11 @@
     }
     #defend_and_special{
         position: fixed;
-        bottom: 18%;
-        width: 100px;
-        left: 35%;
+        bottom: 13%;
+        width: 40px;
+        left: 50%;
         z-index: 1000;
+        height: 150px;
         -webkit-touch-callout: none;
         -webkit-user-select: none;
         -khtml-user-select: none;
@@ -629,7 +644,7 @@
         -webkit-tap-highlight-color: transparent;
         touch-action: none;
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         justify-content: space-between;
     }
     #defend {
