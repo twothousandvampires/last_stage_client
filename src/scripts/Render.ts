@@ -94,6 +94,7 @@ import UnholyPower from "src/Sprites/Effect/UnholyPower"
 import UnholySkull from "src/Sprites/Effect/UnholySkull"
 import LigthNova from "src/Sprites/Effect/LigthNova"
 import Soul from "src/Sprites/Effect/Soul"
+import UnholySpirit from "src/Sprites/Effect/UnholySpirit"
 
 export default class Render{
     ctx: any
@@ -513,6 +514,9 @@ export default class Render{
         else if(elem.name === 'soul'){
             return new Soul(elem.id)
         }
+        else if(elem.name === 'unholy spirit'){
+            return new UnholySpirit(elem.id)
+        } 
     }
 
     public updateData(data: any){

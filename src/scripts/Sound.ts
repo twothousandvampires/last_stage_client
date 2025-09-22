@@ -321,8 +321,17 @@ class Sound{
 
             result.max_volume = 0.2
         }
+
+        else if(name === 'evel upgrade'){
+            let v = ['poison.wav']
+         
+            result.src = v[Math.floor(Math.random() * v.length)]
+
+            result.max_volume = 1
+        }
        
         return result
+  
     }
 
     sortPool(){
