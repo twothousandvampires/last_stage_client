@@ -7,7 +7,7 @@ export default class FlamySprite extends UnitSprite{
     constructor(id: string){
       super(id)
       this.real_x = 6
-      this.real_y = 7
+      this.real_y = 10
     }
     
     setState(state: string){
