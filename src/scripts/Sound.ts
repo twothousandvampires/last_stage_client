@@ -92,7 +92,7 @@ class Sound{
 
         else if(name === 'ambient'){
             let v = ['drip1.wav', 'drip2.wav', 'drip3.wav', 'drip4.wav', 'drip5.wav', 'drip6.wav', 'drip7.wav','drip8.wav', 'vtheft.wav', 'breath1.wav',
-                'breath2.wav','breath3.wav', 'breath4.wav' , 'breath5.wav', 'breath6.wav', 'breath7.wav', 'breath8.wav', 'breath9.wav', 'scream1.wav', 'scream2.wav'
+                'breath2.wav','breath3.wav', 'breath4.wav' , 'breath5.wav', 'breath6.wav', 'breath7.wav', 'breath8.wav', 'breath9.wav', 'scream1.wav', 'scream2.wav', 'bat1.wav', 'bat2.wav'
             ]
             
             result.max_volume = 0.7
@@ -141,11 +141,13 @@ class Sound{
             result.max_volume = 0.25
         }
         else if(name === 'goo'){
-            let v = ['goopile1.wav', 'goopile3.wav', 'goopile2.wav']
+            let v = ['goopile1.wav', 'goopile3.wav', 'goopile2.wav', 'acidd1.wav']
          
             result.src = v[Math.floor(Math.random() * v.length)]
             result.max_volume = 0.2
         }
+     
+       
         else if(name === 'cold cast'){
             let v = ['coldcast.wav', 'icebolt2.wav']
          
@@ -177,7 +179,7 @@ class Sound{
             result.max_volume = 0.1
         }
         else if(name === 'holy cast'){
-            let v = ['holybolt1.wav', 'holybolt2.wav', 'holybolt3.wav','handofgodbolt.wav']
+            let v = ['holybolt1.wav', 'holybolt2.wav', 'holybolt3.wav','handofgodbolt.wav', 'fmag.wav']
          
             result.src = v[Math.floor(Math.random() * v.length)]
             result.max_volume = 0.1
@@ -222,6 +224,14 @@ class Sound{
             result.src = 'belt.wav'
 
             result.max_volume = 0.3
+        }
+
+        else if(name === 'walk'){
+            let v = ['walk1.wav', 'walk2.wav', 'walk3.wav', 'walk4.wav']
+         
+            result.src = v[Math.floor(Math.random() * v.length)]
+
+            result.max_volume = 0.6
         }
 
         else if(name === 'menu item drop'){
@@ -277,13 +287,30 @@ class Sound{
         }
     
         else if(name === 'bones explode'){
-            let v = ['death1.wav', 'death2.wav', 'death3.wav', 'death4.wav', 'death5.wav']
+            let v = ['death1.wav', 'death2.wav', 'death3.wav', 'death4.wav', 'death5.wav', 'golumded.wav', 'shatter.wav']
          
             result.src = v[Math.floor(Math.random() * v.length)]
 
             result.max_volume = 0.3
         }
 
+        else if(name === 'heal'){
+            let v = ['healing.wav']
+         
+            result.src = v[Math.floor(Math.random() * v.length)]
+
+            result.max_volume = 0.12
+        }
+
+
+        else if(name === 'potion'){
+            let v = ['invpot.wav']
+         
+            result.src = v[Math.floor(Math.random() * v.length)]
+
+            result.max_volume = 0.4
+        }
+       
         else if(name === 'short sword swing'){
             let v = ['defiles1.wav', 'defiles2.wav', 'swing.wav', 'swing2.wav']
          
@@ -328,6 +355,14 @@ class Sound{
             result.src = v[Math.floor(Math.random() * v.length)]
 
             result.max_volume = 1
+        }
+
+        else if(name === 'blood'){
+            let v = ['blodstar.wav']
+         
+            result.src = v[Math.floor(Math.random() * v.length)]
+
+            result.max_volume = 0.6
         }
        
         return result

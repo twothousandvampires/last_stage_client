@@ -516,7 +516,10 @@ export default class Render{
         }
         else if(elem.name === 'unholy spirit'){
             return new UnholySpirit(elem.id)
-        } 
+        }
+        else if(elem.name === 'heal'){
+            return new UnholySpirit(elem.id)
+        }  
     }
 
     public updateData(data: any){

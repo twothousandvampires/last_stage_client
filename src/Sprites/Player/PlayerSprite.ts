@@ -107,6 +107,12 @@ export default class PlayerSprite extends UnitSprite{
             this.max_frame = 2
             this.max_frame_tick = 1
         }
+        else if(this.state === 'stunned'){
+            this.sprite_name = 'swordman1'
+            this.y_frame_offset = 240
+            this.max_frame = 2
+            this.max_frame_tick = 2
+        }
         else if(this.state === 'defend'){
             this.sprite_name = 'swordman2'
             this.y_frame_offset = 400
