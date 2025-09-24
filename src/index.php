@@ -59,8 +59,19 @@
                     <h4>
                         If pierce rating is higher than armour rating you have a chance to deal additional damage.
                     </h4>
+                    <h4>
+                        The player also has a penetration rating that is applied and stacks on the enemy with each hit.
+                        The more penetrated the enemy is, the higher the chance they will receive additional damage.
+                    </h4>
+                    <h4>
+                        The player also has a penetration rating that is applied and stacks on the enemy with each hit.
+                        The more penetrated the enemy is, the higher the chance they will receive additional damage.
+                    </h4>
+                    <h4>
+                        And the last stat that helps deal damage is Impact. It has a default cooldown of 3 seconds. When triggered, it deals damage to adjacent targets. Does not deal damage to hit target.
+                    </h4>
                     <p>
-                        So for now maximum damage is 8. 1(default) + 1(from pierce) * 2 (double damage) * 2 (fragile stutus on target)
+                        So for now maximum damage is 12. 1(default) + 1(from pierce) + 1(from penetrate) * 2 (double damage) * 2 (fragile stutus on target)
                     </p>
                 </p>
                 </br>
